@@ -6,7 +6,7 @@ import httpx
 from openai import OpenAI
 from pydantic import BaseModel
 
-from paperbrief import report_prompt
+from paperbrief import question_prompt, report_prompt
 from paperbrief.config import Settings
 from paperbrief.hf import FIXTURES_DIR
 from paperbrief.offline import delay
@@ -56,8 +56,14 @@ class _Unimplemented:
         raise NotImplementedError("LLM client not implemented yet")
 
 
+class Answer(BaseModel):
+    """`text_format` of `answer` (#11)."""
+
+    answer: str
+
+
 class OpenAILLM(_Unimplemented):
-    """The real client. `summarize_ko` (#6) and `answer` (#11) are still the NotImplementedError of the base class."""
+    """The real client. `summarize_ko` (#6) is still the NotImplementedError of the base class."""
 
     def __init__(self, settings: Settings, http_client: httpx.Client | None = None) -> None:
         self._settings = settings
@@ -77,6 +83,21 @@ class OpenAILLM(_Unimplemented):
             raise RuntimeError("OpenAI returned no report")
         return response.output_parsed
 
+    # ---- answer (#11) ----
+    def answer(self, body: str, report: Report, history: list[QA], question: str) -> str:
+        if not self._settings.openai_api_key:
+            raise RuntimeError("OPENAI_API_KEY 없음")
+        client = OpenAI(api_key=self._settings.openai_api_key, http_client=self._http_client)
+        response = client.responses.parse(
+            model=self._settings.openai_model,
+            instructions=question_prompt.INSTRUCTIONS,
+            input=question_prompt.build_input(body, report, history, question),
+            text_format=Answer,
+        )
+        if response.output_parsed is None:  # a refusal or an unparsable answer
+            raise RuntimeError("OpenAI returned no answer")
+        return response.output_parsed.answer
+
 
 class OfflineLLM(_Unimplemented):
     """Canned report from tests/fixtures; `PAPERBRIEF_OFFLINE_DELAY` seconds of fake work make the progress watchable."""
@@ -84,6 +105,10 @@ class OfflineLLM(_Unimplemented):
     def write_report(self, body: str, figures: list[FigureCandidate]) -> Report:
         time.sleep(delay())
         return Report.model_validate_json((FIXTURES_DIR / "report_offline.json").read_text(encoding="utf-8"))
+
+    def answer(self, body: str, report: Report, history: list[QA], question: str) -> str:
+        time.sleep(delay())
+        return f"(오프라인 예시 답) 본문에 근거해 답하면: {report.hook} · 이전 질문 {len(history)}개 참고"
 
 
 def live(settings: Settings) -> LLMClient:
