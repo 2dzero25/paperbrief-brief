@@ -61,7 +61,8 @@ class ScriptedHF(FakeHF):
 def test_collect_saves_latest_day_only_and_lists_it(make_client):
     hf = FakeHF({FRI: [paper("2610.00001"), paper("2610.00002")], THU: [paper("2610.00009", THU)]})
     client = client_with(make_client, hf)
-    assert client.get("/api/papers").json() == {"day": None, "recent": False, "count": 0, "papers": []}
+    empty = client.get("/api/papers").json()
+    assert (empty["day"], empty["recent"], empty["count"], empty["papers"]) == (None, False, 0, [])
 
     assert collect(client)["error"] is None
 
