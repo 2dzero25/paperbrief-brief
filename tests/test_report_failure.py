@@ -219,3 +219,39 @@ def test_the_failure_screen_is_served_and_loaded_by_the_page(make_client):
     assert "report_failure.js" in client.get("/static/app.js").text
     js = client.get("/static/report_failure.js")
     assert js.status_code == 200 and "다시 시도" in js.text
+
+
+def test_an_error_page_instead_of_the_pdf_is_a_pdf_failure_and_is_fetched_again_on_retry(make_client):
+    pdfs = Pdfs()
+    answers = iter(["<html>Service Unavailable</html>"])  # 200 with a gateway error page, once
+
+    def gateway(request: httpx.Request) -> httpx.Response:
+        page = next(answers, None)
+        return httpx.Response(200, content=page.encode()) if page else pdfs(request)
+
+    client, parser, _, _ = start(make_client)
+    client.app.state.pdf_http = httpx.Client(transport=httpx.MockTransport(gateway))  # type: ignore[attr-defined]
+    client.post("/api/papers/2610.00001/report")
+    failed = wait_status(client, "2610.00001", "실패")
+    paper = client.app.state.settings.data_dir / "papers" / "2610.00001"  # type: ignore[attr-defined]
+    assert failed["stage"] == "PDF" and "PDF" in failed["error_log"]
+    assert not (paper / "paper.pdf").exists() and parser.calls == []  # the bad body was never kept or parsed
+
+    client.post("/api/papers/2610.00001/report")
+
+    wait_status(client, "2610.00001", "완료")
+    assert len(pdfs.requests) == 1 and len(parser.calls) == 1
+
+
+def test_an_error_outside_any_stage_is_recorded_as_a_failure_instead_of_leaving_the_report_running(make_client, monkeypatch):
+    client, parser, _, _ = start(make_client)
+
+    def broken(app):
+        raise RuntimeError("no network stack")
+
+    monkeypatch.setattr("paperbrief.app.http_for", broken)
+    client.post("/api/papers/2610.00001/report")
+
+    failed = wait_status(client, "2610.00001", "실패")
+    assert failed["stage"] == "PDF" and "no network stack" in failed["error_log"]
+    assert parser.calls == []

@@ -70,6 +70,8 @@ def pdf_done(w: Work) -> bool:
 def run_pdf(w: Work) -> None:
     res = w.http.get(PDF_URL.format(w.arxiv_id))
     res.raise_for_status()
+    if b"%PDF" not in res.content[:1024]:  # arXiv or a gateway can answer 200 with an error page; keep nothing, so a retry fetches again
+        raise RuntimeError(f"arXiv가 PDF가 아닌 응답을 돌려줌: {res.content[:80]!r}")
     w.folder.mkdir(parents=True, exist_ok=True)
     part = w.pdf.with_name("paper.pdf.part")  # a half-written download must not look like a finished stage
     part.write_bytes(res.content)
@@ -171,10 +173,12 @@ class ReportWorker:
 
     def _process(self, arxiv_id: str) -> None:
         conn = connect(self._settings)
+        stage = STAGES[0][0]
         try:
             work = Work(arxiv_id, self._settings.data_dir / "papers" / arxiv_id, self._boundaries, self._http(), conn)
             self._set(conn, arxiv_id, status=RUNNING)
             for name, done, run in STAGES:
+                stage = name
                 if done(work):
                     continue
                 self._set(conn, arxiv_id, status=RUNNING, stage=name, stage_started_at=now())
@@ -185,6 +189,9 @@ class ReportWorker:
                     self._set(conn, arxiv_id, status=FAILED, stage=name, error_log=traceback.format_exc())
                     return
             self._set(conn, arxiv_id, status=DONE)
+        except Exception:  # outside a stage's own handler (client setup, a done-check): still a failure the user can retry
+            log.exception("report %s failed outside a stage", arxiv_id)
+            self._set(conn, arxiv_id, status=FAILED, stage=stage, error_log=traceback.format_exc())
         finally:
             conn.close()
 
