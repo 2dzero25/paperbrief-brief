@@ -1,13 +1,18 @@
 """Boundary 4/4: PDF parser (MinerU runner). `live()` is #13; `offline()` serves a canned body."""
 import json
+import logging
 import time
+import traceback
+from collections.abc import Callable
 from dataclasses import asdict, dataclass, field
 from pathlib import Path
 from typing import Protocol
 
 from paperbrief.config import Settings
 from paperbrief.hf import FIXTURES_DIR
-from paperbrief.offline import delay
+from paperbrief.offline import delay, fail_once
+
+log = logging.getLogger(__name__)
 
 RESULT_FILE = "parse_result.json"  # written by the worker after `parse` returns; its presence means 파싱 is done
 
@@ -43,6 +48,25 @@ class Parser(Protocol):
         ...
 
 
+class TieredParser:
+    """MinerU tier fallback. `runner(pdf, out_dir, tier)` (`mineru.run_mineru`, #13) parses once with one tier and raises
+    on failure; this tries `standard`, then `basic`. When every tier fails it raises one error holding all their logs."""
+
+    def __init__(self, runner: Callable[[Path, Path, str], ParseResult], tiers: tuple[str, ...] = ("standard", "basic")) -> None:
+        self._runner = runner
+        self._tiers = tiers
+
+    def parse(self, pdf: Path, out_dir: Path) -> ParseResult:
+        logs: list[str] = []
+        for tier in self._tiers:
+            try:
+                return self._runner(pdf, out_dir, tier)
+            except Exception:
+                logs.append(f"[{tier}] 실패\n{traceback.format_exc()}")
+                log.warning("MinerU %s tier failed for %s", tier, pdf, exc_info=True)
+        raise RuntimeError(f"파싱 실패: {' + '.join(self._tiers)} tier 모두 실패\n\n" + "\n".join(logs))
+
+
 class _Unimplemented:
     def parse(self, pdf: Path, out_dir: Path) -> ParseResult:
         raise NotImplementedError("parser not implemented yet")
@@ -55,6 +79,7 @@ def live(settings: Settings) -> Parser:
 class OfflineParser:
     def parse(self, pdf: Path, out_dir: Path) -> ParseResult:
         time.sleep(delay())
+        fail_once("파싱")
         return ParseResult(markdown=(FIXTURES_DIR / "parse_offline.md").read_text(encoding="utf-8"))
 
 

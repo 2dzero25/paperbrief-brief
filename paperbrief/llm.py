@@ -9,7 +9,7 @@ from pydantic import BaseModel
 from paperbrief import report_prompt
 from paperbrief.config import Settings
 from paperbrief.hf import FIXTURES_DIR
-from paperbrief.offline import delay
+from paperbrief.offline import delay, fail_once
 from paperbrief.parser import FigureCandidate
 
 
@@ -83,6 +83,7 @@ class OfflineLLM(_Unimplemented):
 
     def write_report(self, body: str, figures: list[FigureCandidate]) -> Report:
         time.sleep(delay())
+        fail_once("작성")
         return Report.model_validate_json((FIXTURES_DIR / "report_offline.json").read_text(encoding="utf-8"))
 
 

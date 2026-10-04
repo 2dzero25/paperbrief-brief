@@ -188,6 +188,21 @@ def default_http(settings: Settings) -> httpx.Client:
     return httpx.Client(timeout=60, follow_redirects=True)
 
 
+def recover_interrupted(settings: Settings, boundaries: Boundaries) -> None:
+    """On app start: a report still `대기`/`진행 중` was cut off by the app being switched off, so it becomes `실패`.
+
+    The stage is the one that was running; a waiting report failed at the first stage it had no result for yet."""
+    conn = connect(settings)
+    try:
+        with default_http(settings) as http:  # the done-checks only look at disk and DB, the client is never used
+            for row in conn.execute("SELECT arxiv_id, status, stage FROM reports WHERE status IN (?, ?)", (QUEUED, RUNNING)).fetchall():
+                work = Work(row["arxiv_id"], settings.data_dir / "papers" / row["arxiv_id"], boundaries, http, conn)
+                stage = row["stage"] if row["status"] == RUNNING else next((n for n, done, _ in STAGES if not done(work)), "")
+                ReportWorker._set(conn, row["arxiv_id"], status=FAILED, stage=stage, error_log="앱 종료로 중단")
+    finally:
+        conn.close()
+
+
 def worker_for(app: FastAPI) -> ReportWorker:
     """One worker per app, created on first use. Tests set `app.state.pdf_http` to fake arxiv.org before that."""
     if not hasattr(app.state, "report_worker"):
