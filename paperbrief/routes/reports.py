@@ -51,12 +51,19 @@ def paper_header(p) -> dict:
     }
 
 
+def header_links(arxiv_id: str, code_url: str) -> list[dict]:
+    """arXiv, PDF, and GitHub only when a 등록 코드 exists."""
+    links = [{"label": "arXiv", "url": f"https://arxiv.org/abs/{arxiv_id}"},
+             {"label": "PDF", "url": f"https://arxiv.org/pdf/{arxiv_id}"}]  # fmt: skip
+    return links + [{"label": "GitHub", "url": code_url}] if code_url else links
+
+
 def full_state(db, worker: ReportWorker, arxiv_id: str) -> dict:
     paper = db.execute("SELECT * FROM papers WHERE arxiv_id = ?", (arxiv_id,)).fetchone()
     if paper is None:
         raise HTTPException(404, "unknown paper")
     row = db.execute("SELECT * FROM reports WHERE arxiv_id = ?", (arxiv_id,)).fetchone()
-    state = {"arxiv_id": arxiv_id, "paper": paper_header(paper), "status": None, "stage": "", "elapsed": None,
+    state = {"arxiv_id": arxiv_id, "paper": paper_header(paper), "links": header_links(arxiv_id, paper["code_url"]), "status": None, "stage": "", "elapsed": None,
              "queue_position": None, "error_log": "", "report": None, "figures": []}
     if row is not None:
         state |= short_state(row, worker)

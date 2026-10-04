@@ -16,6 +16,13 @@ Rules:
 - difference: how it differs from prior work, as the paper states it. meaning: why the result matters, as the paper argues it.
 - limitations: limitations the paper admits. If it lists none, write "명시 없음".
 - figures: the ids of 1-2 candidates from <figure_candidates> that show the paper's main idea or main result best, most important first. You see only each candidate's caption and the sentences that cite it, not the image. Use only ids from the list; if the list is empty, return an empty list.
+- repro: five items (code, weights, data, gpu, license), each with a verdict and evidence.
+  Judge ONLY from what this paper itself wrote or released. Ignore the code, weights, data and GPU of other works
+  that the paper cites or surveys. Never treat a code repository registered on Hugging Face as evidence.
+  verdict "공개": the paper says it released the item; evidence is where (URL, page, table number).
+  verdict "비공개": the paper says it is not released or will be released later; evidence is where it says so.
+  verdict "명시 없음": the paper does not mention the item; evidence is "명시 없음".
+  For gpu and license with verdict "공개", evidence is the paper's original wording (for example "8×A100, 3일", "Apache-2.0").
 """
 
 
