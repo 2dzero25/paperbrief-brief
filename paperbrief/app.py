@@ -10,6 +10,7 @@ from paperbrief import routes
 from paperbrief.boundaries import Boundaries
 from paperbrief.config import STATIC_DIR, Settings
 from paperbrief.db import init_db
+from paperbrief.reports import recover_interrupted
 
 
 def create_app(settings: Settings, boundaries: Boundaries | None = None) -> FastAPI:
@@ -17,6 +18,7 @@ def create_app(settings: Settings, boundaries: Boundaries | None = None) -> Fast
     if boundaries is None:
         boundaries = boundary_factories.offline(settings) if settings.offline else boundary_factories.live(settings)
     init_db(settings)
+    recover_interrupted(settings, boundaries)
     app = FastAPI(title="PaperBrief")
     app.state.settings = settings
     app.state.boundaries = boundaries

@@ -35,10 +35,11 @@ class FakeLLM:
 
     def __init__(self, report: Report | None = None) -> None:
         self.report = report
-        self.calls: list[tuple[str, tuple]] = []
+        self.calls: list[tuple[str, tuple]] = []  # write_report / answer
+        self.ko_requests: list[list[tuple[str, str, str]]] = []  # one entry per summarize_ko call (every collection makes some)
 
     def summarize_ko(self, papers: list[tuple[str, str, str]]) -> dict[str, str]:
-        self.calls.append(("summarize_ko", (papers,)))
+        self.ko_requests.append(papers)
         return {i: f"KO {title}" for i, title, _ in papers}
 
     def write_report(self, body: str, figures: list[FigureCandidate]) -> Report:

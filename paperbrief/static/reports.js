@@ -111,15 +111,17 @@ async function open(id) {
   appEl.hidden = true;
   screen.hidden = false;
   screen.innerHTML = "";
-  let res = await fetch(`/api/papers/${encodeURIComponent(id)}/report`, { method: "POST" }); // starts it, or joins the queue
+  const url = `/api/papers/${encodeURIComponent(id)}/report`;
+  const get = async () => (await fetch(url)).json();
+  let s = await get();
+  // Only a paper never asked for is started here; a 실패 report waits for [다시 시도] (report_failure.js).
+  if (s.status === null && mine === visit) s = await (await fetch(url, { method: "POST" })).json();
   while (mine === visit) {
-    const s = await res.json();
-    if (mine !== visit) return;
     paint(s);
     if (!ACTIVE.includes(s.status)) return;
     await new Promise((resolve) => setTimeout(resolve, 1000));
     if (mine !== visit) return;
-    res = await fetch(`/api/papers/${encodeURIComponent(id)}/report`);
+    s = await get();
   }
 }
 

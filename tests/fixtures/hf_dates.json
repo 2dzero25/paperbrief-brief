@@ -1,0 +1,9 @@
+{
+ "_note": "responses of daily_papers?limit=100&date=D. The empty weekend list, the empty second page (`p=1`, which the real API links with rel=next even when a day has under 100 papers) and the 400 body were recorded from huggingface.co on 2026-10-04 (latest 발표일 was 2026-10-02); the Thursday items are hand-made with newer upvotes and a late ai_summary.",
+ "2026-10-01": [
+  {"paper": {"id": "2610.10005", "publishedAt": "2026-09-29T00:00:00.000Z", "submittedOnDailyAt": "2026-10-01T00:00:00.000Z", "title": "Thu E", "summary": "Thu E abstract.", "upvotes": 120}, "title": "Thu E", "summary": "Thu E abstract."},
+  {"paper": {"id": "2610.10006", "publishedAt": "2026-09-29T00:00:00.000Z", "submittedOnDailyAt": "2026-10-01T00:00:00.000Z", "title": "Thu F", "summary": "Thu F abstract.", "upvotes": 80, "ai_summary": "HF now says F in one line."}, "title": "Thu F", "summary": "Thu F abstract."}
+ ],
+ "2026-10-03": [],
+ "later_than_latest": {"error": "✖ \"date\" must be less than or equal to \"2026-10-02T00:00:00.000Z\"\n  → at date"}
+}

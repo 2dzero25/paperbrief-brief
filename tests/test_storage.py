@@ -66,3 +66,27 @@ def test_database_newer_than_the_app_is_refused(tmp_path: Path):
         conn.execute("PRAGMA user_version = 99")
         with pytest.raises(RuntimeError):
             migrate(conn, write_migrations(tmp_path / "m", {"0001_init.sql": "CREATE TABLE a (x);"}))
+
+
+def test_request_connection_is_usable_across_threads(tmp_path: Path):
+    """FastAPI opens a sync dependency, runs the endpoint and closes it on different threadpool threads."""
+    import threading
+
+    from paperbrief.db import connect, init_db
+
+    settings = Settings(data_dir=tmp_path / "data")
+    init_db(settings)
+    conn = connect(settings)
+    errors: list[Exception] = []
+
+    def use() -> None:
+        try:
+            conn.execute("SELECT 1").fetchone()
+            conn.close()
+        except Exception as e:  # noqa: BLE001
+            errors.append(e)
+
+    t = threading.Thread(target=use)
+    t.start()
+    t.join()
+    assert errors == []
