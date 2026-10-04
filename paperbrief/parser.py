@@ -1,9 +1,15 @@
-"""Boundary 4/4: PDF parser (MinerU runner). The report ticket implements `live()` and `offline()`."""
-from dataclasses import dataclass, field
+"""Boundary 4/4: PDF parser (MinerU runner). `live()` is #13; `offline()` serves a canned body."""
+import json
+import time
+from dataclasses import asdict, dataclass, field
 from pathlib import Path
 from typing import Protocol
 
 from paperbrief.config import Settings
+from paperbrief.hf import FIXTURES_DIR
+from paperbrief.offline import delay
+
+RESULT_FILE = "parse_result.json"  # written by the worker after `parse` returns; its presence means 파싱 is done
 
 
 @dataclass(frozen=True)
@@ -21,6 +27,15 @@ class ParseResult:
     markdown: str
     figures: list[FigureCandidate] = field(default_factory=list)
 
+    def save(self, out_dir: Path) -> None:
+        data = {"markdown": self.markdown, "figures": [{**asdict(f), "image": str(f.image)} for f in self.figures]}
+        (out_dir / RESULT_FILE).write_text(json.dumps(data, ensure_ascii=False), encoding="utf-8")
+
+    @classmethod
+    def load(cls, out_dir: Path) -> "ParseResult":
+        data = json.loads((out_dir / RESULT_FILE).read_text(encoding="utf-8"))
+        return cls(data["markdown"], [FigureCandidate(**{**f, "image": Path(f["image"])}) for f in data["figures"]])
+
 
 class Parser(Protocol):
     def parse(self, pdf: Path, out_dir: Path) -> ParseResult:
@@ -37,6 +52,12 @@ def live(settings: Settings) -> Parser:
     return _Unimplemented()
 
 
+class OfflineParser:
+    def parse(self, pdf: Path, out_dir: Path) -> ParseResult:
+        time.sleep(delay())
+        return ParseResult(markdown=(FIXTURES_DIR / "parse_offline.md").read_text(encoding="utf-8"))
+
+
 def offline(settings: Settings) -> Parser:
-    """Returns a recorded MinerU output folder from tests/fixtures."""
-    return _Unimplemented()
+    """Returns a canned body (`PAPERBRIEF_OFFLINE=1`); no figures until #9 records a MinerU output folder."""
+    return OfflineParser()

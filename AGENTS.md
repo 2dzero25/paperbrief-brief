@@ -28,6 +28,7 @@ Python 3.12 + [uv](https://docs.astral.sh/uv/). Run from the repo root.
 
 - `create_app(settings, boundaries=None)` in `app.py`. The four external boundaries are injected: `hf.HFClient`, `arxiv.ArxivClient`, `llm.LLMClient`, `parser.Parser` (each a small `Protocol` in its own module, bundled as `boundaries.Boundaries`). Each boundary module owns its `live(settings)` and `offline(settings)` factory; `PAPERBRIEF_OFFLINE=1` uses `offline`. Routes never import a real client.
 - Routes: one module per feature in `routes/`, each with a module-level `router`; `create_app` registers every module found there. Get settings, boundaries and the DB through `deps.SettingsDep`, `BoundariesDep`, `DbDep`.
+- 보고서: `reports.py` is the single FIFO worker (`STAGES` = PDF → 파싱 → 작성, results kept under `<data dir>/papers/<id>/`), `routes/reports.py` its API, `report_prompt.py` the prompt, `static/reports.js` the card dots and report screen (`ext.*` insertion points listed at its top). `Report` in `llm.py` is the stored JSON: only add fields, with defaults. Tests fake arxiv.org by setting `app.state.pdf_http` to an `httpx.Client(transport=MockTransport(...))`.
 - Tests: only through the HTTP API with the `make_client` fixture (`tests/conftest.py`) and the fakes in `tests/fakes.py`.
 - DB: `migrations/NNNN_name.sql`, next free number, add-only (ADR-0001). Static page: `static/` (vanilla JS modules, imported from `app.js`).
 

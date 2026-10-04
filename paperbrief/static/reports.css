@@ -1,0 +1,18 @@
+/* Report screen and card status dots (shapes from wireframe.html Screen 2; tokens from app.css / papers.css). */
+.rdot { display: inline-flex; gap: 8px; font: 500 12px var(--mono); }
+.ghost { border: 0; background: none; cursor: pointer; color: var(--muted); font: 500 13px var(--mono); padding: 2px 4px; }
+.ghost:hover { color: var(--ink); }
+.ghost:focus-visible, summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.muted { color: var(--muted); }
+.rhead { display: grid; gap: 4px; padding: 12px 14px; border-bottom: 1.5px solid var(--ink); }
+.rhead .t { font-size: 16px; font-weight: 600; }
+.rhead .meta { font: 12px var(--mono); }
+.menu { position: relative; }
+.menu summary { cursor: pointer; list-style: none; color: var(--muted); font: 500 13px var(--mono); padding: 2px 4px; }
+.menu div { position: absolute; right: 0; z-index: 1; background: var(--paper); border: 1.5px solid var(--ink); border-radius: 4px; padding: 4px; display: grid; }
+.rbody { padding: 16px 14px; display: grid; gap: 14px; }
+.hook { font-weight: 600; }
+.kv { display: grid; grid-template-columns: 56px minmax(0, 1fr); gap: 6px 10px; font-size: 14px; margin: 0; }
+.kv dt { font: 500 12px var(--mono); color: var(--muted); padding-top: 2px; }
+.kv dd { margin: 0; min-width: 0; white-space: pre-wrap; }
+.status { padding: 28px 14px; font: 13px var(--mono); color: var(--muted); }
