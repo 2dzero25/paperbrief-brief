@@ -2,4 +2,6 @@
 import "./papers.js";
 import "./filters.js";
 import "./reports.js";
+import "./report_failure.js";
+import "./repro.js";
 import "./questions.js";
