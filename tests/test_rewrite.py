@@ -6,9 +6,9 @@ from paperbrief.llm import QA, Report
 from paperbrief.parser import ParseResult
 from tests.fakes import FakeArxiv, FakeHF, FakeLLM, FakeParser
 from tests.test_questions import ID
-from tests.test_reports import BODY, REPORT, GatedParser, report_of, start, wait_for, wait_status
+from tests.test_reports import BODY, REPORT, REPRO, GatedParser, report_of, start, wait_for, wait_status
 
-REWRITTEN = Report(hook="새 훅", method="새 방법", results="새 결과", difference="새 차이", meaning="새 의미", limitations="새 한계")
+REWRITTEN = Report(hook="새 훅", method="새 방법", results="새 결과", difference="새 차이", meaning="새 의미", limitations="새 한계", repro=REPRO)
 REWRITE = f"/api/papers/{ID}/report/rewrite"
 
 
@@ -133,3 +133,32 @@ def test_a_rewrite_keeps_the_questions_and_the_next_one_uses_the_new_report(make
     (_, (_, report, history, question)) = llm.calls[-1]
     assert report == REWRITTEN and question == "And the score?"
     assert history == [QA(question="Which benchmark?", answer="answer to Which benchmark?")]
+
+
+def test_while_a_rewrite_is_failed_the_questions_still_work_against_the_old_report(make_client):
+    llm = TwoReports()
+    client, _, _, _ = start(make_client, llm=llm)
+    client.post(f"/api/papers/{ID}/report")
+    wait_status(client, ID, "완료")
+    client.post(f"/api/papers/{ID}/questions", json={"question": "Before?"})
+    llm.broken = True
+    client.post(REWRITE)
+    wait_status(client, ID, "실패")
+
+    listed = client.get(f"/api/papers/{ID}/questions").json()["questions"]
+    res = client.post(f"/api/papers/{ID}/questions", json={"question": "During?"})
+
+    assert [q["question"] for q in listed] == ["Before?"]
+    assert res.status_code == 200 and res.json()["answer"] == "answer to During?"
+    (_, (_, report, history, _)) = llm.calls[-1]
+    assert report == REPORT and [h.question for h in history] == ["Before?"]  # the stored (old) report
+
+
+def test_a_report_that_never_completed_still_refuses_questions_after_failing(make_client):
+    llm = TwoReports()
+    llm.broken = True
+    client, _, _, _ = start(make_client, llm=llm)
+    client.post(f"/api/papers/{ID}/report")
+    wait_status(client, ID, "실패")
+
+    assert client.post(f"/api/papers/{ID}/questions", json={"question": "?"}).status_code == 409

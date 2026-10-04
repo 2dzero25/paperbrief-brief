@@ -1,7 +1,7 @@
 """Seam: HTTP API through TestClient. Ticket #4: 수집 -> 최근 발표일 목록 (fake HF; the real HF client has its own tests)."""
 import threading
 import time
-from datetime import date
+from datetime import date, datetime, timezone
 
 from fastapi import FastAPI
 from fastapi.testclient import TestClient
@@ -134,6 +134,60 @@ def test_newest_day_is_marked_recent_only_when_it_is_not_today(make_client):
     client.app.dependency_overrides[get_today] = lambda: date(2026, 10, 4)  # a Sunday
     assert client.get("/api/papers").json()["recent"] is True
     client.app.dependency_overrides[get_today] = lambda: FRI
+    assert client.get("/api/papers").json()["recent"] is False
+
+
+def test_simultaneous_first_collect_requests_start_exactly_one_collection(make_client, monkeypatch):
+    from concurrent.futures import ThreadPoolExecutor
+
+    from paperbrief import collector
+
+    init = collector.Collector.__init__
+
+    def slow_init(self, *args, **kwargs):  # widens the window in which a lazily created collector could be created twice
+        time.sleep(0.2)
+        init(self, *args, **kwargs)
+
+    monkeypatch.setattr(collector.Collector, "__init__", slow_init)
+    hf = ScriptedHF({FRI: [paper("2610.00001")]})
+    hf.gate = threading.Event()
+    client = client_with(make_client, hf)
+    barrier = threading.Barrier(4)
+
+    def post(_):
+        barrier.wait()
+        return client.post("/api/collect").status_code
+
+    with ThreadPoolExecutor(4) as pool:
+        codes = list(pool.map(post, range(4)))
+    time.sleep(0.1)
+    hf.gate.set()
+    wait_idle(client)
+
+    assert codes == [202] * 4 and hf.calls == 1
+
+
+def test_today_is_the_utc_date_because_발표일_are_utc_dates(make_client, monkeypatch):
+    """Friday 20:00 UTC is already Saturday on a UTC+9 clock; the newest day (Friday) is still today."""
+    from paperbrief.routes import papers as routes
+
+    instant = datetime(2026, 10, 2, 20, 0, tzinfo=timezone.utc)
+
+    class LocalSaturday(date):
+        @classmethod
+        def today(cls):
+            return cls(2026, 10, 3)  # what the machine's own calendar says
+
+    class Clock(datetime):
+        @classmethod
+        def now(cls, tz=None):
+            return instant.astimezone(tz)
+
+    monkeypatch.setattr(routes, "date", LocalSaturday)
+    monkeypatch.setattr(routes, "datetime", Clock, raising=False)
+    client = client_with(make_client, FakeHF({FRI: [paper("2610.00001")]}))
+    collect(client)
+
     assert client.get("/api/papers").json()["recent"] is False
 
 

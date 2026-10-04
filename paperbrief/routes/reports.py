@@ -6,18 +6,17 @@ import json
 from datetime import datetime, timezone
 from typing import Annotated
 
-from fastapi import APIRouter, Depends, FastAPI, HTTPException, Request
+from fastapi import APIRouter, Depends, HTTPException, Request
 
 from paperbrief import figures
 from paperbrief.deps import DbDep
-from paperbrief.reports import DONE, RUNNING, ReportWorker, worker_for
+from paperbrief.reports import DONE, RUNNING, ReportWorker
 
 router = APIRouter(prefix="/api")
 
 
 def worker_of(request: Request) -> ReportWorker:
-    app: FastAPI = request.app
-    return worker_for(app)
+    return request.app.state.report_worker  # created by `create_app`
 
 
 WorkerDep = Annotated[ReportWorker, Depends(worker_of)]

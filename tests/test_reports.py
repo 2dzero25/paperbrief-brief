@@ -14,12 +14,19 @@ from fastapi.testclient import TestClient
 from paperbrief.boundaries import Boundaries
 from paperbrief.config import Settings
 from paperbrief.hf import HFPaper
-from paperbrief.llm import OpenAILLM, Report
+from paperbrief.llm import OpenAILLM, Report, Repro, ReproItem
 from paperbrief.parser import FigureCandidate, ParseResult
 from tests.fakes import FakeArxiv, FakeHF, FakeLLM, FakeParser
 
 FRI = date(2026, 10, 2)
 BODY = "# Paper body\n\nWe reach 91.2 on Bench. See Figure 1."
+REPRO = Repro(
+    code=ReproItem(verdict="공개", evidence="https://github.com/author/onestreamer, 1쪽 각주"),
+    weights=ReproItem(verdict="비공개", evidence="p.9 공개 예정이라고 씀"),
+    data=ReproItem(verdict="공개", evidence="p.6, Table 2"),
+    gpu=ReproItem(verdict="공개", evidence="8×A100, 3일"),
+    license=ReproItem(verdict="명시 없음", evidence=""),
+)
 REPORT = Report(
     hook="Bench 91.2점으로 이전 SOTA를 넘음",
     method="방법 본문",
@@ -27,6 +34,7 @@ REPORT = Report(
     difference="차이 본문",
     meaning="의미 본문",
     limitations="명시 없음",
+    repro=REPRO,
 )
 
 
@@ -137,6 +145,55 @@ def test_one_paper_at_a_time_in_click_order_and_waiting_cards_show_their_place(m
         wait_status(client, i, "완료")
     assert [pdf.parent.name for pdf, _ in parser.calls] == list(ids)  # FIFO
     assert len(llm.calls) == 3
+
+
+class CountingParser(FakeParser):
+    """Remembers the most papers that were inside 파싱 at the same moment."""
+
+    def __init__(self, result: ParseResult) -> None:
+        super().__init__(result)
+        self.lock = threading.Lock()
+        self.active = self.peak = 0
+
+    def parse(self, pdf, out_dir):
+        with self.lock:
+            self.active += 1
+            self.peak = max(self.peak, self.active)
+        time.sleep(0.05)
+        try:
+            return super().parse(pdf, out_dir)
+        finally:
+            with self.lock:
+                self.active -= 1
+
+
+def test_simultaneous_first_requests_still_make_one_report_at_a_time(make_client, monkeypatch):
+    from concurrent.futures import ThreadPoolExecutor
+
+    from paperbrief import reports
+
+    init = reports.ReportWorker.__init__
+
+    def slow_init(self, *args, **kwargs):  # widens the window in which a lazily created worker could be created twice
+        time.sleep(0.2)
+        init(self, *args, **kwargs)
+
+    monkeypatch.setattr(reports.ReportWorker, "__init__", slow_init)
+    ids = tuple(f"2610.0000{n}" for n in range(1, 5))
+    parser = CountingParser(ParseResult(markdown=BODY))
+    client, _, _, _ = start(make_client, ids, parser=parser)
+    barrier = threading.Barrier(len(ids))
+
+    def post(arxiv_id):
+        barrier.wait()
+        return client.post(f"/api/papers/{arxiv_id}/report").status_code
+
+    with ThreadPoolExecutor(len(ids)) as pool:
+        codes = list(pool.map(post, ids))
+    for i in ids:
+        wait_status(client, i, "완료")
+
+    assert codes == [202] * len(ids) and parser.peak == 1
 
 
 def test_a_finished_report_is_opened_again_never_regenerated(make_client):

@@ -68,6 +68,19 @@ def test_database_newer_than_the_app_is_refused(tmp_path: Path):
             migrate(conn, write_migrations(tmp_path / "m", {"0001_init.sql": "CREATE TABLE a (x);"}))
 
 
+def test_connections_wait_up_to_30_seconds_for_a_lock_instead_of_failing_after_5(tmp_path: Path):
+    """The collector, the report worker and the requests all write; a short busy timeout shows up as "database is locked"."""
+    from paperbrief.db import connect, init_db
+
+    settings = Settings(data_dir=tmp_path / "data")
+    init_db(settings)
+    conn = connect(settings)
+    try:
+        assert conn.execute("PRAGMA busy_timeout").fetchone()[0] == 30_000
+    finally:
+        conn.close()
+
+
 def test_request_connection_is_usable_across_threads(tmp_path: Path):
     """FastAPI opens a sync dependency, runs the endpoint and closes it on different threadpool threads."""
     import threading

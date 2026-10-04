@@ -11,7 +11,6 @@ from pydantic import BaseModel, Field
 from paperbrief.deps import BoundariesDep, DbDep, SettingsDep
 from paperbrief.llm import QA, Report
 from paperbrief.parser import ParseResult
-from paperbrief.reports import DONE
 
 router = APIRouter(prefix="/api")
 log = logging.getLogger(__name__)
@@ -40,8 +39,9 @@ def list_questions(arxiv_id: str, db: DbDep) -> dict:
 @router.post("/papers/{arxiv_id}/questions")
 def ask(arxiv_id: str, body: Ask, db: DbDep, settings: SettingsDep, boundaries: BoundariesDep) -> dict:
     known_paper(db, arxiv_id)
-    row = db.execute("SELECT status, report_json FROM reports WHERE arxiv_id = ?", (arxiv_id,)).fetchone()
-    if row is None or row["status"] != DONE or not row["report_json"]:
+    row = db.execute("SELECT report_json FROM reports WHERE arxiv_id = ?", (arxiv_id,)).fetchone()
+    # report_json is written only when 작성 succeeds, so a stored one (also while a 다시 작성 is waiting, running or failed) is the old report
+    if row is None or not row["report_json"]:
         raise HTTPException(409, "보고서가 완료되지 않음")
     report = Report.model_validate_json(row["report_json"])
     text = ParseResult.load(settings.data_dir / "papers" / arxiv_id / "parsed").markdown

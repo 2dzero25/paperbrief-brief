@@ -14,15 +14,15 @@ from paperbrief.parser import FigureCandidate
 
 
 class ReproItem(BaseModel):
-    """One 판정 of the 재현 체크. 명시 없음 is always `?`, and then the evidence is that same phrase."""
+    """One 판정 of the 재현 체크. 명시 없음 is always `?`, and then the evidence is that same phrase (either one implies the other)."""
 
     verdict: Literal["공개", "비공개", "명시 없음"]  # 판정
     evidence: str  # 근거: URL, 쪽, 표 번호; 원문 표기 for GPU and 라이선스
 
     @model_validator(mode="after")
     def _missing_has_no_other_evidence(self) -> "ReproItem":
-        if self.verdict == "명시 없음":
-            self.evidence = "명시 없음"
+        if self.verdict == "명시 없음" or self.evidence.strip() == "명시 없음":
+            self.verdict, self.evidence = "명시 없음", "명시 없음"
         return self
 
 

@@ -1,7 +1,7 @@
 """Boundary 4/4: PDF parser (MinerU runner). `live()` is #13; `offline()` serves a canned body."""
 import json
-import shutil
 import logging
+import shutil
 import time
 import traceback
 from collections.abc import Callable
@@ -34,13 +34,23 @@ class ParseResult:
     figures: list[FigureCandidate] = field(default_factory=list)
 
     def save(self, out_dir: Path) -> None:
-        data = {"markdown": self.markdown, "figures": [{**asdict(f), "images": [str(i) for i in f.images]} for f in self.figures]}
+        """Image paths are stored relative to `out_dir` (posix style), so moving the data dir keeps them valid."""
+        root = out_dir.resolve()
+        data = {"markdown": self.markdown, "figures": [{**asdict(f), "images": [_relative(i, root) for i in f.images]} for f in self.figures]}
         (out_dir / RESULT_FILE).write_text(json.dumps(data, ensure_ascii=False), encoding="utf-8")
 
     @classmethod
     def load(cls, out_dir: Path) -> "ParseResult":
+        """Files saved by older versions hold absolute image paths; those are kept as they are."""
         data = json.loads((out_dir / RESULT_FILE).read_text(encoding="utf-8"))
-        return cls(data["markdown"], [FigureCandidate(**{**f, "images": [Path(i) for i in f["images"]]}) for f in data["figures"]])
+        return cls(data["markdown"], [FigureCandidate(**{**f, "images": [(out_dir / i).resolve() for i in f["images"]]}) for f in data["figures"]])  # an absolute `i` wins over `out_dir`
+
+
+def _relative(image: Path, root: Path) -> str:
+    try:
+        return image.resolve().relative_to(root).as_posix()
+    except ValueError:  # not under the parsed folder: keep it as given
+        return str(image)
 
 
 class Parser(Protocol):

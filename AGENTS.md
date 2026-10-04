@@ -33,7 +33,7 @@ Python 3.12 + [uv](https://docs.astral.sh/uv/). Run from the repo root.
 - 질문: `routes/questions.py` (`GET`/`POST /api/papers/{id}/questions`; only a 완료 report; a failed answer is not saved), `question_prompt.py`, `static/questions.js` (`<paper-qa>` mounted via `ext.after`). Q&A rows are never touched by the report, so 다시 작성 keeps them.
 - 다시 작성: `POST /api/papers/{id}/report/rewrite` (only a 완료 report) sets `reports.rewrite=1` (migration 0120) and enqueues; `write_done` stays false until the new report is saved, so only 작성 reruns and the old `report_json` survives a failure (retry = the normal `POST .../report`). Menu item in `static/rewrite.js`.
 - Tests: only through the HTTP API with the `make_client` fixture (`tests/conftest.py`) and the fakes in `tests/fakes.py`.
-- DB: `migrations/NNNN_name.sql`, next free number, add-only (ADR-0001). Static page: `static/` (vanilla JS modules, imported from `app.js`).
+- DB: `migrations/NNNN_name.sql`, add-only (ADR-0001); the number is higher than every existing migration and unique across parallel branches (tickets use ranges such as `0120_`; the loader rejects duplicates). Static page: `static/` (vanilla JS modules, imported from `app.js`).
 
 ## Check current docs with MCP (`.mcp.json`)
 

@@ -6,7 +6,7 @@
 //   ext.failure  #8:  (state) => html under the failure line ([다시 시도], log)
 //   ext.top      #9:  (report, state) => html between the hook and the rows (원문 그림)
 //   ext.rows     {label, html: (report, state) => html}; #10 splices 재현 in before 한계
-//   ext.after    #11: (state) => html below the report (질문 box); only rendered for a 완료 report
+//   ext.after    #11: (state) => html below the report (질문 box); rendered whenever a report is shown, also under a failed 다시 작성
 // `state` is the JSON of GET /api/papers/<id>/report.
 import { ext as papers } from "./papers.js";
 
@@ -86,17 +86,20 @@ function header(s) {
   </div>`;
 }
 
-function body(s) {
-  if (s.status === "완료" && s.report) {
-    const r = s.report;
-    return `<div class="rbody">
+// the stored report: also shown under a failed 다시 작성, which keeps the old one
+function reportHtml(s) {
+  const r = s.report;
+  return `<div class="rbody">
       <div class="hook">${esc(r.hook)}</div>
       ${ext.top.map((f) => f(r, s)).join("")}
       <dl class="kv">${ext.rows.map((row) => `<dt>${esc(row.label)}</dt><dd>${row.html(r, s)}</dd>`).join("")}</dl>
     </div>${ext.after.map((f) => f(s)).join("")}`;
-  }
+}
+
+function body(s) {
+  if (s.status === "완료" && s.report) return reportHtml(s);
   if (s.status === "실패") {
-    return `<div class="status"><div class="row"><span class="bad">✕ ${esc(s.stage)} 실패</span></div>${ext.failure.map((f) => f(s)).join("")}</div>`;
+    return `<div class="status"><div class="row"><span class="bad">✕ ${esc(s.stage)} 실패</span></div>${ext.failure.map((f) => f(s)).join("")}</div>${s.report ? reportHtml(s) : ""}`;
   }
   const spin = s.status === "진행 중" ? '<span class="spin">⟳</span>' : "◐";
   return `<div class="status" role="status">${spin} ${esc(progress(s))}</div>`;

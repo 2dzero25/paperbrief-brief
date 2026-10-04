@@ -94,6 +94,8 @@ def write_done(w: Work) -> bool:
 def run_write(w: Work) -> None:
     parsed = ParseResult.load(w.parsed)
     report = w.boundaries.llm.write_report(parsed.markdown, parsed.figures)
+    if report.repro is None:  # the field is optional only so reports stored before #10 load; a new one must have it
+        raise RuntimeError("repro 누락: 모델이 재현 체크를 돌려주지 않음")
     report.figures = figures.pick(report.figures, parsed.figures)  # only ids that are candidates, at most two
     w.conn.execute("UPDATE reports SET report_json = ?, rewrite = 0 WHERE arxiv_id = ?", (report.model_dump_json(), w.arxiv_id))
     w.conn.commit()
@@ -107,10 +109,10 @@ STAGES: list[tuple[str, Callable[[Work], bool], Callable[[Work], None]]] = [
 
 
 class ReportWorker:
-    def __init__(self, settings: Settings, boundaries: Boundaries, http: httpx.Client) -> None:
+    def __init__(self, settings: Settings, boundaries: Boundaries, http: Callable[[], httpx.Client]) -> None:
         self._settings = settings
         self._boundaries = boundaries
-        self._http = http
+        self._http = http  # asked for when a paper is processed, so a test can set `app.state.pdf_http` after the app exists
         self._queue: queue.Queue[str] = queue.Queue()
         self._lock = threading.Lock()
         self._waiting: list[str] = []  # FIFO order, for 대기 순번
@@ -170,7 +172,7 @@ class ReportWorker:
     def _process(self, arxiv_id: str) -> None:
         conn = connect(self._settings)
         try:
-            work = Work(arxiv_id, self._settings.data_dir / "papers" / arxiv_id, self._boundaries, self._http, conn)
+            work = Work(arxiv_id, self._settings.data_dir / "papers" / arxiv_id, self._boundaries, self._http(), conn)
             self._set(conn, arxiv_id, status=RUNNING)
             for name, done, run in STAGES:
                 if done(work):
@@ -215,9 +217,12 @@ def recover_interrupted(settings: Settings, boundaries: Boundaries) -> None:
         conn.close()
 
 
-def worker_for(app: FastAPI) -> ReportWorker:
-    """One worker per app, created on first use. Tests set `app.state.pdf_http` to fake arxiv.org before that."""
-    if not hasattr(app.state, "report_worker"):
-        http = getattr(app.state, "pdf_http", None) or default_http(app.state.settings)
-        app.state.report_worker = ReportWorker(app.state.settings, app.state.boundaries, http)
-    return app.state.report_worker
+_http_lock = threading.Lock()
+
+
+def http_for(app: FastAPI) -> httpx.Client:
+    """The PDF client: `app.state.pdf_http` (tests fake arxiv.org there), else a real one made on first use."""
+    with _http_lock:
+        if getattr(app.state, "pdf_http", None) is None:
+            app.state.pdf_http = default_http(app.state.settings)
+        return app.state.pdf_http

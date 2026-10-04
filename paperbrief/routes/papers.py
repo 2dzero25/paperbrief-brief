@@ -6,7 +6,7 @@ import json
 import re
 from collections.abc import AsyncIterator
 from contextlib import asynccontextmanager
-from datetime import date
+from datetime import date, datetime, timezone
 from typing import Annotated
 
 from fastapi import APIRouter, Depends, FastAPI, HTTPException, Request
@@ -14,15 +14,10 @@ from fastapi import APIRouter, Depends, FastAPI, HTTPException, Request
 from paperbrief.collector import Collector
 from paperbrief.deps import DbDep
 
-def collector_for(app: FastAPI) -> Collector:
-    if not hasattr(app.state, "collector"):  # one per app, created on first use
-        app.state.collector = Collector(app.state.settings, app.state.boundaries)
-    return app.state.collector
-
 
 @asynccontextmanager
 async def lifespan(app: FastAPI) -> AsyncIterator[None]:
-    collector_for(app).start()  # every app start collects in the background
+    app.state.collector.start()  # every app start collects in the background
     yield
 
 
@@ -30,14 +25,14 @@ router = APIRouter(prefix="/api", lifespan=lifespan)
 
 
 def collector_of(request: Request) -> Collector:
-    return collector_for(request.app)
+    return request.app.state.collector  # created by `create_app`
 
 
 CollectorDep = Annotated[Collector, Depends(collector_of)]
 
 
 def get_today() -> date:
-    return date.today()  # a dependency so tests can pick the day
+    return datetime.now(timezone.utc).date()  # 발표일 are UTC dates, so "today" is too; a dependency so tests can pick the day
 
 
 TodayDep = Annotated[date, Depends(get_today)]

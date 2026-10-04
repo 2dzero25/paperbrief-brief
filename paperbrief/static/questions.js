@@ -11,8 +11,8 @@ const el = (tag, attrs = {}, text = "") => Object.assign(document.createElement(
 
 class PaperQA extends HTMLElement {
   connectedCallback() {
-    this.id_ = this.dataset.id ?? "";
-    this.url = `/api/papers/${encodeURIComponent(this.id_)}/questions`;
+    this.arxivId = this.dataset.id ?? "";
+    this.url = `/api/papers/${encodeURIComponent(this.arxivId)}/questions`;
     this.list = el("div", { className: "qlist" });
     this.input = el("input", { id: "q", placeholder: "질문", ariaLabel: "질문", autocomplete: "off" });
     this.send = el("button", { className: "btn", type: "submit", ariaLabel: "보내기" }, "↵");

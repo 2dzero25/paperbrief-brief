@@ -7,7 +7,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 STATIC_DIR = Path(__file__).resolve().parent / "static"
-HOST ="127.0.0.1"  # never configurable: the app must not be reachable from other machines
+HOST = "127.0.0.1"  # never configurable: the app must not be reachable from other machines
 
 
 def default_data_dir() -> Path:

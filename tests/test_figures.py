@@ -4,14 +4,17 @@ The parser fake writes hand-made MinerU output (tests/mineru_fixtures.py); the f
 given and picks ids; we look at what the report screen would get from `GET /api/papers/<id>/report`.
 """
 import json
+import shutil
 from contextlib import closing
 
 import httpx
+from fastapi.testclient import TestClient
 
+from paperbrief.app import create_app
 from paperbrief.config import STATIC_DIR, Settings
 from paperbrief.db import connect
 from paperbrief.llm import OpenAILLM, Report
-from tests.fakes import FakeLLM
+from tests.fakes import FakeLLM, fake_boundaries
 from tests.mineru_fixtures import MineruFixtureParser, block, jpeg
 from tests.test_reports import REPORT, start, wait_for, wait_status
 
@@ -166,6 +169,41 @@ def test_a_report_stored_before_figures_existed_still_opens_with_no_figures(make
                    (PID, json.dumps(old)))
     state = client.get(f"/api/papers/{PID}/report").json()
     assert state["status"] == "완료" and state["figures"] == [] and state["report"]["hook"] == REPORT.hook
+
+
+def figure_urls(client):
+    return client.get(f"/api/papers/{PID}/report").json()["figures"][0]["images"]
+
+
+def test_figures_are_still_served_after_the_data_dir_is_moved(make_client, tmp_path):
+    red = jpeg((200, 30, 30))
+    pages = [[block("image", ["Figure 1: Architecture overview."], "images/page_2_image_0.jpg")]]
+    client, _, _ = make_report(make_client, pages, {"images/page_2_image_0.jpg": red})
+    old_dir = client.app.state.settings.data_dir  # type: ignore[attr-defined]
+    new_dir = tmp_path / "moved" / "PaperBrief"
+    new_dir.parent.mkdir()
+    shutil.move(old_dir, new_dir)
+
+    moved = TestClient(create_app(Settings(data_dir=new_dir), fake_boundaries()))
+
+    (url,) = figure_urls(moved)
+    res = moved.get(url)
+    assert (res.status_code, res.content) == (200, red)
+
+
+def test_a_parse_result_saved_with_absolute_paths_by_an_older_version_still_loads(make_client):
+    green = jpeg((30, 200, 30))
+    pages = [[block("image", ["Figure 1: Architecture overview."], "images/page_2_image_0.jpg")]]
+    client, _, _ = make_report(make_client, pages, {"images/page_2_image_0.jpg": green})
+    parsed = client.app.state.settings.data_dir / "papers" / PID / "parsed"  # type: ignore[attr-defined]
+    saved = json.loads((parsed / "parse_result.json").read_text(encoding="utf-8"))
+    for f in saved["figures"]:
+        f["images"] = [str((parsed / i).resolve()) for i in f["images"]]  # the old format
+    (parsed / "parse_result.json").write_text(json.dumps(saved), encoding="utf-8")
+
+    (url,) = figure_urls(client)
+
+    assert client.get(url).content == green
 
 
 def test_offline_mode_report_has_a_two_panel_figure_and_a_chart_figure(make_client):
