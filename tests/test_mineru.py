@@ -151,3 +151,20 @@ def test_real_mineru_output_has_the_shapes_the_figure_code_relies_on(make_client
     # multi-panel figure: the caption sits on the last panel, the panels in front of it have none
     per_page = [[b for b in p["blocks"] if b["type"] in ("image", "chart")] for p in pages]
     assert any(not a["captions"] and figure_caption(b) for g in per_page for a, b in zip(g, g[1:]))
+
+
+@pytest.mark.parametrize("evil", ["images/../../escape.txt", r"images/..\..\escape.txt"])
+def test_a_zip_entry_that_climbs_out_of_the_parsed_folder_is_a_parse_failure_and_writes_nothing(make_client, evil):
+    buf = io.BytesIO()
+    with zipfile.ZipFile(buf, "w") as z:
+        z.writestr("markdown.md", MARKDOWN)
+        z.writestr(evil, "owned")
+    fake = FakeMineru(buf.getvalue(), buf.getvalue())  # standard, then the basic fallback
+    client, _, _, _ = start(make_client, parser=parser_with(fake))
+    client.post("/api/papers/2610.00001/report")
+    state = wait_status(client, "2610.00001", "실패")
+
+    paper = client.app.state.settings.data_dir / "papers" / "2610.00001"  # type: ignore[attr-defined]
+    assert state["stage"] == "파싱" and "unsafe" in state["error_log"]
+    assert not (paper / "escape.txt").exists() and not list(paper.rglob("escape.txt"))
+    assert not (paper / "parsed" / "markdown.md").exists()  # nothing is unpacked from a rejected zip

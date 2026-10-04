@@ -50,8 +50,12 @@ def _unpack(zip_path: Path, out_dir: Path) -> None:
         names = [n for n in z.namelist() if n in KEEP or (n.startswith("images/") and not n.endswith("/"))]
         if "markdown.md" not in names:
             raise RuntimeError("mineru zip has no markdown.md")
-        for name in names:
-            target = out_dir / Path(*name.split("/"))
+        root = out_dir.resolve()
+        targets = {name: (out_dir / Path(*name.replace("\\", "/").split("/"))).resolve() for name in names}
+        for name, target in targets.items():  # check every entry first, so a rejected zip writes nothing
+            if not target.is_relative_to(root):
+                raise RuntimeError(f"mineru zip has an unsafe path: {name!r}")
+        for name, target in targets.items():
             target.parent.mkdir(parents=True, exist_ok=True)
-            with z.open(name) as src, target.open("wb") as dst:  # names are exact matches above, so no `..` can get in
+            with z.open(name) as src, target.open("wb") as dst:
                 shutil.copyfileobj(src, dst)
