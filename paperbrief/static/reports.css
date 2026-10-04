@@ -9,7 +9,7 @@
 .rhead .meta { font: 12px var(--mono); }
 .menu { position: relative; }
 .menu summary { cursor: pointer; list-style: none; color: var(--muted); font: 500 13px var(--mono); padding: 2px 4px; }
-.menu div { position: absolute; right: 0; z-index: 1; background: var(--paper); border: 1.5px solid var(--ink); border-radius: 4px; padding: 4px; display: grid; }
+.menu div { position: absolute; right: 0; z-index: 1; background: var(--paper); border: 1.5px solid var(--ink); border-radius: 4px; padding: 4px; display: grid; white-space: nowrap; }
 .rbody { padding: 16px 14px; display: grid; gap: 14px; }
 .hook { font-weight: 600; }
 .kv { display: grid; grid-template-columns: 56px minmax(0, 1fr); gap: 6px 10px; font-size: 14px; margin: 0; }
