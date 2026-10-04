@@ -214,7 +214,7 @@ def test_the_real_llm_client_sends_figure_ids_captions_and_mentions_but_no_image
     client.post(f"/api/papers/{PID}/report")
     done = wait_status(client, PID, "완료")
 
-    (request,) = sent
+    (request,) = [r for r in sent if r["model"] == "test-model"]  # the collection also sent its KO summary request
     text = request["input"]
     for line in ("fig1", "Figure 1: Architecture overview.", "Figure 1 shows the architecture.", "fig2", "Figure 2: Scaling."):
         assert line in text
