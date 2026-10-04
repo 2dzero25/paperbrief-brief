@@ -1,0 +1,51 @@
+[project]
+name = "paperbrief"
+version = "0.1.0"
+description = "PaperBrief: local web app that turns recent papers into Korean reports with a reproducibility check."
+readme = "README.md"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+  "mineru[full]>=4.0.10,<4.1",
+  "torch",
+  "torchvision",
+  "fastapi",
+  "uvicorn",
+  "httpx",
+  "openai",
+  "pydantic",
+]
+
+[dependency-groups]
+dev = [
+  "pytest",
+  "pyright",
+]
+
+[tool.uv]
+package = false
+# Lock only the three supported targets: Windows, Linux x86_64, Linux aarch64.
+environments = [
+  "sys_platform == 'win32'",
+  "sys_platform == 'linux' and platform_machine == 'x86_64'",
+  "sys_platform == 'linux' and platform_machine == 'aarch64'",
+]
+# lmdeploy's Linux wheel metadata requires nvidia-nccl-cu12, which breaks the Windows lock.
+override-dependencies = ["nvidia-nccl-cu12; sys_platform == 'linux'"]
+
+# PyPI torch is CPU-only on Windows, so take it from the PyTorch cu128 index there.
+[tool.uv.sources]
+torch = [{ index = "pytorch-cu128", marker = "sys_platform == 'win32'" }]
+torchvision = [{ index = "pytorch-cu128", marker = "sys_platform == 'win32'" }]
+
+[[tool.uv.index]]
+name = "pytorch-cu128"
+url = "https://download.pytorch.org/whl/cu128"
+explicit = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests", ".claude/skills"]
+pythonpath = ["."]
+
+[tool.pyright]
+include = ["paperbrief", "tests", ".claude/skills"]
+pythonVersion = "3.12"

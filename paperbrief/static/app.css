@@ -1,0 +1,16 @@
+/* Tokens follow wireframe.html; system fonts only (the app makes no external requests from the browser). */
+:root {
+  --bg: #eef0f2; --paper: #ffffff; --ink: #1d232b; --muted: #6b7580; --line: #cfd5db;
+  --sans: system-ui, "Malgun Gothic", "Noto Sans CJK KR", sans-serif;
+  --mono: ui-monospace, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --bg: #14181d; --paper: #1c2128; --ink: #e4e8ec; --muted: #98a2ac; --line: #38414b; color-scheme: dark; }
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 15px/1.55 var(--sans); padding: 32px 16px 64px; }
+.wrap { max-width: 760px; margin: 0 auto; background: var(--paper); border: 1.5px solid var(--ink); border-radius: 6px; overflow: hidden; }
+header { padding: 12px 14px; border-bottom: 1.5px solid var(--ink); }
+.brand { font-weight: 700; }
+main { min-height: 240px; }
+footer { font: 11px var(--mono); color: var(--muted); padding: 0 14px 10px; }

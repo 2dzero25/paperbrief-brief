@@ -1,0 +1,8 @@
+[
+ {"paper": {"id": "2610.10004", "publishedAt": "2026-10-01T00:00:00.000Z", "submittedOnDailyAt": "2026-10-02T00:00:00.000Z", "title": "Fri D", "summary": "Fri D abstract.", "upvotes": 8},
+  "publishedAt": "2026-10-01T20:00:00.000Z", "title": "Fri D", "summary": "Fri D abstract.", "thumbnail": "https://example.test/thumb/2610.10004.png", "numComments": 0},
+ {"paper": {"id": "2610.10005", "publishedAt": "2026-09-29T00:00:00.000Z", "submittedOnDailyAt": "2026-10-01T00:00:00.000Z", "title": "Thu E", "summary": "Thu E abstract.", "upvotes": 99},
+  "publishedAt": "2026-09-30T20:00:00.000Z", "title": "Thu E", "summary": "Thu E abstract.", "thumbnail": "https://example.test/thumb/2610.10005.png", "numComments": 0},
+ {"paper": {"id": "2610.10006", "publishedAt": "2026-09-29T00:00:00.000Z", "submittedOnDailyAt": "2026-10-01T00:00:00.000Z", "title": "Thu F", "summary": "Thu F abstract.", "upvotes": 77},
+  "publishedAt": "2026-09-30T20:00:00.000Z", "title": "Thu F", "summary": "Thu F abstract.", "thumbnail": "https://example.test/thumb/2610.10006.png", "numComments": 0}
+]

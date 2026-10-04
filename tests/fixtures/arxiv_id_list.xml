@@ -1,0 +1,829 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/hHI90wFUCj/v8tGBnVIgq/rBUKs</id>
+  <title>arXiv Query: id_list=...</title>
+  <updated>2026-10-04T14:11:53Z</updated>
+  <link href="https://arxiv.org/api/query?id_list=..." type="application/atom+xml"/>
+  <opensearch:itemsPerPage>84</opensearch:itemsPerPage>
+  <opensearch:totalResults>84</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2609.34381v1</id>
+    <title>Joint and Cross-Modal Video-Audio Generation and Editing: A Unified Formulation and Design Taxonomy</title>
+    <updated>2026-09-28T05:57:37Z</updated>
+    <link href="https://arxiv.org/abs/2609.34381v1" rel="alternate" type="text/html"/>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.MM" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.SD" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="eess.AS" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-09-28T05:57:37Z</published>
+    <arxiv:primary_category term="cs.CV"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2609.34677v1</id>
+    <title>Learning What to Recall: Adaptive Multi-Cue Episodic Memory for World Models</title>
+    <updated>2026-09-28T09:07:39Z</updated>
+    <link href="https://arxiv.org/abs/2609.34677v1" rel="alternate" type="text/html"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-09-28T09:07:39Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2609.33403v1</id>
+    <title>DataMagic: Authoring Data Videos through Declarative Multi-Agent Orchestration</title>
+    <updated>2026-09-27T09:31:21Z</updated>
+    <link href="https://arxiv.org/abs/2609.33403v1" rel="alternate" type="text/html"/>
+    <category term="cs.HC" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.DB" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.MA" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-09-27T09:31:21Z</published>
+    <arxiv:primary_category term="cs.HC"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2609.36138v1</id>
+    <title>When Does Correction Become Repair? Mechanistic Auditing of Internal Interventions in Tool-Using LLMs</title>
+    <updated>2026-09-28T19:12:55Z</updated>
+    <link href="https://arxiv.org/abs/2609.36138v1" rel="alternate" type="text/html"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.SE" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-09-28T19:12:55Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2609.39378v1</id>
+    <title>EgoTools: Towards Tool-Centric Reasoning in Real-World Egocentric Videos</title>
+    <updated>2026-09-30T09:30:23Z</updated>
+    <link href="https://arxiv.org/abs/2609.39378v1" rel="alternate" type="text/html"/>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-09-30T09:30:23Z</published>
+    <arxiv:primary_category term="cs.CV"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2610.01428v1</id>
+    <title>Generalization Is Stability, Not Accuracy: Multi-Axis Evaluation of LLMs</title>
+    <updated>2026-10-01T10:27:25Z</updated>
+    <link href="https://arxiv.org/abs/2610.01428v1" rel="alternate" type="text/html"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-10-01T10:27:25Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2610.01415v1</id>
+    <title>Beyond Memory: Harnessing Long-Horizon Agents with Explicit Belief States</title>
+    <updated>2026-10-01T10:21:46Z</updated>
+    <link href="https://arxiv.org/abs/2610.01415v1" rel="alternate" type="text/html"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-10-01T10:21:46Z</published>
+    <arxiv:primary_category term="cs.AI"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2610.02185v1</id>
+    <title>Decoding Looped Transformers Better for (Almost) Free</title>
+    <updated>2026-10-01T17:58:38Z</updated>
+    <link href="https://arxiv.org/abs/2610.02185v1" rel="alternate" type="text/html"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-10-01T17:58:38Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2610.00544v1</id>
+    <title>Memorizon: Training World Models Beyond Their Context Window</title>
+    <updated>2026-09-30T18:26:24Z</updated>
+    <link href="https://arxiv.org/abs/2610.00544v1" rel="alternate" type="text/html"/>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-09-30T18:26:24Z</published>
+    <arxiv:primary_category term="cs.CV"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2609.36820v1</id>
+    <title>CorrGRPO: Correlation-Normalized GRPO for Multi-Reward Learning</title>
+    <updated>2026-09-29T06:30:02Z</updated>
+    <link href="https://arxiv.org/abs/2609.36820v1" rel="alternate" type="text/html"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-09-29T06:30:02Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2609.37568v1</id>
+    <title>Devils in Question Relay: Source-Conditioned Relay Steering to Mitigate Hallucinations in Audio-visual Large Language Models</title>
+    <updated>2026-09-29T13:37:31Z</updated>
+    <link href="https://arxiv.org/abs/2609.37568v1" rel="alternate" type="text/html"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-09-29T13:37:31Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2609.35259v1</id>
+    <title>On-Policy or Off-Policy Learning? A Systematic Study of Distillation Dynamics</title>
+    <updated>2026-09-28T14:20:42Z</updated>
+    <link href="https://arxiv.org/abs/2609.35259v1" rel="alternate" type="text/html"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-09-28T14:20:42Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2609.39687v1</id>
+    <title>Better Supervision Is Nearby: Neighborhood On-Policy Self-Distillation</title>
+    <updated>2026-09-30T13:14:39Z</updated>
+    <link href="https://arxiv.org/abs/2609.39687v1" rel="alternate" type="text/html"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-09-30T13:14:39Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2610.00314v1</id>
+    <title>Predictive Credit: Measuring What Scientific Explanations Add to Experimental Forecasts</title>
+    <updated>2026-09-29T00:36:26Z</updated>
+    <link href="https://arxiv.org/abs/2610.00314v1" rel="alternate" type="text/html"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-09-29T00:36:26Z</published>
+    <arxiv:primary_category term="cs.AI"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2610.00313v1</id>
+    <title>Rules to Tools: Executable Checks for LLM Agents in Scientific Computing</title>
+    <updated>2026-09-29T00:36:16Z</updated>
+    <link href="https://arxiv.org/abs/2610.00313v1" rel="alternate" type="text/html"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.SE" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-09-29T00:36:16Z</published>
+    <arxiv:primary_category term="cs.AI"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2609.34210v2</id>
+    <title>RLE-Bench: A Qualifying Exam for Coding Agents as Robot Learning Engineers</title>
+    <updated>2026-09-29T05:16:26Z</updated>
+    <link href="https://arxiv.org/abs/2609.34210v2" rel="alternate" type="text/html"/>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-09-28T03:16:09Z</published>
+    <arxiv:primary_category term="cs.RO"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2609.36602v1</id>
+    <title>OTRetarget: Joint Robot and Object Motion Retargeting via Optimal Transport</title>
+    <updated>2026-09-29T03:18:14Z</updated>
+    <link href="https://arxiv.org/abs/2609.36602v1" rel="alternate" type="text/html"/>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-09-29T03:18:14Z</published>
+    <arxiv:primary_category term="cs.RO"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2609.38585v1</id>
+    <title>FlexRouter: Learning Complementary Model Sets for Flexible LLM Routing</title>
+    <updated>2026-09-29T21:44:05Z</updated>
+    <link href="https://arxiv.org/abs/2609.38585v1" rel="alternate" type="text/html"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-09-29T21:44:05Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2609.39375v1</id>
+    <title>Beyond the Current Scene: Event-Referential Grasping with Active View Selection</title>
+    <updated>2026-09-30T09:27:02Z</updated>
+    <link href="https://arxiv.org/abs/2609.39375v1" rel="alternate" type="text/html"/>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-09-30T09:27:02Z</published>
+    <arxiv:primary_category term="cs.RO"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2610.01939v1</id>
+    <title>Fewer Tokens, Better Action: GPT-6 Astra Robot Agents with 14% Higher Success Rate but 65% Fewer Tokens</title>
+    <updated>2026-10-01T16:07:49Z</updated>
+    <link href="https://arxiv.org/abs/2610.01939v1" rel="alternate" type="text/html"/>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-10-01T16:07:49Z</published>
+    <arxiv:primary_category term="cs.CV"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2610.01016v1</id>
+    <title>Scaling and Distilling Text Embeddings for Better Diffusibility</title>
+    <updated>2026-10-01T03:59:36Z</updated>
+    <link href="https://arxiv.org/abs/2610.01016v1" rel="alternate" type="text/html"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-10-01T03:59:36Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2610.00559v1</id>
+    <title>PhysVista: Benchmarking Physical Intelligence in VLMs via a Perception-Reasoning-Assessment Loop</title>
+    <updated>2026-09-30T18:34:22Z</updated>
+    <link href="https://arxiv.org/abs/2610.00559v1" rel="alternate" type="text/html"/>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-09-30T18:34:22Z</published>
+    <arxiv:primary_category term="cs.CV"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2610.01215v1</id>
+    <title>AutoGUIWorld: Image Generators as Visual World Models for GUI Agent</title>
+    <updated>2026-10-01T07:22:53Z</updated>
+    <link href="https://arxiv.org/abs/2610.01215v1" rel="alternate" type="text/html"/>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-10-01T07:22:53Z</published>
+    <arxiv:primary_category term="cs.CV"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2610.02201v1</id>
+    <title>SILSA: Sliding-Window Slice Latents for Topology-Preserving High-Resolution 3D Generation</title>
+    <updated>2026-10-01T17:59:46Z</updated>
+    <link href="https://arxiv.org/abs/2610.02201v1" rel="alternate" type="text/html"/>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-10-01T17:59:46Z</published>
+    <arxiv:primary_category term="cs.CV"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2610.02160v1</id>
+    <title>4Director: Controlling Video World Models with Rigid 3D Geometry</title>
+    <updated>2026-10-01T17:52:58Z</updated>
+    <link href="https://arxiv.org/abs/2610.02160v1" rel="alternate" type="text/html"/>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-10-01T17:52:58Z</published>
+    <arxiv:primary_category term="cs.CV"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2610.02148v1</id>
+    <title>Omni-Embed-Mini: Binding Modalities Without Forgetting via Dense Distillation</title>
+    <updated>2026-10-01T17:49:40Z</updated>
+    <link href="https://arxiv.org/abs/2610.02148v1" rel="alternate" type="text/html"/>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-10-01T17:49:40Z</published>
+    <arxiv:primary_category term="cs.CV"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2610.02142v1</id>
+    <title>Keyword Harnesses Fail Open: A Cheap Diagnostic Ladder for Tool-Use Claims in Small Language Models</title>
+    <updated>2026-10-01T17:46:38Z</updated>
+    <link href="https://arxiv.org/abs/2610.02142v1" rel="alternate" type="text/html"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-10-01T17:46:38Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2609.32520v1</id>
+    <title>When Users Change Their Minds: Measuring and Repairing Intent Drift in LLM Agents</title>
+    <updated>2026-09-26T12:03:54Z</updated>
+    <link href="https://arxiv.org/abs/2609.32520v1" rel="alternate" type="text/html"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-09-26T12:03:54Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2609.35690v1</id>
+    <title>Agent Priors-guided Policy Learning</title>
+    <updated>2026-09-28T17:37:00Z</updated>
+    <link href="https://arxiv.org/abs/2609.35690v1" rel="alternate" type="text/html"/>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-09-28T17:37:00Z</published>
+    <arxiv:primary_category term="cs.RO"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2609.37533v1</id>
+    <title>E-MoE: Enhanced Mixture-of-Experts for Non-Factorized Diffusion Language Models</title>
+    <updated>2026-09-29T13:18:50Z</updated>
+    <link href="https://arxiv.org/abs/2609.37533v1" rel="alternate" type="text/html"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-09-29T13:18:50Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2609.36585v1</id>
+    <title>Transformers Stop Thinking Too Early, and a Tiny LoRA Fixes It</title>
+    <updated>2026-09-29T03:02:58Z</updated>
+    <link href="https://arxiv.org/abs/2609.36585v1" rel="alternate" type="text/html"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-09-29T03:02:58Z</published>
+    <arxiv:primary_category term="cs.AI"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2609.36956v1</id>
+    <title>Controlled Decoding Attacks on Black-Box LLMs</title>
+    <updated>2026-09-29T07:58:49Z</updated>
+    <link href="https://arxiv.org/abs/2609.36956v1" rel="alternate" type="text/html"/>
+    <category term="cs.CR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-09-29T07:58:49Z</published>
+    <arxiv:primary_category term="cs.CR"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2609.38923v1</id>
+    <title>GraphForge: Training Working Agents with Graph-Anchored Workspace Synthesis</title>
+    <updated>2026-09-30T04:07:17Z</updated>
+    <link href="https://arxiv.org/abs/2609.38923v1" rel="alternate" type="text/html"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-09-30T04:07:17Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2610.01017v1</id>
+    <title>Pay for the Fault, Not the Flow: Label-Free In-Flow Multi-Agent Workflow Optimization</title>
+    <updated>2026-10-01T04:01:23Z</updated>
+    <link href="https://arxiv.org/abs/2610.01017v1" rel="alternate" type="text/html"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-10-01T04:01:23Z</published>
+    <arxiv:primary_category term="cs.AI"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2610.00906v1</id>
+    <title>ActiveSaddler: Automated Curriculum Learning for Agent Harness Optimization</title>
+    <updated>2026-10-01T01:36:03Z</updated>
+    <link href="https://arxiv.org/abs/2610.00906v1" rel="alternate" type="text/html"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.MA" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.SE" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-10-01T01:36:03Z</published>
+    <arxiv:primary_category term="cs.AI"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2610.00825v1</id>
+    <title>Align Then Reason: A Multimodal Lip-Sync Judge for Dubbing</title>
+    <updated>2026-09-30T23:35:37Z</updated>
+    <link href="https://arxiv.org/abs/2610.00825v1" rel="alternate" type="text/html"/>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-09-30T23:35:37Z</published>
+    <arxiv:primary_category term="cs.CV"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2610.00812v1</id>
+    <title>Video Generation Models: A Survey of Post-Training and Alignment</title>
+    <updated>2026-09-30T23:13:08Z</updated>
+    <link href="https://arxiv.org/abs/2610.00812v1" rel="alternate" type="text/html"/>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-09-30T23:13:08Z</published>
+    <arxiv:primary_category term="cs.CV"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2610.00437v1</id>
+    <title>JevSpawn: Adaptive Agentic Inference through Compositional Action Spaces</title>
+    <updated>2026-09-30T17:23:01Z</updated>
+    <link href="https://arxiv.org/abs/2610.00437v1" rel="alternate" type="text/html"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-09-30T17:23:01Z</published>
+    <arxiv:primary_category term="cs.AI"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2610.02206v1</id>
+    <title>KaliBench: A Fine-Grained Benchmark for Cybersecurity Tool Use on Kali Linux with Runtime-Free Verifiable Rewards</title>
+    <updated>2026-10-01T17:59:55Z</updated>
+    <link href="https://arxiv.org/abs/2610.02206v1" rel="alternate" type="text/html"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CR" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-10-01T17:59:55Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2610.02193v1</id>
+    <title>Hierarchical Continuous Diffusion Language Models</title>
+    <updated>2026-10-01T17:59:39Z</updated>
+    <link href="https://arxiv.org/abs/2610.02193v1" rel="alternate" type="text/html"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-10-01T17:59:39Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2610.02117v1</id>
+    <title>Where-OPD: Spatially Guided On-Policy Self-Distillation of MLLMs with Synthetic Scenes</title>
+    <updated>2026-10-01T17:34:10Z</updated>
+    <link href="https://arxiv.org/abs/2610.02117v1" rel="alternate" type="text/html"/>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-10-01T17:34:10Z</published>
+    <arxiv:primary_category term="cs.CV"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2610.01942v1</id>
+    <title>Latent-Foresight: End-to-End Learning Predictable Representations for Latent World Models</title>
+    <updated>2026-10-01T16:09:34Z</updated>
+    <link href="https://arxiv.org/abs/2610.01942v1" rel="alternate" type="text/html"/>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-10-01T16:09:34Z</published>
+    <arxiv:primary_category term="cs.CV"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2610.01762v1</id>
+    <title>OneStreamer: Unifying Perception, Memory, and Proactive Response in Streaming Video Interaction</title>
+    <updated>2026-10-01T14:23:03Z</updated>
+    <link href="https://arxiv.org/abs/2610.01762v1" rel="alternate" type="text/html"/>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-10-01T14:23:03Z</published>
+    <arxiv:primary_category term="cs.CV"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2610.02202v1</id>
+    <title>ScholarCatalyst: A Benchmark for Retrieving Papers That Inspire New Research</title>
+    <updated>2026-10-01T17:59:47Z</updated>
+    <link href="https://arxiv.org/abs/2610.02202v1" rel="alternate" type="text/html"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.IR" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-10-01T17:59:47Z</published>
+    <arxiv:primary_category term="cs.AI"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2610.02205v1</id>
+    <title>ROWBench: Do Video Models Render What the Program Specifies?</title>
+    <updated>2026-10-01T17:59:53Z</updated>
+    <link href="https://arxiv.org/abs/2610.02205v1" rel="alternate" type="text/html"/>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-10-01T17:59:53Z</published>
+    <arxiv:primary_category term="cs.CV"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2610.00348v1</id>
+    <title>Removing the NEEDLE in the Haystack: Backdoor Removal in LLMs via Weight Orthogonalisation</title>
+    <updated>2026-09-29T20:35:24Z</updated>
+    <link href="https://arxiv.org/abs/2610.00348v1" rel="alternate" type="text/html"/>
+    <category term="cs.CR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-09-29T20:35:24Z</published>
+    <arxiv:primary_category term="cs.CR"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2609.32536v1</id>
+    <title>Do Audio LLMs Listen Before They Act? Diagnosing Acoustic-Context Gating in Voice Agents</title>
+    <updated>2026-09-26T12:16:00Z</updated>
+    <link href="https://arxiv.org/abs/2609.32536v1" rel="alternate" type="text/html"/>
+    <category term="cs.SD" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.MM" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="eess.AS" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-09-26T12:16:00Z</published>
+    <arxiv:primary_category term="cs.SD"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2609.32993v1</id>
+    <title>X-Tree: Tokenizing Reusable Experience for Efficient Agent Generalization</title>
+    <updated>2026-09-26T22:41:20Z</updated>
+    <link href="https://arxiv.org/abs/2609.32993v1" rel="alternate" type="text/html"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-09-26T22:41:20Z</published>
+    <arxiv:primary_category term="cs.AI"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2609.32810v2</id>
+    <title>OpenTumorBoard: A Real-World Benchmark of Multidisciplinary Tumor Board Discussion Trajectories</title>
+    <updated>2026-09-29T07:50:22Z</updated>
+    <link href="https://arxiv.org/abs/2609.32810v2" rel="alternate" type="text/html"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-09-26T17:35:10Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2609.36435v1</id>
+    <title>MemFold: Learning Compact Soft Memory for Long-Context Personalization via On-Policy Optimization</title>
+    <updated>2026-09-29T00:52:34Z</updated>
+    <link href="https://arxiv.org/abs/2609.36435v1" rel="alternate" type="text/html"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-09-29T00:52:34Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2609.36388v1</id>
+    <title>Persona Dosing: Calibrated Activation Steering for Graded Trait Control</title>
+    <updated>2026-09-28T23:36:15Z</updated>
+    <link href="https://arxiv.org/abs/2609.36388v1" rel="alternate" type="text/html"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-09-28T23:36:15Z</published>
+    <arxiv:primary_category term="cs.AI"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2609.37362v1</id>
+    <title>Pretrain Once, Route Anywhere: Towards a Foundation Model for LLM Routing</title>
+    <updated>2026-09-29T12:23:58Z</updated>
+    <link href="https://arxiv.org/abs/2609.37362v1" rel="alternate" type="text/html"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-09-29T12:23:58Z</published>
+    <arxiv:primary_category term="cs.AI"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2609.37200v1</id>
+    <title>Adaptive Reward Routing: Dynamic Multi-Reward Optimization for Joint Audio-Video Diffusion via Forward-Process RL</title>
+    <updated>2026-09-29T10:18:01Z</updated>
+    <link href="https://arxiv.org/abs/2609.37200v1" rel="alternate" type="text/html"/>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-09-29T10:18:01Z</published>
+    <arxiv:primary_category term="cs.CV"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2609.38104v1</id>
+    <title>Explore Broadly, Reason Sharply: Push Small Models toward the Frontier via Sampling</title>
+    <updated>2026-09-29T17:45:43Z</updated>
+    <link href="https://arxiv.org/abs/2609.38104v1" rel="alternate" type="text/html"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-09-29T17:45:43Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2609.40222v1</id>
+    <title>LOCI: Spatial Linear Memory for Streaming World Models</title>
+    <updated>2026-09-30T17:27:06Z</updated>
+    <link href="https://arxiv.org/abs/2609.40222v1" rel="alternate" type="text/html"/>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-09-30T17:27:06Z</published>
+    <arxiv:primary_category term="cs.CV"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2610.00483v1</id>
+    <title>PixelDense: Dense Prediction as Representation Alignment for Pixel Diffusion</title>
+    <updated>2026-09-30T18:00:13Z</updated>
+    <link href="https://arxiv.org/abs/2610.00483v1" rel="alternate" type="text/html"/>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-09-30T18:00:13Z</published>
+    <arxiv:primary_category term="cs.CV"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2610.01092v1</id>
+    <title>Ego2Act: Evaluating Goal-Directed Manipulation in Egocentric Video Generation</title>
+    <updated>2026-10-01T05:35:29Z</updated>
+    <link href="https://arxiv.org/abs/2610.01092v1" rel="alternate" type="text/html"/>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-10-01T05:35:29Z</published>
+    <arxiv:primary_category term="cs.CV"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2609.38593v1</id>
+    <title>Prompt2Skill: Unsupervised Skill Optimization From Natural Language Instructions</title>
+    <updated>2026-09-29T21:53:56Z</updated>
+    <link href="https://arxiv.org/abs/2609.38593v1" rel="alternate" type="text/html"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-09-29T21:53:56Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2610.01595v1</id>
+    <title>Before It Fades: Reinforcing Temporal Representations at Inference Time in VideoLLMs</title>
+    <updated>2026-10-01T12:45:01Z</updated>
+    <link href="https://arxiv.org/abs/2610.01595v1" rel="alternate" type="text/html"/>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-10-01T12:45:01Z</published>
+    <arxiv:primary_category term="cs.CV"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2610.01499v1</id>
+    <title>VTR-Bench: A Systematic Benchmark for Evaluating Visual Text Rendering in Video Generation</title>
+    <updated>2026-10-01T11:40:03Z</updated>
+    <link href="https://arxiv.org/abs/2610.01499v1" rel="alternate" type="text/html"/>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-10-01T11:40:03Z</published>
+    <arxiv:primary_category term="cs.CV"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2610.02122v1</id>
+    <title>Argo-Bench: Evaluating Data Agents on Enterprise-Scale Workflows</title>
+    <updated>2026-10-01T17:35:44Z</updated>
+    <link href="https://arxiv.org/abs/2610.02122v1" rel="alternate" type="text/html"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.DB" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-10-01T17:35:44Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2610.00964v1</id>
+    <title>RPTune: Learned Context Curation for LLM Catalog Search</title>
+    <updated>2026-10-01T02:52:24Z</updated>
+    <link href="https://arxiv.org/abs/2610.00964v1" rel="alternate" type="text/html"/>
+    <category term="cs.IR" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-10-01T02:52:24Z</published>
+    <arxiv:primary_category term="cs.IR"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2609.22753v2</id>
+    <title>Replacing Large Language Models with Jev Decision Models for Low-Latency Edge Service Orchestration</title>
+    <updated>2026-09-26T10:20:17Z</updated>
+    <link href="https://arxiv.org/abs/2609.22753v2" rel="alternate" type="text/html"/>
+    <category term="cs.DC" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.NI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-09-19T04:26:37Z</published>
+    <arxiv:primary_category term="cs.DC"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2609.34621v1</id>
+    <title>Does Native 3D Texture Generation Necessarily Require 3D Assets for Training?</title>
+    <updated>2026-09-28T08:44:04Z</updated>
+    <link href="https://arxiv.org/abs/2609.34621v1" rel="alternate" type="text/html"/>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-09-28T08:44:04Z</published>
+    <arxiv:primary_category term="cs.CV"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2609.32019v1</id>
+    <title>Decentralized Master-Mind: Joint Action Refinement through Iterative Intent Denoising in Multi-Agent Pathfinding</title>
+    <updated>2026-09-25T21:31:41Z</updated>
+    <link href="https://arxiv.org/abs/2609.32019v1" rel="alternate" type="text/html"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.MA" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-09-25T21:31:41Z</published>
+    <arxiv:primary_category term="cs.AI"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2609.38024v1</id>
+    <title>Retrieval-Augmented Skill Optimization via Cross-Harness Adaptation</title>
+    <updated>2026-09-29T17:06:43Z</updated>
+    <link href="https://arxiv.org/abs/2609.38024v1" rel="alternate" type="text/html"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-09-29T17:06:43Z</published>
+    <arxiv:primary_category term="cs.AI"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2609.38886v1</id>
+    <title>Benchmarking and Enhancing Skill-Level Memory for Partially Observable Robotic Manipulation</title>
+    <updated>2026-09-30T03:35:00Z</updated>
+    <link href="https://arxiv.org/abs/2609.38886v1" rel="alternate" type="text/html"/>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-09-30T03:35:00Z</published>
+    <arxiv:primary_category term="cs.RO"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2609.38987v1</id>
+    <title>Smaller Models, Better Rejects: Preference Distillation Scaling</title>
+    <updated>2026-09-30T05:04:12Z</updated>
+    <link href="https://arxiv.org/abs/2609.38987v1" rel="alternate" type="text/html"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-09-30T05:04:12Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2609.40362v1</id>
+    <title>Multimodal Flow: Unified Flow Modeling of Language and Vision in Embedding Spaces</title>
+    <updated>2026-09-30T17:59:57Z</updated>
+    <link href="https://arxiv.org/abs/2609.40362v1" rel="alternate" type="text/html"/>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-09-30T17:59:57Z</published>
+    <arxiv:primary_category term="cs.CV"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2609.40097v1</id>
+    <title>AutoDataBench: A Data-centric Testbed for Accelerating Auto Research</title>
+    <updated>2026-09-30T16:33:24Z</updated>
+    <link href="https://arxiv.org/abs/2609.40097v1" rel="alternate" type="text/html"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-09-30T16:33:24Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2609.32259v2</id>
+    <title>Prefill-Free Cross-Family KV Cache Transfer for Heterogeneous Multi-Agent LLMs</title>
+    <updated>2026-09-29T19:41:30Z</updated>
+    <link href="https://arxiv.org/abs/2609.32259v2" rel="alternate" type="text/html"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.MA" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-09-26T05:30:18Z</published>
+    <arxiv:primary_category term="cs.AI"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2606.10953v2</id>
+    <title>Architect-Ant: Editable Automatic Furnishing of Architectural Floor Plans</title>
+    <updated>2026-09-30T22:13:55Z</updated>
+    <link href="https://arxiv.org/abs/2606.10953v2" rel="alternate" type="text/html"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-06-09T14:55:43Z</published>
+    <arxiv:primary_category term="cs.AI"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2610.00737v1</id>
+    <title>Personalized Image Generation with Reasoning and Reflection</title>
+    <updated>2026-09-30T21:30:26Z</updated>
+    <link href="https://arxiv.org/abs/2610.00737v1" rel="alternate" type="text/html"/>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-09-30T21:30:26Z</published>
+    <arxiv:primary_category term="cs.CV"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2610.00686v1</id>
+    <title>SemanTok: Predictable Semantic Tokens for Efficient Autoregressive Video Generation</title>
+    <updated>2026-09-30T20:29:37Z</updated>
+    <link href="https://arxiv.org/abs/2610.00686v1" rel="alternate" type="text/html"/>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-09-30T20:29:37Z</published>
+    <arxiv:primary_category term="cs.CV"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2610.00360v1</id>
+    <title>DexPolicy: Scheduled Exploration for Trajectory-Guided Dexterous Manipulation</title>
+    <updated>2026-09-30T04:19:47Z</updated>
+    <link href="https://arxiv.org/abs/2610.00360v1" rel="alternate" type="text/html"/>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-09-30T04:19:47Z</published>
+    <arxiv:primary_category term="cs.RO"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2610.01509v1</id>
+    <title>Sharpening Tax in Post-Training</title>
+    <updated>2026-10-01T11:46:00Z</updated>
+    <link href="https://arxiv.org/abs/2610.01509v1" rel="alternate" type="text/html"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-10-01T11:46:00Z</published>
+    <arxiv:primary_category term="cs.AI"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2609.39027v1</id>
+    <title>A Missing Piece for Trustworthy AI Reviewers: From Benchmarking Rhetorical Robustness to SciCore Review</title>
+    <updated>2026-09-30T05:32:26Z</updated>
+    <link href="https://arxiv.org/abs/2609.39027v1" rel="alternate" type="text/html"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-09-30T05:32:26Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2609.37690v2</id>
+    <title>Honeycomb: Constant-Size Scene Memory Representation for Video World Models</title>
+    <updated>2026-09-30T23:30:43Z</updated>
+    <link href="https://arxiv.org/abs/2609.37690v2" rel="alternate" type="text/html"/>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-09-29T14:33:39Z</published>
+    <arxiv:primary_category term="cs.CV"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2610.00574v1</id>
+    <title>Make Sparse Rewards Count: Density-Aware Reward Aggregation for Multi-Reward RL</title>
+    <updated>2026-09-30T18:45:26Z</updated>
+    <link href="https://arxiv.org/abs/2610.00574v1" rel="alternate" type="text/html"/>
+    <category term="cs.LG" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-09-30T18:45:26Z</published>
+    <arxiv:primary_category term="cs.LG"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2610.02196v1</id>
+    <title>InterEvolve: Test-Time Evolution of Reward Programs for Humanoid Loco-Manipulation</title>
+    <updated>2026-10-01T17:59:40Z</updated>
+    <link href="https://arxiv.org/abs/2610.02196v1" rel="alternate" type="text/html"/>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.GR" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-10-01T17:59:40Z</published>
+    <arxiv:primary_category term="cs.RO"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2610.02181v1</id>
+    <title>OmniSeek: Native Tool Integration for Multi-turn Audio-Visual Reasoning</title>
+    <updated>2026-10-01T17:58:16Z</updated>
+    <link href="https://arxiv.org/abs/2610.02181v1" rel="alternate" type="text/html"/>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-10-01T17:58:16Z</published>
+    <arxiv:primary_category term="cs.CV"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2610.02162v1</id>
+    <title>World Observer: Joint Actor-Observer Generation for Persistent World Modeling</title>
+    <updated>2026-10-01T17:53:20Z</updated>
+    <link href="https://arxiv.org/abs/2610.02162v1" rel="alternate" type="text/html"/>
+    <category term="cs.CV" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-10-01T17:53:20Z</published>
+    <arxiv:primary_category term="cs.CV"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2610.01108v1</id>
+    <title>AgSpec: Pushing the Limits of Retrieval-Based Speculative Decoding in Coding Agent Pipelines</title>
+    <updated>2026-10-01T05:48:29Z</updated>
+    <link href="https://arxiv.org/abs/2610.01108v1" rel="alternate" type="text/html"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-10-01T05:48:29Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2610.01026v1</id>
+    <title>It Takes Workflows to Evolve Better Workflows</title>
+    <updated>2026-10-01T04:15:49Z</updated>
+    <link href="https://arxiv.org/abs/2610.01026v1" rel="alternate" type="text/html"/>
+    <category term="cs.CL" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2026-10-01T04:15:49Z</published>
+    <arxiv:primary_category term="cs.CL"/>
+  </entry>
+</feed>

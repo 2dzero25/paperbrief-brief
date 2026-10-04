@@ -1,0 +1,16 @@
+{
+  "hook": "OneStreamer는 스트리밍 영상 벤치마크 StreamBench에서 평균 71.4점을 기록해 이전 최고 모델보다 6.3점 높았다.",
+  "method": "인식(perception), 기억(memory), 선제 응답(proactive response)을 하나의 streaming LLM 안에서 함께 학습한다. 영상 프레임은 chunk 단위로 들어오며, 오래된 chunk는 compressed memory token으로 요약해 KV cache에 남긴다.",
+  "results": "StreamBench 평균 71.4점(이전 최고 65.1점), 선제 응답 정확도 58.0%. 모든 수치는 논문 Table 2 기준이며 단일 run 결과다.",
+  "difference": "이전 streaming video LLM은 인식과 응답을 별도 모듈로 나눴다. 이 논문은 세 기능을 한 모델에서 end-to-end로 학습한다.",
+  "meaning": "긴 영상을 실시간으로 보면서 필요한 순간에 먼저 말을 거는 assistant를 만들 수 있다는 근거를 제시한다.",
+  "limitations": "명시 없음",
+  "figures": ["fig1", "fig2"],
+  "repro": {
+    "code": {"verdict": "공개", "evidence": "github.com/MCG-NJU/OneStreamer, 1쪽 각주"},
+    "weights": {"verdict": "명시 없음", "evidence": "명시 없음"},
+    "data": {"verdict": "공개", "evidence": "p.6, Table 2"},
+    "gpu": {"verdict": "비공개", "evidence": "p.9 학습 설정은 공개 예정이라고 씀"},
+    "license": {"verdict": "공개", "evidence": "Apache-2.0"}
+  }
+}

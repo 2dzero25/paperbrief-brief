@@ -1,0 +1,2889 @@
+{
+ "pages": [
+  {
+   "page_idx": 0,
+   "blocks": [
+    {
+     "type": "aside_text",
+     "bbox": [
+      0.032,
+      0.279,
+      0.069,
+      0.716
+     ],
+     "content": "arXiv:2609.36585v1 [cs.AI] 29 Sep 2026"
+    },
+    {
+     "type": "doc_title",
+     "bbox": [
+      0.155,
+      0.11,
+      0.82,
+      0.134
+     ],
+     "level": 1,
+     "content": "Transformers Stop Thinking Too Early, an..."
+    },
+    {
+     "type": "text",
+     "bbox": [
+      0.326,
+      0.177,
+      0.645,
+      0.195
+     ],
+     "content": "**Zehao Jin** <sup>1</sup> **Ruixuan Den..."
+    },
+    {
+     "type": "chart",
+     "bbox": [
+      0.09,
+      0.222,
+      0.342,
+      0.405
+     ],
+     "content": "",
+     "captions": [],
+     "footnotes": [],
+     "image_source": "images/page_0_chart_3.jpg"
+    },
+    {
+     "type": "chart",
+     "bbox": [
+      0.357,
+      0.223,
+      0.596,
+      0.404
+     ],
+     "content": "",
+     "captions": [],
+     "footnotes": [],
+     "image_source": "images/page_0_chart_4.jpg"
+    },
+    {
+     "type": "chart",
+     "bbox": [
+      0.632,
+      0.223,
+      0.881,
+      0.404
+     ],
+     "content": "",
+     "captions": [
+      {
+       "bbox": [
+        0.085,
+        0.416,
+        0.888,
+        0.47
+       ],
+       "content": "Figure 1. Short reference chains become ..."
+      }
+     ],
+     "footnotes": [],
+     "image_source": "images/page_0_chart_5.jpg"
+    },
+    {
+     "type": "paragraph_title",
+     "bbox": [
+      0.241,
+      0.485,
+      0.323,
+      0.501
+     ],
+     "level": 2,
+     "content": "Abstract"
+    },
+    {
+     "type": "text",
+     "bbox": [
+      0.116,
+      0.506,
+      0.446,
+      0.841
+     ],
+     "content": "Pretrained transformers use little of th..."
+    },
+    {
+     "type": "paragraph_title",
+     "bbox": [
+      0.5,
+      0.485,
+      0.63,
+      0.502
+     ],
+     "level": 2,
+     "content": "1. Introduction"
+    },
+    {
+     "type": "text",
+     "bbox": [
+      0.496,
+      0.512,
+      0.89,
+      0.679
+     ],
+     "content": "A transformer can read $\\mathbb{K} = \\ma..."
+    },
+    {
+     "type": "text",
+     "bbox": [
+      0.496,
+      0.685,
+      0.89,
+      0.853
+     ],
+     "content": "The failure is also easy to change. We t..."
+    },
+    {
+     "type": "text",
+     "bbox": [
+      0.496,
+      0.858,
+      0.891,
+      0.905
+     ],
+     "content": "We answer that question by tracing the p..."
+    },
+    {
+     "type": "page_footnote",
+     "bbox": [
+      0.085,
+      0.854,
+      0.476,
+      0.881
+     ],
+     "content": "<sup>1</sup>Georgia Institute of Technol..."
+    },
+    {
+     "type": "footer",
+     "bbox": [
+      0.086,
+      0.891,
+      0.269,
+      0.907
+     ],
+     "content": "Preprint. September 30, 2026."
+    },
+    {
+     "type": "page_number",
+     "bbox": [
+      0.482,
+      0.924,
+      0.492,
+      0.935
+     ],
+     "content": "1"
+    }
+   ]
+  },
+  {
+   "page_idx": 1,
+   "blocks": [
+    {
+     "type": "header",
+     "bbox": [
+      0.278,
+      0.057,
+      0.696,
+      0.072
+     ],
+     "content": "Transformers Stop Thinking Too Early, an..."
+    },
+    {
+     "type": "text",
+     "bbox": [
+      0.084,
+      0.086,
+      0.478,
+      0.207
+     ],
+     "content": "The query resolves another one or two po..."
+    },
+    {
+     "type": "text",
+     "bbox": [
+      0.085,
+      0.214,
+      0.478,
+      0.351
+     ],
+     "content": "The mechanism suggests where adaptation ..."
+    },
+    {
+     "type": "text",
+     "bbox": [
+      0.085,
+      0.357,
+      0.477,
+      0.374
+     ],
+     "content": "Our contributions connect the failure, f..."
+    },
+    {
+     "type": "text",
+     "bbox": [
+      0.086,
+      0.382,
+      0.476,
+      0.412
+     ],
+     "content": "1. **A short default computation** acros..."
+    },
+    {
+     "type": "text",
+     "bbox": [
+      0.086,
+      0.413,
+      0.476,
+      0.443
+     ],
+     "content": "2. **A tiny edit with large gains:** 50-..."
+    },
+    {
+     "type": "text",
+     "bbox": [
+      0.086,
+      0.443,
+      0.476,
+      0.489
+     ],
+     "content": "3. **A causal account of the relay** and..."
+    },
+    {
+     "type": "paragraph_title",
+     "bbox": [
+      0.086,
+      0.505,
+      0.295,
+      0.522
+     ],
+     "level": 2,
+     "content": "2. Task and intervention"
+    },
+    {
+     "type": "text",
+     "bbox": [
+      0.084,
+      0.532,
+      0.477,
+      0.624
+     ],
+     "content": "**Reference chains.** A program contains..."
+    },
+    {
+     "type": "equation",
+     "bbox": [
+      0.191,
+      0.626,
+      0.369,
+      0.678
+     ],
+     "content": "\\begin{array}{l l} \\mathrm{K} = \\text {a...",
+     "image_source": "images/page_1_equation_9.jpg"
+    },
+    {
+     "type": "text",
+     "bbox": [
+      0.085,
+      0.681,
+      0.479,
+      0.804
+     ],
+     "content": "Each assignment occupies a separate prom..."
+    },
+    {
+     "type": "text",
+     "bbox": [
+      0.084,
+      0.812,
+      0.477,
+      0.904
+     ],
+     "content": "**Models and scoring.** We evaluate thir..."
+    },
+    {
+     "type": "text",
+     "bbox": [
+      0.496,
+      0.086,
+      0.889,
+      0.148
+     ],
+     "content": "Huginn-0125, whose four-layer recurrent ..."
+    },
+    {
+     "type": "text",
+     "bbox": [
+      0.496,
+      0.153,
+      0.89,
+      0.336
+     ],
+     "content": "Choice accuracy selects among the chains..."
+    },
+    {
+     "type": "text",
+     "bbox": [
+      0.496,
+      0.344,
+      0.889,
+      0.391
+     ],
+     "content": "**LoRA at one layer.** Our rank-8 LoRA (..."
+    },
+    {
+     "type": "equation",
+     "bbox": [
+      0.602,
+      0.396,
+      0.886,
+      0.412
+     ],
+     "content": "h \\leftarrow M (h) = s h + B A h,\\tag{1}",
+     "image_source": "images/page_1_equation_15.jpg"
+    },
+    {
+     "type": "text",
+     "bbox": [
+      0.496,
+      0.417,
+      0.889,
+      0.555
+     ],
+     "content": "where n is hidden width, $A \\; \\in \\; \\m..."
+    },
+    {
+     "type": "text",
+     "bbox": [
+      0.495,
+      0.56,
+      0.891,
+      0.805
+     ],
+     "content": "The scalar s rescales the full state; BA..."
+    },
+    {
+     "type": "paragraph_title",
+     "bbox": [
+      0.497,
+      0.817,
+      0.825,
+      0.835
+     ],
+     "level": 2,
+     "content": "3. The default computation stops early"
+    },
+    {
+     "type": "text",
+     "bbox": [
+      0.496,
+      0.843,
+      0.891,
+      0.905
+     ],
+     "content": "**More layers do not mean more reference..."
+    },
+    {
+     "type": "page_number",
+     "bbox": [
+      0.481,
+      0.924,
+      0.494,
+      0.935
+     ],
+     "content": "2"
+    }
+   ]
+  },
+  {
+   "page_idx": 2,
+   "blocks": [
+    {
+     "type": "header",
+     "bbox": [
+      0.278,
+      0.057,
+      0.696,
+      0.072
+     ],
+     "content": "Transformers Stop Thinking Too Early, an..."
+    },
+    {
+     "type": "chart",
+     "bbox": [
+      0.108,
+      0.091,
+      0.464,
+      0.373
+     ],
+     "content": "",
+     "captions": [],
+     "footnotes": [],
+     "image_source": "images/page_2_chart_1.jpg"
+    },
+    {
+     "type": "chart",
+     "bbox": [
+      0.521,
+      0.091,
+      0.873,
+      0.365
+     ],
+     "content": "",
+     "captions": [
+      {
+       "bbox": [
+        0.085,
+        0.388,
+        0.888,
+        0.466
+       ],
+       "content": "Figure 2. The LoRA extends a relay that ..."
+      }
+     ],
+     "footnotes": [],
+     "image_source": "images/page_2_chart_2.jpg"
+    },
+    {
+     "type": "text",
+     "bbox": [
+      0.085,
+      0.476,
+      0.476,
+      0.553
+     ],
+     "content": "3-32B and OLMo-3-7B both reach about 2.6..."
+    },
+    {
+     "type": "text",
+     "bbox": [
+      0.085,
+      0.559,
+      0.478,
+      0.681
+     ],
+     "content": "Additional loops give similarly diminish..."
+    },
+    {
+     "type": "text",
+     "bbox": [
+      0.084,
+      0.69,
+      0.479,
+      0.904
+     ],
+     "content": "**The query reads pointers, then copies ..."
+    },
+    {
+     "type": "text",
+     "bbox": [
+      0.495,
+      0.476,
+      0.889,
+      0.599
+     ],
+     "content": "The interval over which a pointer’s own ..."
+    },
+    {
+     "type": "text",
+     "bbox": [
+      0.495,
+      0.607,
+      0.89,
+      0.775
+     ],
+     "content": "**The context makes little progress on i..."
+    },
+    {
+     "type": "paragraph_title",
+     "bbox": [
+      0.497,
+      0.788,
+      0.84,
+      0.805
+     ],
+     "level": 2,
+     "content": "4. A small LoRA makes the layers count"
+    },
+    {
+     "type": "text",
+     "bbox": [
+      0.496,
+      0.814,
+      0.891,
+      0.906
+     ],
+     "content": "**Long chains in one pass.** With the la..."
+    },
+    {
+     "type": "page_number",
+     "bbox": [
+      0.481,
+      0.924,
+      0.494,
+      0.936
+     ],
+     "content": "3"
+    }
+   ]
+  },
+  {
+   "page_idx": 3,
+   "blocks": [
+    {
+     "type": "header",
+     "bbox": [
+      0.278,
+      0.057,
+      0.696,
+      0.072
+     ],
+     "content": "Transformers Stop Thinking Too Early, an..."
+    },
+    {
+     "type": "chart",
+     "bbox": [
+      0.105,
+      0.092,
+      0.465,
+      0.304
+     ],
+     "content": "",
+     "captions": [],
+     "footnotes": [],
+     "image_source": "images/page_3_chart_1.jpg"
+    },
+    {
+     "type": "chart",
+     "bbox": [
+      0.525,
+      0.091,
+      0.878,
+      0.304
+     ],
+     "content": "",
+     "captions": [
+      {
+       "bbox": [
+        0.085,
+        0.333,
+        0.889,
+        0.399
+       ],
+       "content": "Figure 3. Extra loops extend the chain o..."
+      }
+     ],
+     "footnotes": [],
+     "image_source": "images/page_3_chart_2.jpg"
+    },
+    {
+     "type": "text",
+     "bbox": [
+      0.085,
+      0.409,
+      0.477,
+      0.516
+     ],
+     "content": "LoRA answers 40-line chains at 98% and 4..."
+    },
+    {
+     "type": "text",
+     "bbox": [
+      0.084,
+      0.525,
+      0.478,
+      0.693
+     ],
+     "content": "**Longer chains with more loops.** Ouro’..."
+    },
+    {
+     "type": "text",
+     "bbox": [
+      0.084,
+      0.698,
+      0.478,
+      0.836
+     ],
+     "content": "Ouro’s first-loop-only LoRA reaches 9.5 ..."
+    },
+    {
+     "type": "text",
+     "bbox": [
+      0.085,
+      0.844,
+      0.478,
+      0.906
+     ],
+     "content": "**The useful layers can be run again.** ..."
+    },
+    {
+     "type": "text",
+     "bbox": [
+      0.496,
+      0.41,
+      0.888,
+      0.455
+     ],
+     "continues_prev": true,
+     "content": "with one re-entry and 92% with two; the ..."
+    },
+    {
+     "type": "text",
+     "bbox": [
+      0.496,
+      0.465,
+      0.89,
+      0.631
+     ],
+     "content": "**Other interventions work at the same l..."
+    },
+    {
+     "type": "table",
+     "bbox": [
+      0.516,
+      0.705,
+      0.865,
+      0.781
+     ],
+     "content": "| Intervention | Parameters | Layer 14 |...",
+     "captions": [
+      {
+       "bbox": [
+        0.496,
+        0.635,
+        0.889,
+        0.701
+       ],
+       "content": "Table 1. Different edits share an early ..."
+      }
+     ],
+     "footnotes": [],
+     "image_source": "images/page_3_table_11.jpg"
+    },
+    {
+     "type": "paragraph_title",
+     "bbox": [
+      0.497,
+      0.8,
+      0.888,
+      0.818
+     ],
+     "level": 2,
+     "content": "5. The LoRA starts a relay in the middle..."
+    },
+    {
+     "type": "text",
+     "bbox": [
+      0.496,
+      0.826,
+      0.891,
+      0.903
+     ],
+     "content": "**A short interval carries a much longer..."
+    },
+    {
+     "type": "page_number",
+     "bbox": [
+      0.481,
+      0.924,
+      0.494,
+      0.935
+     ],
+     "content": "4"
+    }
+   ]
+  },
+  {
+   "page_idx": 4,
+   "blocks": [
+    {
+     "type": "header",
+     "bbox": [
+      0.278,
+      0.057,
+      0.696,
+      0.072
+     ],
+     "content": "Transformers Stop Thinking Too Early, an..."
+    },
+    {
+     "type": "chart",
+     "bbox": [
+      0.109,
+      0.094,
+      0.304,
+      0.3
+     ],
+     "content": "",
+     "captions": [],
+     "footnotes": [],
+     "image_source": "images/page_4_chart_1.jpg"
+    },
+    {
+     "type": "chart",
+     "bbox": [
+      0.306,
+      0.095,
+      0.484,
+      0.294
+     ],
+     "content": "",
+     "captions": [],
+     "footnotes": [],
+     "image_source": "images/page_4_chart_2.jpg"
+    },
+    {
+     "type": "chart",
+     "bbox": [
+      0.489,
+      0.098,
+      0.675,
+      0.302
+     ],
+     "content": "",
+     "captions": [],
+     "footnotes": [],
+     "image_source": "images/page_4_chart_3.jpg"
+    },
+    {
+     "type": "chart",
+     "bbox": [
+      0.679,
+      0.094,
+      0.878,
+      0.301
+     ],
+     "content": "",
+     "captions": [
+      {
+       "bbox": [
+        0.085,
+        0.306,
+        0.889,
+        0.372
+       ],
+       "content": "Figure 4. The LoRA changes how the progr..."
+      }
+     ],
+     "footnotes": [],
+     "image_source": "images/page_4_chart_4.jpg"
+    },
+    {
+     "type": "text",
+     "bbox": [
+      0.085,
+      0.382,
+      0.477,
+      0.429
+     ],
+     "continues_prev": true,
+     "content": "effect at progressively later program li..."
+    },
+    {
+     "type": "text",
+     "bbox": [
+      0.085,
+      0.435,
+      0.478,
+      0.556
+     ],
+     "content": "The same pattern repeats across loops. O..."
+    },
+    {
+     "type": "text",
+     "bbox": [
+      0.084,
+      0.565,
+      0.478,
+      0.764
+     ],
+     "content": "**Attention reaches further as the relay..."
+    },
+    {
+     "type": "text",
+     "bbox": [
+      0.084,
+      0.769,
+      0.479,
+      0.908
+     ],
+     "content": "The relevant heads already exist in the ..."
+    },
+    {
+     "type": "text",
+     "bbox": [
+      0.496,
+      0.382,
+      0.889,
+      0.459
+     ],
+     "continues_prev": true,
+     "content": "heads lowers choice accuracy from 89% to..."
+    },
+    {
+     "type": "text",
+     "bbox": [
+      0.496,
+      0.467,
+      0.89,
+      0.65
+     ],
+     "content": "**The parent line is necessary.** Removi..."
+    },
+    {
+     "type": "text",
+     "bbox": [
+      0.495,
+      0.657,
+      0.891,
+      0.81
+     ],
+     "content": "**Earlier names let a line find earlier ..."
+    },
+    {
+     "type": "text",
+     "bbox": [
+      0.496,
+      0.815,
+      0.892,
+      0.908
+     ],
+     "content": "The LoRA itself exchanges no information..."
+    },
+    {
+     "type": "page_number",
+     "bbox": [
+      0.481,
+      0.924,
+      0.494,
+      0.936
+     ],
+     "content": "5"
+    }
+   ]
+  },
+  {
+   "page_idx": 5,
+   "blocks": [
+    {
+     "type": "header",
+     "bbox": [
+      0.278,
+      0.057,
+      0.696,
+      0.072
+     ],
+     "content": "Transformers Stop Thinking Too Early, an..."
+    },
+    {
+     "type": "chart",
+     "bbox": [
+      0.104,
+      0.091,
+      0.538,
+      0.287
+     ],
+     "content": "",
+     "captions": [],
+     "footnotes": [],
+     "image_source": "images/page_5_chart_1.jpg"
+    },
+    {
+     "type": "chart",
+     "bbox": [
+      0.603,
+      0.094,
+      0.874,
+      0.29
+     ],
+     "content": "",
+     "captions": [
+      {
+       "bbox": [
+        0.085,
+        0.297,
+        0.889,
+        0.375
+       ],
+       "content": "Figure 5. Longer reads use frozen attent..."
+      }
+     ],
+     "footnotes": [],
+     "image_source": "images/page_5_chart_2.jpg"
+    },
+    {
+     "type": "text",
+     "bbox": [
+      0.085,
+      0.385,
+      0.477,
+      0.432
+     ],
+     "content": "Ouro’s unmodified loops continue the rel..."
+    },
+    {
+     "type": "text",
+     "bbox": [
+      0.085,
+      0.44,
+      0.478,
+      0.594
+     ],
+     "content": "**The ability is learned before the LoRA..."
+    },
+    {
+     "type": "paragraph_title",
+     "bbox": [
+      0.086,
+      0.606,
+      0.281,
+      0.624
+     ],
+     "level": 2,
+     "content": "6. Where to put the fix"
+    },
+    {
+     "type": "text",
+     "bbox": [
+      0.085,
+      0.632,
+      0.478,
+      0.785
+     ],
+     "content": "**A sharp placement limit.** Holding LoR..."
+    },
+    {
+     "type": "text",
+     "bbox": [
+      0.085,
+      0.793,
+      0.478,
+      0.885
+     ],
+     "content": "**Predicting placement from the frozen m..."
+    },
+    {
+     "type": "text",
+     "bbox": [
+      0.496,
+      0.385,
+      0.888,
+      0.416
+     ],
+     "continues_prev": true,
+     "content": "median frozen reach; the last working pl..."
+    },
+    {
+     "type": "text",
+     "bbox": [
+      0.496,
+      0.423,
+      0.89,
+      0.636
+     ],
+     "content": "Before obtaining held-out results, we pr..."
+    },
+    {
+     "type": "table",
+     "bbox": [
+      0.549,
+      0.696,
+      0.834,
+      0.777
+     ],
+     "content": "| Held-out model | Placement bracket | C...",
+     "captions": [
+      {
+       "bbox": [
+        0.496,
+        0.64,
+        0.889,
+        0.693
+       ],
+       "content": "Table 2. The frozen cutoff locates three..."
+      }
+     ],
+     "footnotes": [],
+     "image_source": "images/page_5_table_12.jpg"
+    },
+    {
+     "type": "text",
+     "bbox": [
+      0.496,
+      0.79,
+      0.891,
+      0.898
+     ],
+     "content": "**A later loop provides another opportun..."
+    },
+    {
+     "type": "page_number",
+     "bbox": [
+      0.481,
+      0.924,
+      0.494,
+      0.936
+     ],
+     "content": "6"
+    }
+   ]
+  },
+  {
+   "page_idx": 6,
+   "blocks": [
+    {
+     "type": "header",
+     "bbox": [
+      0.278,
+      0.057,
+      0.696,
+      0.072
+     ],
+     "content": "Transformers Stop Thinking Too Early, an..."
+    },
+    {
+     "type": "chart",
+     "bbox": [
+      0.105,
+      0.094,
+      0.462,
+      0.312
+     ],
+     "content": "",
+     "captions": [],
+     "footnotes": [],
+     "image_source": "images/page_6_chart_1.jpg"
+    },
+    {
+     "type": "chart",
+     "bbox": [
+      0.517,
+      0.095,
+      0.867,
+      0.316
+     ],
+     "content": "",
+     "captions": [
+      {
+       "bbox": [
+        0.085,
+        0.324,
+        0.889,
+        0.377
+       ],
+       "content": "Figure 6. A model-specific layer separat..."
+      }
+     ],
+     "footnotes": [],
+     "image_source": "images/page_6_chart_2.jpg"
+    },
+    {
+     "type": "text",
+     "bbox": [
+      0.085,
+      0.387,
+      0.477,
+      0.465
+     ],
+     "continues_prev": true,
+     "content": "has 24 layers after it, but reaches just..."
+    },
+    {
+     "type": "paragraph_title",
+     "bbox": [
+      0.086,
+      0.478,
+      0.364,
+      0.495
+     ],
+     "level": 2,
+     "content": "7. Multi-hop question answering"
+    },
+    {
+     "type": "text",
+     "bbox": [
+      0.085,
+      0.504,
+      0.478,
+      0.656
+     ],
+     "content": "**Fictional facts preserve the controlle..."
+    },
+    {
+     "type": "text",
+     "bbox": [
+      0.084,
+      0.665,
+      0.478,
+      0.893
+     ],
+     "content": "**Early layers also matter on MuSiQue.**..."
+    },
+    {
+     "type": "text",
+     "bbox": [
+      0.496,
+      0.387,
+      0.891,
+      0.525
+     ],
+     "content": "Early projection LoRA retains most of it..."
+    },
+    {
+     "type": "text",
+     "bbox": [
+      0.496,
+      0.53,
+      0.891,
+      0.714
+     ],
+     "content": "In Ouro, the layer-6 LoRA improves exact..."
+    },
+    {
+     "type": "paragraph_title",
+     "bbox": [
+      0.497,
+      0.726,
+      0.638,
+      0.743
+     ],
+     "level": 2,
+     "content": "8. Related work"
+    },
+    {
+     "type": "text",
+     "bbox": [
+      0.496,
+      0.753,
+      0.891,
+      0.906
+     ],
+     "content": "**Composition and information flow.** Th..."
+    },
+    {
+     "type": "page_number",
+     "bbox": [
+      0.481,
+      0.923,
+      0.494,
+      0.936
+     ],
+     "content": "7"
+    }
+   ]
+  },
+  {
+   "page_idx": 7,
+   "blocks": [
+    {
+     "type": "header",
+     "bbox": [
+      0.278,
+      0.057,
+      0.696,
+      0.072
+     ],
+     "content": "Transformers Stop Thinking Too Early, an..."
+    },
+    {
+     "type": "chart",
+     "bbox": [
+      0.104,
+      0.097,
+      0.439,
+      0.302
+     ],
+     "content": "",
+     "captions": [],
+     "footnotes": [],
+     "image_source": "images/page_7_chart_1.jpg"
+    },
+    {
+     "type": "chart",
+     "bbox": [
+      0.535,
+      0.097,
+      0.87,
+      0.313
+     ],
+     "content": "",
+     "captions": [
+      {
+       "bbox": [
+        0.085,
+        0.324,
+        0.889,
+        0.377
+       ],
+       "content": "Figure 7. Early adaptation preserves mos..."
+      }
+     ],
+     "footnotes": [],
+     "image_source": "images/page_7_chart_2.jpg"
+    },
+    {
+     "type": "text",
+     "bbox": [
+      0.085,
+      0.388,
+      0.476,
+      0.434
+     ],
+     "continues_prev": true,
+     "content": "et al., 2025). We connect these timing q..."
+    },
+    {
+     "type": "text",
+     "bbox": [
+      0.084,
+      0.443,
+      0.478,
+      0.701
+     ],
+     "content": "**Binding and reusable circuits.** Varia..."
+    },
+    {
+     "type": "text",
+     "bbox": [
+      0.084,
+      0.71,
+      0.478,
+      0.908
+     ],
+     "content": "**Loops and adaptation.** Recurrent-dept..."
+    },
+    {
+     "type": "text",
+     "bbox": [
+      0.496,
+      0.387,
+      0.89,
+      0.494
+     ],
+     "content": "2022) and FLAS representation interventi..."
+    },
+    {
+     "type": "paragraph_title",
+     "bbox": [
+      0.498,
+      0.507,
+      0.613,
+      0.525
+     ],
+     "level": 2,
+     "content": "9. Discussion"
+    },
+    {
+     "type": "text",
+     "bbox": [
+      0.496,
+      0.534,
+      0.89,
+      0.686
+     ],
+     "content": "A wrong direct answer or weak scaling wi..."
+    },
+    {
+     "type": "text",
+     "bbox": [
+      0.495,
+      0.695,
+      0.891,
+      0.908
+     ],
+     "content": "**Limitations.** The mechanistic tasks a..."
+    },
+    {
+     "type": "page_number",
+     "bbox": [
+      0.481,
+      0.924,
+      0.494,
+      0.936
+     ],
+     "content": "8"
+    }
+   ]
+  },
+  {
+   "page_idx": 8,
+   "blocks": [
+    {
+     "type": "header",
+     "bbox": [
+      0.278,
+      0.057,
+      0.697,
+      0.071
+     ],
+     "content": "Transformers Stop Thinking Too Early, an..."
+    },
+    {
+     "type": "paragraph_title",
+     "bbox": [
+      0.086,
+      0.084,
+      0.242,
+      0.101
+     ],
+     "level": 2,
+     "content": "Impact Statement"
+    },
+    {
+     "type": "text",
+     "bbox": [
+      0.085,
+      0.11,
+      0.478,
+      0.217
+     ],
+     "content": "This work diagnoses how pretrained langu..."
+    },
+    {
+     "type": "paragraph_title",
+     "bbox": [
+      0.087,
+      0.235,
+      0.185,
+      0.252
+     ],
+     "level": 2,
+     "content": "References"
+    },
+    {
+     "type": "ref_text",
+     "bbox": [
+      0.088,
+      0.26,
+      0.476,
+      0.335
+     ],
+     "content": "Aghajanyan, A., Zettlemoyer, L., and Gup..."
+    },
+    {
+     "type": "ref_text",
+     "bbox": [
+      0.088,
+      0.35,
+      0.476,
+      0.441
+     ],
+     "content": "Bae, S., Kim, Y., Bayat, R., Kim, S., Ha..."
+    },
+    {
+     "type": "ref_text",
+     "bbox": [
+      0.088,
+      0.455,
+      0.475,
+      0.5
+     ],
+     "content": "Balesni, M., Korbak, T., and Evans, O. L..."
+    },
+    {
+     "type": "ref_text",
+     "bbox": [
+      0.088,
+      0.515,
+      0.476,
+      0.592
+     ],
+     "content": "Bansal, A., Schwarzschild, A., Borgnia, ..."
+    },
+    {
+     "type": "ref_text",
+     "bbox": [
+      0.088,
+      0.605,
+      0.477,
+      0.682
+     ],
+     "content": "Biran, E., Gottesman, D., Yang, S., Geva..."
+    },
+    {
+     "type": "ref_text",
+     "bbox": [
+      0.088,
+      0.695,
+      0.478,
+      0.757
+     ],
+     "content": "Blayney, H., Arroyo, A., Obando-Ceron, J..."
+    },
+    {
+     "type": "ref_text",
+     "bbox": [
+      0.088,
+      0.771,
+      0.477,
+      0.831
+     ],
+     "content": "Brinkmann, J. et al. A mechanistic analy..."
+    },
+    {
+     "type": "ref_text",
+     "bbox": [
+      0.088,
+      0.846,
+      0.476,
+      0.905
+     ],
+     "content": "Csordas, R., Manning, C. D., and Potts, ..."
+    },
+    {
+     "type": "ref_text",
+     "bbox": [
+      0.499,
+      0.086,
+      0.888,
+      0.132
+     ],
+     "content": "Dehghani, M., Gouws, S., Vinyals, O., Us..."
+    },
+    {
+     "type": "ref_text",
+     "bbox": [
+      0.499,
+      0.144,
+      0.888,
+      0.19
+     ],
+     "content": "Fan, Y., Du, Y., Ramchandran, K., and Le..."
+    },
+    {
+     "type": "ref_text",
+     "bbox": [
+      0.5,
+      0.202,
+      0.889,
+      0.248
+     ],
+     "content": "Feng, J. and Steinhardt, J. How do langu..."
+    },
+    {
+     "type": "ref_text",
+     "bbox": [
+      0.499,
+      0.26,
+      0.889,
+      0.35
+     ],
+     "content": "Geiping, J., McLeish, S., Jain, N., Kirc..."
+    },
+    {
+     "type": "ref_text",
+     "bbox": [
+      0.499,
+      0.363,
+      0.889,
+      0.394
+     ],
+     "content": "Gemma Team, Kamath, A., Ferret, J., et a..."
+    },
+    {
+     "type": "ref_text",
+     "bbox": [
+      0.499,
+      0.407,
+      0.889,
+      0.483
+     ],
+     "content": "Geva, M., Bastings, J., Filippova, K., a..."
+    },
+    {
+     "type": "ref_text",
+     "bbox": [
+      0.499,
+      0.495,
+      0.889,
+      0.571
+     ],
+     "content": "Giannou, A., Rajput, S., Sohn, J.-Y., Le..."
+    },
+    {
+     "type": "ref_text",
+     "bbox": [
+      0.499,
+      0.583,
+      0.889,
+      0.615
+     ],
+     "content": "Grattafiori, A., Dubey, A., Jauhri, A., ..."
+    },
+    {
+     "type": "ref_text",
+     "bbox": [
+      0.499,
+      0.626,
+      0.889,
+      0.673
+     ],
+     "content": "Guo, T., Zhu, H., Zhang, R., Jiao, J., M..."
+    },
+    {
+     "type": "ref_text",
+     "bbox": [
+      0.499,
+      0.684,
+      0.888,
+      0.745
+     ],
+     "content": "Hao, S., Sukhbaatar, S., Su, D., Li, X.,..."
+    },
+    {
+     "type": "ref_text",
+     "bbox": [
+      0.499,
+      0.757,
+      0.889,
+      0.833
+     ],
+     "content": "Hsieh, C.-P., Sun, S., Kriman, S., Achar..."
+    },
+    {
+     "type": "ref_text",
+     "bbox": [
+      0.499,
+      0.846,
+      0.889,
+      0.906
+     ],
+     "content": "Hu, E. J., Shen, Y., Wallis, P., Allen-Z..."
+    },
+    {
+     "type": "page_number",
+     "bbox": [
+      0.481,
+      0.924,
+      0.494,
+      0.935
+     ],
+     "content": "9"
+    }
+   ]
+  },
+  {
+   "page_idx": 9,
+   "blocks": [
+    {
+     "type": "header",
+     "bbox": [
+      0.278,
+      0.058,
+      0.697,
+      0.072
+     ],
+     "content": "Transformers Stop Thinking Too Early, an..."
+    },
+    {
+     "type": "ref_text",
+     "bbox": [
+      0.088,
+      0.086,
+      0.478,
+      0.16
+     ],
+     "content": "Jin, Z., Deng, R., Wang, J., Shen, X., a..."
+    },
+    {
+     "type": "ref_text",
+     "bbox": [
+      0.088,
+      0.174,
+      0.476,
+      0.234
+     ],
+     "content": "Kapl, F., Angelis, E., Maile, K., von Os..."
+    },
+    {
+     "type": "ref_text",
+     "bbox": [
+      0.088,
+      0.247,
+      0.476,
+      0.307
+     ],
+     "content": "Kim, N. and Schuster, S. Entity tracking..."
+    },
+    {
+     "type": "ref_text",
+     "bbox": [
+      0.088,
+      0.32,
+      0.476,
+      0.38
+     ],
+     "content": "Kohli, H., Parthasarathy, S., Sun, H., a..."
+    },
+    {
+     "type": "ref_text",
+     "bbox": [
+      0.087,
+      0.393,
+      0.476,
+      0.44
+     ],
+     "content": "Koishekenov, Y., Lipani, A., and Cancedd..."
+    },
+    {
+     "type": "ref_text",
+     "bbox": [
+      0.087,
+      0.45,
+      0.478,
+      0.556
+     ],
+     "content": "Lepori, M. A., Mozer, M. C., and Ghandeh..."
+    },
+    {
+     "type": "ref_text",
+     "bbox": [
+      0.086,
+      0.569,
+      0.478,
+      0.631
+     ],
+     "content": "Lester, B., Al-Rfou, R., and Constant, N..."
+    },
+    {
+     "type": "ref_text",
+     "bbox": [
+      0.086,
+      0.642,
+      0.478,
+      0.689
+     ],
+     "content": "Liu, B., Ash, J. T., Goel, S., Krishnamu..."
+    },
+    {
+     "type": "ref_text",
+     "bbox": [
+      0.086,
+      0.7,
+      0.478,
+      0.745
+     ],
+     "content": "Lu, Yang, Lee, Li, and Liu. Latent chain..."
+    },
+    {
+     "type": "ref_text",
+     "bbox": [
+      0.087,
+      0.758,
+      0.478,
+      0.835
+     ],
+     "content": "McLeish, S., Li, A., Kirchenbauer, J., K..."
+    },
+    {
+     "type": "ref_text",
+     "bbox": [
+      0.088,
+      0.846,
+      0.478,
+      0.905
+     ],
+     "content": "Meng, K., Bau, D., Andonian, A., and Bel..."
+    },
+    {
+     "type": "ref_text",
+     "bbox": [
+      0.499,
+      0.086,
+      0.889,
+      0.147
+     ],
+     "content": "Merity, S., Xiong, C., Bradbury, J., and..."
+    },
+    {
+     "type": "ref_text",
+     "bbox": [
+      0.499,
+      0.159,
+      0.889,
+      0.204
+     ],
+     "content": "Oh and Demberg, V. A retrieval condition..."
+    },
+    {
+     "type": "ref_text",
+     "bbox": [
+      0.499,
+      0.217,
+      0.89,
+      0.337
+     ],
+     "content": "Olsson, C., Elhage, N., Nanda, N., Josep..."
+    },
+    {
+     "type": "ref_text",
+     "bbox": [
+      0.499,
+      0.35,
+      0.889,
+      0.397
+     ],
+     "content": "Pfau, J., Merrill, W., and Bowman, S. R...."
+    },
+    {
+     "type": "ref_text",
+     "bbox": [
+      0.499,
+      0.408,
+      0.888,
+      0.47
+     ],
+     "content": "Prakash, N., Rott Shaham, T., Haklay, T...."
+    },
+    {
+     "type": "ref_text",
+     "bbox": [
+      0.499,
+      0.481,
+      0.89,
+      0.542
+     ],
+     "content": "Prakash, N., Shapira, N., Sen Sharma, A...."
+    },
+    {
+     "type": "ref_text",
+     "bbox": [
+      0.499,
+      0.554,
+      0.891,
+      0.63
+     ],
+     "content": "Press, O., Zhang, M., Min, S., Schmidt, ..."
+    },
+    {
+     "type": "ref_text",
+     "bbox": [
+      0.499,
+      0.642,
+      0.89,
+      0.689
+     ],
+     "content": "Rimsky, N. et al. Steering Llama 2 via c..."
+    },
+    {
+     "type": "ref_text",
+     "bbox": [
+      0.499,
+      0.7,
+      0.891,
+      0.775
+     ],
+     "content": "Sanford, C., Hsu, D., and Telgarsky, M. ..."
+    },
+    {
+     "type": "ref_text",
+     "bbox": [
+      0.499,
+      0.788,
+      0.89,
+      0.833
+     ],
+     "content": "Saparov, A. et al. Transformers struggle..."
+    },
+    {
+     "type": "ref_text",
+     "bbox": [
+      0.499,
+      0.845,
+      0.889,
+      0.906
+     ],
+     "content": "Saunshi, N., Dikkala, N., Li, Z., Kumar,..."
+    },
+    {
+     "type": "page_number",
+     "bbox": [
+      0.478,
+      0.924,
+      0.498,
+      0.936
+     ],
+     "content": "10"
+    }
+   ]
+  },
+  {
+   "page_idx": 10,
+   "blocks": [
+    {
+     "type": "header",
+     "bbox": [
+      0.278,
+      0.057,
+      0.697,
+      0.072
+     ],
+     "content": "Transformers Stop Thinking Too Early, an..."
+    },
+    {
+     "type": "ref_text",
+     "bbox": [
+      0.088,
+      0.086,
+      0.477,
+      0.162
+     ],
+     "content": "Schwarzschild, A., Borgnia, E., Gupta, A..."
+    },
+    {
+     "type": "ref_text",
+     "bbox": [
+      0.088,
+      0.174,
+      0.476,
+      0.235
+     ],
+     "content": "Shapiro, M. Retrofitting recurrent depth..."
+    },
+    {
+     "type": "ref_text",
+     "bbox": [
+      0.087,
+      0.247,
+      0.476,
+      0.294
+     ],
+     "content": "Sia, S., Mueller, D., and Duh, K. Where ..."
+    },
+    {
+     "type": "ref_text",
+     "bbox": [
+      0.087,
+      0.305,
+      0.476,
+      0.366
+     ],
+     "content": "Tang, Z., Zhao, Q., Franco, G., Wijaya, ..."
+    },
+    {
+     "type": "ref_text",
+     "bbox": [
+      0.088,
+      0.378,
+      0.476,
+      0.41
+     ],
+     "content": "Team Olmo, Ettinger, A., Bertsch, A., et..."
+    },
+    {
+     "type": "ref_text",
+     "bbox": [
+      0.087,
+      0.422,
+      0.478,
+      0.483
+     ],
+     "content": "Trivedi, H., Balasubramanian, N., Khot, ..."
+    },
+    {
+     "type": "ref_text",
+     "bbox": [
+      0.087,
+      0.495,
+      0.477,
+      0.556
+     ],
+     "content": "Turner, A. M., Thiergart, L., Leech, G.,..."
+    },
+    {
+     "type": "ref_text",
+     "bbox": [
+      0.088,
+      0.568,
+      0.478,
+      0.643
+     ],
+     "content": "Wang, K., Variengien, A., Conmy, A., Shl..."
+    },
+    {
+     "type": "ref_text",
+     "bbox": [
+      0.088,
+      0.656,
+      0.478,
+      0.703
+     ],
+     "content": "Wang, W. and Reid, F. Looped transformer..."
+    },
+    {
+     "type": "ref_text",
+     "bbox": [
+      0.088,
+      0.715,
+      0.478,
+      0.79
+     ],
+     "content": "Wu, Y., Geiger, A., and Milliere, R. How..."
+    },
+    {
+     "type": "ref_text",
+     "bbox": [
+      0.087,
+      0.803,
+      0.478,
+      0.864
+     ],
+     "content": "Wu, Z., Arora, A., Wang, Z., Geiger, A.,..."
+    },
+    {
+     "type": "ref_text",
+     "bbox": [
+      0.087,
+      0.876,
+      0.478,
+      0.906
+     ],
+     "content": "Yang, A., Li, A., Yang, B., et al. Qwen3..."
+    },
+    {
+     "type": "ref_text",
+     "bbox": [
+      0.499,
+      0.086,
+      0.889,
+      0.146
+     ],
+     "content": "Yang, L., Lee, K., Nowak, R., and Papail..."
+    },
+    {
+     "type": "ref_text",
+     "bbox": [
+      0.5,
+      0.156,
+      0.889,
+      0.233
+     ],
+     "content": "Yang, S., Gribovskaya, E., Kassner, N., ..."
+    },
+    {
+     "type": "ref_text",
+     "bbox": [
+      0.5,
+      0.242,
+      0.89,
+      0.318
+     ],
+     "content": "Yang, Z., Li, J., Xia, S., and Hu, X. In..."
+    },
+    {
+     "type": "ref_text",
+     "bbox": [
+      0.5,
+      0.327,
+      0.889,
+      0.373
+     ],
+     "content": "Yin, F., Ye, X., and Durrett, G. LoFiT: ..."
+    },
+    {
+     "type": "ref_text",
+     "bbox": [
+      0.5,
+      0.382,
+      0.889,
+      0.443
+     ],
+     "content": "Yu, Z., Belinkov, Y., and Ananiadou, S. ..."
+    },
+    {
+     "type": "ref_text",
+     "bbox": [
+      0.498,
+      0.453,
+      0.889,
+      0.514
+     ],
+     "content": "Zhang, T., Hu, J., Peng, Y., and Xie, T...."
+    },
+    {
+     "type": "ref_text",
+     "bbox": [
+      0.498,
+      0.523,
+      0.889,
+      0.584
+     ],
+     "content": "Zhang, Y., Backurs, A., Bubeck, S., Elda..."
+    },
+    {
+     "type": "ref_text",
+     "bbox": [
+      0.499,
+      0.594,
+      0.889,
+      0.655
+     ],
+     "content": "Zhang, Z., Hu, R., Glentis, A., Li, D., ..."
+    },
+    {
+     "type": "ref_text",
+     "bbox": [
+      0.499,
+      0.664,
+      0.889,
+      0.71
+     ],
+     "content": "Zhu, R.-J., Wang, Z., Hua, K., et al. Sc..."
+    },
+    {
+     "type": "ref_text",
+     "bbox": [
+      0.499,
+      0.72,
+      0.89,
+      0.825
+     ],
+     "content": "Zou, A., Phan, L., Chen, S., Campbell, J..."
+    },
+    {
+     "type": "page_number",
+     "bbox": [
+      0.478,
+      0.924,
+      0.496,
+      0.935
+     ],
+     "content": "11"
+    }
+   ]
+  },
+  {
+   "page_idx": 11,
+   "blocks": [
+    {
+     "type": "header",
+     "bbox": [
+      0.278,
+      0.058,
+      0.696,
+      0.072
+     ],
+     "content": "Transformers Stop Thinking Too Early, an..."
+    },
+    {
+     "type": "paragraph_title",
+     "bbox": [
+      0.086,
+      0.085,
+      0.45,
+      0.101
+     ],
+     "level": 2,
+     "content": "A. Tasks, interventions, and measurement..."
+    },
+    {
+     "type": "paragraph_title",
+     "bbox": [
+      0.086,
+      0.11,
+      0.332,
+      0.126
+     ],
+     "level": 2,
+     "content": "A.1. Prompts, models, and scoring"
+    },
+    {
+     "type": "text",
+     "bbox": [
+      0.084,
+      0.135,
+      0.891,
+      0.24
+     ],
+     "content": "A program starts with Here is a short pr..."
+    },
+    {
+     "type": "text",
+     "bbox": [
+      0.084,
+      0.247,
+      0.891,
+      0.355
+     ],
+     "content": "DeepSeek-V4-Flash uses the DeepSeek-V4-F..."
+    },
+    {
+     "type": "text",
+     "bbox": [
+      0.085,
+      0.36,
+      0.889,
+      0.437
+     ],
+     "content": "Choice accuracy compares logits only amo..."
+    },
+    {
+     "type": "text",
+     "bbox": [
+      0.084,
+      0.443,
+      0.89,
+      0.519
+     ],
+     "content": "Panel cells and headline standard-model ..."
+    },
+    {
+     "type": "text",
+     "bbox": [
+      0.084,
+      0.526,
+      0.889,
+      0.602
+     ],
+     "content": "Fictional-fact prompts contain an instru..."
+    },
+    {
+     "type": "paragraph_title",
+     "bbox": [
+      0.086,
+      0.618,
+      0.258,
+      0.634
+     ],
+     "level": 2,
+     "content": "A.2. Training the LoRA"
+    },
+    {
+     "type": "text",
+     "bbox": [
+      0.085,
+      0.642,
+      0.367,
+      0.657
+     ],
+     "content": "The LoRA in Section 2 is implemented as"
+    },
+    {
+     "type": "equation",
+     "bbox": [
+      0.328,
+      0.667,
+      0.886,
+      0.7
+     ],
+     "content": "h \\leftarrow s h + \\operatorname{rms} (h...",
+     "image_source": "images/page_11_equation_10.jpg"
+    },
+    {
+     "type": "text",
+     "bbox": [
+      0.085,
+      0.71,
+      0.889,
+      0.771
+     ],
+     "content": "It acts independently at each token; fro..."
+    },
+    {
+     "type": "text",
+     "bbox": [
+      0.085,
+      0.777,
+      0.889,
+      0.824
+     ],
+     "content": "Table 3 reports the learned scalar in ea..."
+    },
+    {
+     "type": "text",
+     "bbox": [
+      0.084,
+      0.83,
+      0.89,
+      0.907
+     ],
+     "content": "For standard models, initialize A with i..."
+    },
+    {
+     "type": "page_number",
+     "bbox": [
+      0.478,
+      0.924,
+      0.498,
+      0.935
+     ],
+     "content": "12"
+    }
+   ]
+  },
+  {
+   "page_idx": 12,
+   "blocks": [
+    {
+     "type": "header",
+     "bbox": [
+      0.278,
+      0.057,
+      0.696,
+      0.072
+     ],
+     "content": "Transformers Stop Thinking Too Early, an..."
+    },
+    {
+     "type": "table",
+     "bbox": [
+      0.314,
+      0.13,
+      0.658,
+      0.258
+     ],
+     "content": "| LoRA | Learned scale s |\n| --- | --- |...",
+     "captions": [
+      {
+       "bbox": [
+        0.085,
+        0.083,
+        0.888,
+        0.123
+       ],
+       "content": "Table 3. Learned scales distinguish the ..."
+      }
+     ],
+     "footnotes": [],
+     "image_source": "images/page_12_table_2.jpg"
+    },
+    {
+     "type": "text",
+     "bbox": [
+      0.085,
+      0.285,
+      0.89,
+      0.347
+     ],
+     "content": "The text control evaluates the first 64 ..."
+    },
+    {
+     "type": "text",
+     "bbox": [
+      0.085,
+      0.353,
+      0.889,
+      0.43
+     ],
+     "content": "Ouro program LoRAs use 1,200 steps, batc..."
+    },
+    {
+     "type": "text",
+     "bbox": [
+      0.084,
+      0.435,
+      0.89,
+      0.498
+     ],
+     "content": "Huginn training uses batch size one with..."
+    },
+    {
+     "type": "paragraph_title",
+     "bbox": [
+      0.086,
+      0.513,
+      0.382,
+      0.529
+     ],
+     "level": 2,
+     "content": "A.3. Restoration, read-outs, and attenti..."
+    },
+    {
+     "type": "text",
+     "bbox": [
+      0.085,
+      0.536,
+      0.888,
+      0.568
+     ],
+     "content": "Let $g ( x ) = z _ { v } ( x ) - z _ { v..."
+    },
+    {
+     "type": "equation",
+     "bbox": [
+      0.369,
+      0.578,
+      0.886,
+      0.615
+     ],
+     "content": "S (p, \\ell) = \\frac {g (x _ {\\mathrm{cf}...",
+     "image_source": "images/page_12_equation_8.jpg"
+    },
+    {
+     "type": "text",
+     "bbox": [
+      0.085,
+      0.623,
+      0.889,
+      0.7
+     ],
+     "content": "Effects may be negative or exceed one an..."
+    },
+    {
+     "type": "text",
+     "bbox": [
+      0.084,
+      0.706,
+      0.889,
+      0.784
+     ],
+     "content": "For each line and layer output, a ridge ..."
+    },
+    {
+     "type": "text",
+     "bbox": [
+      0.084,
+      0.79,
+      0.889,
+      0.882
+     ],
+     "content": "Attention j lines up the chain is attent..."
+    },
+    {
+     "type": "page_number",
+     "bbox": [
+      0.478,
+      0.923,
+      0.497,
+      0.936
+     ],
+     "content": "13"
+    }
+   ]
+  },
+  {
+   "page_idx": 13,
+   "blocks": [
+    {
+     "type": "header",
+     "bbox": [
+      0.278,
+      0.057,
+      0.696,
+      0.072
+     ],
+     "content": "Transformers Stop Thinking Too Early, an..."
+    },
+    {
+     "type": "paragraph_title",
+     "bbox": [
+      0.086,
+      0.084,
+      0.348,
+      0.101
+     ],
+     "level": 2,
+     "content": "B. How the frozen models stop"
+    },
+    {
+     "type": "paragraph_title",
+     "bbox": [
+      0.086,
+      0.11,
+      0.406,
+      0.126
+     ],
+     "level": 2,
+     "content": "B.1. A short computation in standard mod..."
+    },
+    {
+     "type": "text",
+     "bbox": [
+      0.085,
+      0.134,
+      0.89,
+      0.225
+     ],
+     "content": "Reliable reach ranges from 1.4 to 3.6 li..."
+    },
+    {
+     "type": "text",
+     "bbox": [
+      0.084,
+      0.232,
+      0.89,
+      0.339
+     ],
+     "content": "Three measurements locate this failure (..."
+    },
+    {
+     "type": "table",
+     "bbox": [
+      0.09,
+      0.42,
+      0.882,
+      0.622
+     ],
+     "content": "<table><tr><td rowspan=\"2\">Model</td><td...",
+     "captions": [
+      {
+       "bbox": [
+        0.085,
+        0.347,
+        0.889,
+        0.413
+       ],
+       "content": "Table 4. Frozen reach stays short across..."
+      }
+     ],
+     "footnotes": [],
+     "image_source": "images/page_13_table_6.jpg"
+    },
+    {
+     "type": "paragraph_title",
+     "bbox": [
+      0.086,
+      0.652,
+      0.389,
+      0.668
+     ],
+     "level": 2,
+     "content": "B.2. Measuring when pointer reading ends"
+    },
+    {
+     "type": "text",
+     "bbox": [
+      0.084,
+      0.675,
+      0.888,
+      0.722
+     ],
+     "content": "The cutoff layer is the average, over po..."
+    },
+    {
+     "type": "text",
+     "bbox": [
+      0.084,
+      0.728,
+      0.89,
+      0.805
+     ],
+     "content": "We measure the full reading range from t..."
+    },
+    {
+     "type": "text",
+     "bbox": [
+      0.084,
+      0.811,
+      0.89,
+      0.888
+     ],
+     "content": "Threshold sensitivity supports interpret..."
+    },
+    {
+     "type": "page_number",
+     "bbox": [
+      0.478,
+      0.924,
+      0.498,
+      0.935
+     ],
+     "content": "14"
+    }
+   ]
+  },
+  {
+   "page_idx": 14,
+   "blocks": [
+    {
+     "type": "header",
+     "bbox": [
+      0.278,
+      0.057,
+      0.696,
+      0.072
+     ],
+     "content": "Transformers Stop Thinking Too Early, an..."
+    },
+    {
+     "type": "chart",
+     "bbox": [
+      0.108,
+      0.088,
+      0.459,
+      0.263
+     ],
+     "content": "",
+     "captions": [],
+     "footnotes": [],
+     "image_source": "images/page_14_chart_1.jpg"
+    },
+    {
+     "type": "chart",
+     "bbox": [
+      0.52,
+      0.087,
+      0.869,
+      0.263
+     ],
+     "content": "",
+     "captions": [],
+     "footnotes": [],
+     "image_source": "images/page_14_chart_2.jpg"
+    },
+    {
+     "type": "chart",
+     "bbox": [
+      0.102,
+      0.297,
+      0.461,
+      0.455
+     ],
+     "content": "",
+     "captions": [],
+     "footnotes": [],
+     "image_source": "images/page_14_chart_3.jpg"
+    },
+    {
+     "type": "chart",
+     "bbox": [
+      0.514,
+      0.296,
+      0.876,
+      0.455
+     ],
+     "content": "",
+     "captions": [
+      {
+       "bbox": [
+        0.085,
+        0.478,
+        0.889,
+        0.543
+       ],
+       "content": "Figure 8. The query stops following poin..."
+      }
+     ],
+     "footnotes": [],
+     "image_source": "images/page_14_chart_4.jpg"
+    },
+    {
+     "type": "text",
+     "bbox": [
+      0.085,
+      0.57,
+      0.888,
+      0.601
+     ],
+     "continues_prev": true,
+     "content": "to 11 in Qwen3-0.6B and 7 to 4 in Llama-..."
+    },
+    {
+     "type": "text",
+     "bbox": [
+      0.084,
+      0.607,
+      0.889,
+      0.684
+     ],
+     "content": "Query-attention cuts preserve root assig..."
+    },
+    {
+     "type": "paragraph_title",
+     "bbox": [
+      0.086,
+      0.699,
+      0.411,
+      0.715
+     ],
+     "level": 2,
+     "content": "B.3. Extra loops repeat the short comput..."
+    },
+    {
+     "type": "text",
+     "bbox": [
+      0.084,
+      0.723,
+      0.89,
+      0.8
+     ],
+     "content": "Ouro-1.4B answers one-line chains at 43%..."
+    },
+    {
+     "type": "text",
+     "bbox": [
+      0.084,
+      0.806,
+      0.89,
+      0.896
+     ],
+     "content": "The pattern persists with facts and demo..."
+    },
+    {
+     "type": "page_number",
+     "bbox": [
+      0.478,
+      0.924,
+      0.497,
+      0.936
+     ],
+     "content": "15"
+    }
+   ]
+  },
+  {
+   "page_idx": 15,
+   "blocks": [
+    {
+     "type": "header",
+     "bbox": [
+      0.279,
+      0.057,
+      0.696,
+      0.072
+     ],
+     "content": "Transformers Stop Thinking Too Early, an..."
+    },
+    {
+     "type": "chart",
+     "bbox": [
+      0.106,
+      0.086,
+      0.436,
+      0.288
+     ],
+     "content": "",
+     "captions": [],
+     "footnotes": [],
+     "image_source": "images/page_15_chart_1.jpg"
+    },
+    {
+     "type": "chart",
+     "bbox": [
+      0.114,
+      0.312,
+      0.438,
+      0.506
+     ],
+     "content": "",
+     "captions": [],
+     "footnotes": [],
+     "image_source": "images/page_15_chart_2.jpg"
+    },
+    {
+     "type": "chart",
+     "bbox": [
+      0.523,
+      0.104,
+      0.88,
+      0.528
+     ],
+     "content": "",
+     "captions": [
+      {
+       "bbox": [
+        0.606,
+        0.086,
+        0.621,
+        0.098
+       ],
+       "content": "b"
+      },
+      {
+       "bbox": [
+        0.085,
+        0.546,
+        0.888,
+        0.6
+       ],
+       "content": "Figure 9. Pointer reading occupies a sim..."
+      }
+     ],
+     "footnotes": [],
+     "image_source": "images/page_15_chart_4.jpg"
+    },
+    {
+     "type": "text",
+     "bbox": [
+      0.085,
+      0.625,
+      0.889,
+      0.703
+     ],
+     "content": "Restoration in Ouro retains 30 of 66 sam..."
+    },
+    {
+     "type": "text",
+     "bbox": [
+      0.085,
+      0.708,
+      0.89,
+      0.8
+     ],
+     "content": "Ouro’s program relay reaches line 3 in l..."
+    },
+    {
+     "type": "page_number",
+     "bbox": [
+      0.478,
+      0.924,
+      0.498,
+      0.936
+     ],
+     "content": "16"
+    }
+   ]
+  },
+  {
+   "page_idx": 16,
+   "blocks": [
+    {
+     "type": "header",
+     "bbox": [
+      0.278,
+      0.058,
+      0.696,
+      0.071
+     ],
+     "content": "Transformers Stop Thinking Too Early, an..."
+    },
+    {
+     "type": "chart",
+     "bbox": [
+      0.11,
+      0.085,
+      0.449,
+      0.288
+     ],
+     "content": "",
+     "captions": [],
+     "footnotes": [],
+     "image_source": "images/page_16_chart_1.jpg"
+    },
+    {
+     "type": "chart",
+     "bbox": [
+      0.541,
+      0.084,
+      0.876,
+      0.245
+     ],
+     "content": "",
+     "captions": [
+      {
+       "bbox": [
+        0.126,
+        0.298,
+        0.14,
+        0.31
+       ],
+       "content": "c"
+      }
+     ],
+     "footnotes": [],
+     "image_source": "images/page_16_chart_2.jpg"
+    },
+    {
+     "type": "chart",
+     "bbox": [
+      0.555,
+      0.25,
+      0.641,
+      0.311
+     ],
+     "content": "",
+     "captions": [],
+     "footnotes": [],
+     "image_source": "images/page_16_chart_4.jpg"
+    },
+    {
+     "type": "chart",
+     "bbox": [
+      0.105,
+      0.315,
+      0.454,
+      0.466
+     ],
+     "content": "",
+     "captions": [],
+     "footnotes": [],
+     "image_source": "images/page_16_chart_5.jpg"
+    },
+    {
+     "type": "chart",
+     "bbox": [
+      0.549,
+      0.319,
+      0.878,
+      0.467
+     ],
+     "content": "",
+     "captions": [],
+     "footnotes": [],
+     "image_source": "images/page_16_chart_6.jpg"
+    },
+    {
+     "type": "chart",
+     "bbox": [
+      0.105,
+      0.607,
+      0.456,
+      0.748
+     ],
+     "content": "",
+     "captions": [
+      {
+       "bbox": [
+        0.085,
+        0.528,
+        0.889,
+        0.581
+       ],
+       "content": "Figure 10. Frozen looped models gain lit..."
+      }
+     ],
+     "footnotes": [],
+     "image_source": "images/page_16_chart_8.jpg"
+    },
+    {
+     "type": "chart",
+     "bbox": [
+      0.512,
+      0.606,
+      0.862,
+      0.748
+     ],
+     "content": "",
+     "captions": [
+      {
+       "bbox": [
+        0.085,
+        0.775,
+        0.889,
+        0.829
+       ],
+       "content": "Figure 11. The same Qwen3-8B weights ans..."
+      }
+     ],
+     "footnotes": [],
+     "image_source": "images/page_16_chart_9.jpg"
+    },
+    {
+     "type": "page_number",
+     "bbox": [
+      0.478,
+      0.923,
+      0.497,
+      0.935
+     ],
+     "content": "17"
+    }
+   ]
+  }
+ ],
+ "metadata": {
+  "file_suffix": "pdf",
+  "producer": {
+   "name": "mineru",
+   "version": "4.0.10"
+  }
+ },
+ "extensions": {
+  "mineru": {
+   "tier": "standard",
+   "parse_mode": "txt"
+  }
+ },
+ "is_full_document": true
+}
