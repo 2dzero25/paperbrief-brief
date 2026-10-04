@@ -1,0 +1,8 @@
+[
+ {"paper": {"id": "2610.10001", "publishedAt": "2026-09-30T00:00:00.000Z", "submittedOnDailyAt": "2026-10-02T00:00:00.000Z", "title": "Fri A", "summary": "Fri A first sentence. Fri A second sentence.", "upvotes": 12, "githubRepo": "https://example.test/fri/a", "organization": {"name": "acme", "fullname": "ACME Research"}},
+  "publishedAt": "2026-10-01T20:00:00.000Z", "title": "Fri A", "summary": "Fri A first sentence.", "thumbnail": "https://example.test/thumb/2610.10001.png?user=someone@example.test", "numComments": 1},
+ {"paper": {"id": "2610.10002", "publishedAt": "2026-09-30T00:00:00.000Z", "submittedOnDailyAt": "2026-10-02T00:00:00.000Z", "title": "Fri B", "summary": "Fri B abstract.", "upvotes": 40, "ai_summary": "HF says B in one line."},
+  "publishedAt": "2026-10-01T20:00:00.000Z", "title": "Fri B", "summary": "Fri B abstract.", "thumbnail": "https://example.test/thumb/2610.10002.png", "numComments": 0},
+ {"paper": {"id": "2610.10003", "publishedAt": "2026-10-01T00:00:00.000Z", "submittedOnDailyAt": "2026-10-02T00:00:00.000Z", "title": "Fri C", "summary": "Fri C abstract.", "upvotes": 3},
+  "publishedAt": "2026-10-01T20:00:00.000Z", "title": "Fri C", "summary": "Fri C abstract.", "thumbnail": "https://example.test/thumb/2610.10003.png", "numComments": 0}
+]
