@@ -92,7 +92,7 @@ def test_the_prompt_judges_by_the_paper_itself_and_never_carries_the_registered_
     _, done = start(make_client, code_url=REGISTERED, llm=llm)  # type: ignore[arg-type]
 
     assert done["report"]["repro"]["data"]["evidence"] == "p.6, Table 2"
-    (request,) = sent
+    (request,) = [r for r in sent if r["model"] == "test-model"]  # the collection also sent its KO summary request
     assert "repro" in request["text"]["format"]["schema"]["properties"]
     rules = request["instructions"]
     assert "ONLY" in rules and "this paper itself" in rules and "cites or surveys" in rules
