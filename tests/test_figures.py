@@ -222,3 +222,13 @@ def test_the_real_llm_client_sends_figure_ids_captions_and_mentions_but_no_image
     assert "figures" in request["text"]["format"]["schema"]["properties"]
     assert "1-2" in request["instructions"] and "figures" in request["instructions"]
     assert done["report"]["figures"] == ["fig1"]
+
+
+def test_html_entities_in_a_mineru_caption_are_shown_as_the_characters(make_client):
+    """A real run gave `&lt;/Observe&gt;` for `</Observe>`; the page escapes text itself, so it would show the entity."""
+    caption = "Figure 1: Tags &lt;/Observe&gt; and &lt;/Silence&gt; mark events."
+    pages = [[block("image", [caption], "images/page_2_image_0.jpg")]]
+    client, llm, done = make_report(make_client, pages, {"images/page_2_image_0.jpg": jpeg((1, 2, 3))})
+
+    assert sent_to_llm(llm)[0].caption == "Figure 1: Tags </Observe> and </Silence> mark events."
+    assert done["figures"][0]["caption"] == "Figure 1: Tags </Observe> and </Silence> mark events."

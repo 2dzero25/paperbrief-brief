@@ -8,6 +8,7 @@ before a captioned block (same page, nothing else in between, no `Figure` captio
 File names are never built: only the `image_source` path is followed, and only inside the parsed folder.
 Ids are `fig1`, `fig2`, ... in document order. The JSON is not trusted in shape: odd parts are skipped.
 """
+import html
 import json
 import re
 from pathlib import Path
@@ -22,7 +23,8 @@ MAX_PICK = 2
 def _caption(block: dict) -> str | None:
     captions = block.get("captions")
     contents = [c.get("content") for c in captions if isinstance(c, dict)] if isinstance(captions, list) else []
-    return next((c.strip() for c in contents if isinstance(c, str) and c.strip().startswith("Figure")), None)
+    caption = next((c.strip() for c in contents if isinstance(c, str) and c.strip().startswith("Figure")), None)
+    return html.unescape(caption) if caption else None  # MinerU writes `<` as `&lt;`; the page escapes text itself
 
 
 def inside(root: Path, source: object) -> Path | None:
@@ -90,7 +92,7 @@ def shown(arxiv_id: str, parsed: Path, report: dict) -> list[dict]:
     ids = report.get("figures")  # a report stored before #9 has none
     by_id = {c.id: c for c in load(parsed)}
     return [
-        {"id": i, "caption": by_id[i].caption, "images": [f"/api/papers/{arxiv_id}/figures/{i}/{n}" for n in range(len(by_id[i].images))]}
+        {"id": i, "caption": html.unescape(by_id[i].caption), "images": [f"/api/papers/{arxiv_id}/figures/{i}/{n}" for n in range(len(by_id[i].images))]}
         for i in (ids if isinstance(ids, list) else [])
         if i in by_id
     ]
