@@ -50,7 +50,7 @@ def ask(arxiv_id: str, body: Ask, db: DbDep, settings: SettingsDep, boundaries: 
         answer = boundaries.llm.answer(text, report, history, body.question)
     except Exception as e:  # nothing is saved: the page keeps the question text and offers [다시]
         log.exception("answer for %s failed", arxiv_id)
-        raise HTTPException(502, f"답 생성 실패: {e}") from e
+        raise HTTPException(502, str(e)) from e
     asked_at = datetime.now(timezone.utc).isoformat(timespec="seconds")
     with db:
         cur = db.execute(

@@ -59,6 +59,7 @@ class PaperQA extends HTMLElement {
       this.retry.hidden = false;
     } finally {
       this.input.disabled = this.send.disabled = false;
+      this.input.focus(); // a disabled input loses focus; keep typing flowing
     }
   }
 }
