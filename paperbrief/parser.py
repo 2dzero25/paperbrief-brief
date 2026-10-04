@@ -1,6 +1,7 @@
 """Boundary 4/4: PDF parser (MinerU runner). `live()` is #13; `offline()` serves a canned body."""
 import json
 import time
+from collections.abc import Callable
 from dataclasses import asdict, dataclass, field
 from pathlib import Path
 from typing import Protocol
@@ -43,13 +44,30 @@ class Parser(Protocol):
         ...
 
 
-class _Unimplemented:
+class TieredParser:
+    """TEMPORARY (#13): minimal standard -> basic fallback so `live()` works before #8's `TieredParser(runner)` lands.
+
+    #8 owns the real one (same name and constructor, logs both failures); drop this class when merging it.
+    """
+
+    def __init__(self, runner: Callable[[Path, Path, str], ParseResult], tiers: tuple[str, ...] = ("standard", "basic")) -> None:
+        self.runner, self.tiers = runner, tiers
+
     def parse(self, pdf: Path, out_dir: Path) -> ParseResult:
-        raise NotImplementedError("parser not implemented yet")
+        errors: list[str] = []
+        for tier in self.tiers:
+            try:
+                return self.runner(pdf, out_dir, tier)
+            except Exception as e:
+                errors.append(f"[{tier}] {e}")
+        raise RuntimeError("\n".join(errors))
 
 
 def live(settings: Settings) -> Parser:
-    return _Unimplemented()
+    from paperbrief.mineru import run_mineru  # imported here: mineru.py imports ParseResult from this module
+
+    # PAPERBRIEF_MINERU_TIER=basic skips the GPU tier altogether
+    return TieredParser(run_mineru, ("basic",) if settings.mineru_tier == "basic" else ("standard", "basic"))
 
 
 class OfflineParser:
