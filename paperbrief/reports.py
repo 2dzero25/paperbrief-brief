@@ -7,7 +7,8 @@ paper again continues at the first stage without a result. Cancelling a queued p
 Extension points for later tickets:
   - `STAGES`: (name, done, run) triples. #8 wraps/extends `run_parse` (CPU fallback) and the failure bookkeeping in
     `_process`; the failure path already records status 실패 + stage + traceback and never kills the thread.
-  - `ReportWorker.enqueue`: #12 [다시 작성] clears `report_json` first and then enqueues, so only 작성 runs again.
+  - `ReportWorker.enqueue(rewrite=True)`: #12 [다시 작성] sets `reports.rewrite`, so only 작성 runs again (`write_done` is
+    false until the new report is saved; the old `report_json` stays meanwhile).
   - `Work`: what a stage can see; #9/#10 read `Work.parsed` / the parse result from there.
 """
 import logging
@@ -84,13 +85,14 @@ def run_parse(w: Work) -> None:
 
 
 def write_done(w: Work) -> bool:
-    return bool(w.report_json())
+    row = w.conn.execute("SELECT report_json, rewrite FROM reports WHERE arxiv_id = ?", (w.arxiv_id,)).fetchone()
+    return bool(row and row["report_json"] and not row["rewrite"])  # a pending 다시 작성 keeps the old json but is not done
 
 
 def run_write(w: Work) -> None:
     parsed = ParseResult.load(w.parsed)
     report = w.boundaries.llm.write_report(parsed.markdown, parsed.figures)
-    w.conn.execute("UPDATE reports SET report_json = ? WHERE arxiv_id = ?", (report.model_dump_json(), w.arxiv_id))
+    w.conn.execute("UPDATE reports SET report_json = ?, rewrite = 0 WHERE arxiv_id = ?", (report.model_dump_json(), w.arxiv_id))
     w.conn.commit()
 
 
@@ -117,22 +119,26 @@ class ReportWorker:
         with self._lock:
             return self._waiting.index(arxiv_id) + 1 if arxiv_id in self._waiting else None
 
-    def enqueue(self, arxiv_id: str) -> None:
-        """Make the report (or continue a failed one). Does nothing for a finished or already queued paper."""
+    def enqueue(self, arxiv_id: str, rewrite: bool = False) -> None:
+        """Make the report (or continue a failed one). Does nothing for a finished or already queued paper.
+
+        `rewrite` (a 완료 report only) owes 작성 again; the old `report_json` stays until a new one is saved."""
         with self._lock:
             if arxiv_id in self._waiting or arxiv_id == self._current:
                 return
             conn = connect(self._settings)
             try:
                 row = conn.execute("SELECT status FROM reports WHERE arxiv_id = ?", (arxiv_id,)).fetchone()
-                if row and row["status"] == DONE:
+                if row and row["status"] == DONE and not rewrite:
+                    return
+                if rewrite and not (row and row["status"] == DONE):
                     return
                 stamp = now()
                 with conn:
                     conn.execute(
                         "INSERT INTO reports (arxiv_id, status, created_at, updated_at) VALUES (?, ?, ?, ?) "
-                        "ON CONFLICT (arxiv_id) DO UPDATE SET status = ?, error_log = '', updated_at = ?",
-                        (arxiv_id, QUEUED, stamp, stamp, QUEUED, stamp),
+                        "ON CONFLICT (arxiv_id) DO UPDATE SET status = ?, error_log = '', updated_at = ?, rewrite = MAX(rewrite, ?)",
+                        (arxiv_id, QUEUED, stamp, stamp, QUEUED, stamp, int(rewrite)),
                     )
             finally:
                 conn.close()

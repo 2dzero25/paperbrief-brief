@@ -6,3 +6,4 @@ import "./reports.js";
 import "./report_failure.js";
 import "./repro.js";
 import "./questions.js";
+import "./rewrite.js";

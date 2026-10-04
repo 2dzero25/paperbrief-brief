@@ -9,7 +9,7 @@ from typing import Annotated
 from fastapi import APIRouter, Depends, FastAPI, HTTPException, Request
 
 from paperbrief.deps import DbDep
-from paperbrief.reports import RUNNING, ReportWorker, worker_for
+from paperbrief.reports import DONE, RUNNING, ReportWorker, worker_for
 
 router = APIRouter(prefix="/api")
 
@@ -76,6 +76,15 @@ def make_report(arxiv_id: str, db: DbDep, worker: WorkerDep) -> dict:
     """Card click: start the report, or join the queue; an existing one is just returned (never regenerated)."""
     full_state(db, worker, arxiv_id)  # 404 for an unknown paper
     worker.enqueue(arxiv_id)
+    return full_state(db, worker, arxiv_id)
+
+
+@router.post("/papers/{arxiv_id}/report/rewrite", status_code=202)
+def rewrite_report(arxiv_id: str, db: DbDep, worker: WorkerDep) -> dict:
+    """[다시 작성]: only a 완료 report, only 작성 runs again, the old report stays until the new one is saved."""
+    if full_state(db, worker, arxiv_id)["status"] != DONE:
+        raise HTTPException(409, "완료된 보고서만 다시 작성할 수 있음")
+    worker.enqueue(arxiv_id, rewrite=True)
     return full_state(db, worker, arxiv_id)
 
 
