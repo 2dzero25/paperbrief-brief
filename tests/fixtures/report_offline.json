@@ -5,6 +5,7 @@
   "difference": "이전 streaming video LLM은 인식과 응답을 별도 모듈로 나눴다. 이 논문은 세 기능을 한 모델에서 end-to-end로 학습한다.",
   "meaning": "긴 영상을 실시간으로 보면서 필요한 순간에 먼저 말을 거는 assistant를 만들 수 있다는 근거를 제시한다.",
   "limitations": "명시 없음",
+  "figures": ["fig1", "fig2"],
   "repro": {
     "code": {"verdict": "공개", "evidence": "github.com/MCG-NJU/OneStreamer, 1쪽 각주"},
     "weights": {"verdict": "명시 없음", "evidence": "명시 없음"},

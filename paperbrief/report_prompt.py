@@ -1,6 +1,6 @@
 """The text the model sees when writing a 보고서. Prompt rules are the only guard (no code check on numbers).
 
-#9 adds the 그림 후보 selection and #10 the 재현 체크 rules here, together with the `Report` field they add.
+#9 added the 그림 후보 selection; #10 adds the 재현 체크 rules here, together with the `Report` field it adds.
 """
 from paperbrief.parser import FigureCandidate
 
@@ -15,6 +15,7 @@ Rules:
 - method: what the paper did and how. results: the main results with their numbers.
 - difference: how it differs from prior work, as the paper states it. meaning: why the result matters, as the paper argues it.
 - limitations: limitations the paper admits. If it lists none, write "명시 없음".
+- figures: the ids of 1-2 candidates from <figure_candidates> that show the paper's main idea or main result best, most important first. You see only each candidate's caption and the sentences that cite it, not the image. Use only ids from the list; if the list is empty, return an empty list.
 - repro: five items (code, weights, data, gpu, license), each with a verdict and evidence.
   Judge ONLY from what this paper itself wrote or released. Ignore the code, weights, data and GPU of other works
   that the paper cites or surveys. Never treat a code repository registered on Hugging Face as evidence.
@@ -26,5 +27,15 @@ Rules:
 
 
 def build_input(body: str, figures: list[FigureCandidate]) -> str:
-    """The paper text first (a stable prefix); #9 appends the 그림 후보 after it."""
-    return f"<paper>\n{body}\n</paper>"
+    """The paper text first (a stable prefix), then the 그림 후보: id, caption, citing sentences. Never the image."""
+    return f"<paper>\n{body}\n</paper>\n{_candidates(figures)}"
+
+
+def _candidates(figures: list[FigureCandidate]) -> str:
+    if not figures:
+        return "<figure_candidates>(none)</figure_candidates>"
+    lines = []
+    for f in figures:
+        lines.append(f"{f.id}: {f.caption}")
+        lines += [f"  cited: {m}" for m in f.mentions]
+    return "<figure_candidates>\n" + "\n".join(lines) + "\n</figure_candidates>"

@@ -17,13 +17,14 @@ import sqlite3
 import threading
 import traceback
 from collections.abc import Callable
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from datetime import datetime, timezone
 from pathlib import Path
 
 import httpx
 from fastapi import FastAPI
 
+from paperbrief import figures
 from paperbrief.boundaries import Boundaries
 from paperbrief.config import Settings
 from paperbrief.db import connect
@@ -81,7 +82,8 @@ def parse_done(w: Work) -> bool:
 
 def run_parse(w: Work) -> None:
     w.parsed.mkdir(parents=True, exist_ok=True)
-    w.boundaries.parser.parse(w.pdf, w.parsed).save(w.parsed)
+    result = w.boundaries.parser.parse(w.pdf, w.parsed)
+    replace(result, figures=figures.extract(w.parsed, result.markdown)).save(w.parsed)  # 그림 후보 from MinerU's folder
 
 
 def write_done(w: Work) -> bool:
@@ -92,6 +94,7 @@ def write_done(w: Work) -> bool:
 def run_write(w: Work) -> None:
     parsed = ParseResult.load(w.parsed)
     report = w.boundaries.llm.write_report(parsed.markdown, parsed.figures)
+    report.figures = figures.pick(report.figures, parsed.figures)  # only ids that are candidates, at most two
     w.conn.execute("UPDATE reports SET report_json = ?, rewrite = 0 WHERE arxiv_id = ?", (report.model_dump_json(), w.arxiv_id))
     w.conn.commit()
 
@@ -113,6 +116,9 @@ class ReportWorker:
         self._waiting: list[str] = []  # FIFO order, for 대기 순번
         self._current: str | None = None
         self._thread: threading.Thread | None = None
+
+    def parsed_dir(self, arxiv_id: str) -> Path:
+        return self._settings.data_dir / "papers" / arxiv_id / "parsed"
 
     def queue_position(self, arxiv_id: str) -> int | None:
         """1 = next in line. None when the paper is not waiting."""
