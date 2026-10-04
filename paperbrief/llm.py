@@ -1,16 +1,37 @@
 """Boundary 3/4: OpenAI Responses API. The collection (summaries) and report/question tickets implement it."""
 import time
-from typing import Protocol
+from typing import Literal, Protocol
 
 import httpx
 from openai import OpenAI
-from pydantic import BaseModel
+from pydantic import BaseModel, model_validator
 
 from paperbrief import report_prompt
 from paperbrief.config import Settings
 from paperbrief.hf import FIXTURES_DIR
 from paperbrief.offline import delay, fail_once
 from paperbrief.parser import FigureCandidate
+
+
+class ReproItem(BaseModel):
+    """One 판정 of the 재현 체크. 명시 없음 is always `?`, and then the evidence is that same phrase."""
+
+    verdict: Literal["공개", "비공개", "명시 없음"]  # 판정
+    evidence: str  # 근거: URL, 쪽, 표 번호; 원문 표기 for GPU and 라이선스
+
+    @model_validator(mode="after")
+    def _missing_has_no_other_evidence(self) -> "ReproItem":
+        if self.verdict == "명시 없음":
+            self.evidence = "명시 없음"
+        return self
+
+
+class Repro(BaseModel):
+    code: ReproItem
+    weights: ReproItem
+    data: ReproItem
+    gpu: ReproItem
+    license: ReproItem
 
 
 class Report(BaseModel):
@@ -28,6 +49,7 @@ class Report(BaseModel):
     difference: str
     meaning: str
     limitations: str
+    repro: Repro | None = None  # 재현 체크 (#10); None for reports stored before it
 
 
 class QA(BaseModel):
