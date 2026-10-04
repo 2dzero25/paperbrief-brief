@@ -11,6 +11,7 @@ from paperbrief.boundaries import Boundaries
 from paperbrief.collector import Collector
 from paperbrief.config import STATIC_DIR, Settings
 from paperbrief.db import init_db
+from paperbrief.guard import add_origin_guard
 from paperbrief.reports import ReportWorker, http_for, recover_interrupted
 
 
@@ -22,6 +23,7 @@ def create_app(settings: Settings, boundaries: Boundaries | None = None) -> Fast
     recover_interrupted(settings, boundaries)
     app = FastAPI(title="PaperBrief")
     app.state.settings = settings
+    add_origin_guard(app, settings.port)
     app.state.boundaries = boundaries
     # the one collector and the one report worker are made here, not on first request, so two first requests cannot make two
     app.state.collector = Collector(settings, boundaries)
