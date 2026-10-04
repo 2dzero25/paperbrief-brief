@@ -17,7 +17,7 @@ class Report(BaseModel):
     """The JSON stored in one column of the reports table (ADR-0001).
 
     Additive only: a later ticket adds its field WITH A DEFAULT so reports stored earlier still load.
-    Planned: `figures: list[str] = []` (#9, 그림 후보 ids, 0-2) and `repro: Repro | None = None` (#10).
+    Planned: `repro: Repro | None = None` (#10).
     `write_report` asks the model for exactly these fields (it is the `text_format`), so a new field is
     also a new thing the prompt in `report_prompt.py` must describe.
     """
@@ -28,6 +28,7 @@ class Report(BaseModel):
     difference: str
     meaning: str
     limitations: str
+    figures: list[str] = []  # #9: 그림 후보 ids picked by the model (0-2); caption and images come from the candidates
 
 
 class QA(BaseModel):

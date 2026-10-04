@@ -1,5 +1,6 @@
 """Boundary 4/4: PDF parser (MinerU runner). `live()` is #13; `offline()` serves a canned body."""
 import json
+import shutil
 import time
 from dataclasses import asdict, dataclass, field
 from pathlib import Path
@@ -14,11 +15,11 @@ RESULT_FILE = "parse_result.json"  # written by the worker after `parse` returns
 
 @dataclass(frozen=True)
 class FigureCandidate:
-    """A 그림 후보: caption starts with `Figure`, image file exists. Panels are already merged."""
+    """A 그림 후보 (built by `figures.extract`): caption starts with `Figure`, image files exist, panels merged."""
 
     id: str
     caption: str
-    image: Path
+    images: list[Path]  # the panels in order; one file for a single-image figure
     mentions: list[str] = field(default_factory=list)  # sentences of the body that cite this figure
 
 
@@ -28,13 +29,13 @@ class ParseResult:
     figures: list[FigureCandidate] = field(default_factory=list)
 
     def save(self, out_dir: Path) -> None:
-        data = {"markdown": self.markdown, "figures": [{**asdict(f), "image": str(f.image)} for f in self.figures]}
+        data = {"markdown": self.markdown, "figures": [{**asdict(f), "images": [str(i) for i in f.images]} for f in self.figures]}
         (out_dir / RESULT_FILE).write_text(json.dumps(data, ensure_ascii=False), encoding="utf-8")
 
     @classmethod
     def load(cls, out_dir: Path) -> "ParseResult":
         data = json.loads((out_dir / RESULT_FILE).read_text(encoding="utf-8"))
-        return cls(data["markdown"], [FigureCandidate(**{**f, "image": Path(f["image"])}) for f in data["figures"]])
+        return cls(data["markdown"], [FigureCandidate(**{**f, "images": [Path(i) for i in f["images"]]}) for f in data["figures"]])
 
 
 class Parser(Protocol):
@@ -55,9 +56,10 @@ def live(settings: Settings) -> Parser:
 class OfflineParser:
     def parse(self, pdf: Path, out_dir: Path) -> ParseResult:
         time.sleep(delay())
+        shutil.copytree(FIXTURES_DIR / "mineru_offline", out_dir, dirs_exist_ok=True)  # hand-made MinerU output (#9)
         return ParseResult(markdown=(FIXTURES_DIR / "parse_offline.md").read_text(encoding="utf-8"))
 
 
 def offline(settings: Settings) -> Parser:
-    """Returns a canned body (`PAPERBRIEF_OFFLINE=1`); no figures until #9 records a MinerU output folder."""
+    """Returns a canned body and a hand-made MinerU output folder (`PAPERBRIEF_OFFLINE=1`)."""
     return OfflineParser()

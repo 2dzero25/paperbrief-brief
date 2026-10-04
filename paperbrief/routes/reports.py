@@ -8,6 +8,7 @@ from typing import Annotated
 
 from fastapi import APIRouter, Depends, FastAPI, HTTPException, Request
 
+from paperbrief import figures
 from paperbrief.deps import DbDep
 from paperbrief.reports import RUNNING, ReportWorker, worker_for
 
@@ -56,11 +57,13 @@ def full_state(db, worker: ReportWorker, arxiv_id: str) -> dict:
         raise HTTPException(404, "unknown paper")
     row = db.execute("SELECT * FROM reports WHERE arxiv_id = ?", (arxiv_id,)).fetchone()
     state = {"arxiv_id": arxiv_id, "paper": paper_header(paper), "status": None, "stage": "", "elapsed": None,
-             "queue_position": None, "error_log": "", "report": None}
+             "queue_position": None, "error_log": "", "report": None, "figures": []}
     if row is not None:
         state |= short_state(row, worker)
         state["error_log"] = row["error_log"]
         state["report"] = json.loads(row["report_json"]) if row["report_json"] else None
+        if state["report"]:
+            state["figures"] = figures.shown(arxiv_id, worker.parsed_dir(arxiv_id), state["report"])
     return state
 
 

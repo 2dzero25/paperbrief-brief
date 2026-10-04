@@ -1,0 +1,58 @@
+{
+ "pages": [
+  {
+   "page_idx": 2,
+   "blocks": [
+    {
+     "type": "image",
+     "bbox": [
+      0,
+      0,
+      100,
+      100
+     ],
+     "captions": [],
+     "image_source": "images/page_2_image_0.jpg"
+    },
+    {
+     "type": "image",
+     "bbox": [
+      0,
+      0,
+      100,
+      100
+     ],
+     "captions": [
+      {
+       "content": "Figure 1. Overview of OneStreamer."
+      }
+     ],
+     "image_source": "images/page_2_image_1.jpg"
+    }
+   ]
+  },
+  {
+   "page_idx": 5,
+   "blocks": [
+    {
+     "type": "chart",
+     "bbox": [
+      0,
+      0,
+      100,
+      100
+     ],
+     "captions": [
+      {
+       "content": "Accuracy by chunk size"
+      },
+      {
+       "content": "Figure 2. StreamBench accuracy by chunk size."
+      }
+     ],
+     "image_source": "images/page_5_chart_0.jpg"
+    }
+   ]
+  }
+ ]
+}
