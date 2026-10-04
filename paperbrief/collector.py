@@ -2,6 +2,7 @@
 
 Later tickets extend `_collect` (arXiv categories, KO summaries, refreshing the last 3 days).
 """
+import json
 import logging
 import threading
 from datetime import datetime
@@ -57,6 +58,23 @@ class Collector:
             self._finished_at = datetime.now().isoformat(timespec="seconds")
             self._running = False
 
+    def _attach_categories(self, arxiv_ids: list[str]) -> None:
+        """One arXiv lookup for these ids. A failure is only logged: the papers stay saved, without a category."""
+        try:
+            found = self._boundaries.arxiv.categories(arxiv_ids)
+        except Exception:
+            log.exception("arXiv category lookup failed")
+            return
+        conn = connect(self._settings)
+        try:
+            with conn:
+                conn.executemany(
+                    "UPDATE papers SET primary_category = ?, categories = ? WHERE arxiv_id = ?",
+                    [(primary, json.dumps(cats), i) for i, (primary, cats) in found.items()],
+                )
+        finally:
+            conn.close()
+
     def _collect(self) -> None:
         _, papers = self._boundaries.hf.latest_day()  # raises on failure before anything is written
         conn = connect(self._settings)
@@ -80,3 +98,4 @@ class Collector:
                 )
         finally:
             conn.close()
+        self._attach_categories([p.arxiv_id for p in papers])

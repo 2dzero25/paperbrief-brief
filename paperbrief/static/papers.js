@@ -14,6 +14,7 @@ export const ext = {
   summary: (p) => p.summary_en, // #6: pick KO or EN one-line summary
   meta: [(p) => p.organization], // #5: push (p) => category label in front; falsy results are skipped
   side: [], // #7: (p) => html string, e.g. the report status dot
+  loaded: [], // #5: (data) => void, called with the /api/papers response after every reload() (chips, ◀ ▶)
 };
 
 const WEEKDAYS = ["일", "월", "화", "수", "목", "금", "토"];
@@ -22,7 +23,7 @@ const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&
 const app = document.getElementById("app");
 app.innerHTML = `
   <div class="top">
-    <div class="row between"><span class="date" id="day"></span><span class="row"><span class="tag" id="recent" hidden>최근</span><button class="btn primary js-collect" type="button" data-label="수집">수집</button></span></div>
+    <div class="row between"><span class="row"><button class="ghost" type="button" id="prev" aria-label="이전 날짜">◀</button><span class="date" id="day"></span><button class="ghost" type="button" id="next" aria-label="다음 날짜">▶</button></span><span class="row"><span class="tag" id="recent" hidden>최근</span><button class="btn primary js-collect" type="button" data-label="수집">수집</button></span></div>
     <div class="row" id="filters"></div>
   </div>
   <div id="alert"></div>
@@ -58,9 +59,10 @@ export async function reload() {
   $("day").textContent = data.day ? dayLabel(data.day, data.count) : "";
   $("recent").hidden = !(data.day && data.recent);
   $("list").innerHTML = data.day
-    ? data.papers.map(card).join("")
-    : '<div class="empty"><span>논문 없음</span><button class="btn primary js-collect" type="button" data-label="수집">수집</button></div>';
+    ? data.papers.map(card).join("") || '<div class="empty"><span>결과 없음</span><button class="btn js-reset" type="button">초기화</button></div>'
+    :'<div class="empty"><span>논문 없음</span><button class="btn primary js-collect" type="button" data-label="수집">수집</button></div>';
   paintButtons();
+  ext.loaded.forEach((f) => f(data));
 }
 
 function showError(error) {
