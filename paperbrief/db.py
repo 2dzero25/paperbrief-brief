@@ -55,7 +55,9 @@ def init_db(settings: Settings) -> None:
 
 def connect(settings: Settings) -> sqlite3.Connection:
     """One short-lived connection per request (see `deps.get_db`)."""
-    conn = sqlite3.connect(settings.data_dir / DB_NAME)
+    # FastAPI enters/exits a sync dependency and runs the endpoint on different threadpool threads; the
+    # connection is never shared between requests, so cross-thread use is safe.
+    conn = sqlite3.connect(settings.data_dir / DB_NAME, check_same_thread=False)
     conn.row_factory = sqlite3.Row
     conn.execute("PRAGMA foreign_keys = ON")
     return conn
