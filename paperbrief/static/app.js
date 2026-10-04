@@ -6,3 +6,4 @@ import "./reports.js";
 import "./figures.js";
 import "./report_failure.js";
 import "./repro.js";
+import "./questions.js";
