@@ -21,8 +21,15 @@ Python 3.12 + [uv](https://docs.astral.sh/uv/). Run from the repo root.
 - Install: `uv sync` (one lock for Windows, Linux x86_64, Linux aarch64; downloads several GB of torch/MinerU)
 - Test: `uv run pytest` (offline; no network, GPU or OpenAI)
 - Typecheck: `uv run pyright`
-- Run: `run.bat` (Windows) / `run.sh` (Linux); both start the server on `127.0.0.1` and open the browser (scripts land with the app ticket)
+- Run: `run.bat` (Windows) / `run.sh` (Linux); both start the server on `127.0.0.1` (`PAPERBRIEF_PORT`, default 8765) and open the browser
 - Settings: copy `.env.example` to `.env`; never commit `.env`
+
+## App layout (`paperbrief/`)
+
+- `create_app(settings, boundaries=None)` in `app.py`. The four external boundaries are injected: `hf.HFClient`, `arxiv.ArxivClient`, `llm.LLMClient`, `parser.Parser` (each a small `Protocol` in its own module, bundled as `boundaries.Boundaries`). Each boundary module owns its `live(settings)` and `offline(settings)` factory; `PAPERBRIEF_OFFLINE=1` uses `offline`. Routes never import a real client.
+- Routes: one module per feature in `routes/`, each with a module-level `router`; `create_app` registers every module found there. Get settings, boundaries and the DB through `deps.SettingsDep`, `BoundariesDep`, `DbDep`.
+- Tests: only through the HTTP API with the `make_client` fixture (`tests/conftest.py`) and the fakes in `tests/fakes.py`.
+- DB: `migrations/NNNN_name.sql`, next free number, add-only (ADR-0001). Static page: `static/` (vanilla JS modules, imported from `app.js`).
 
 ## Check current docs with MCP (`.mcp.json`)
 

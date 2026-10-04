@@ -44,7 +44,8 @@ explicit = true
 
 [tool.pytest.ini_options]
 testpaths = ["tests", ".claude/skills"]
+pythonpath = ["."]
 
 [tool.pyright]
-include = ["tests", ".claude/skills"]
+include = ["paperbrief", "tests", ".claude/skills"]
 pythonVersion = "3.12"
