@@ -223,7 +223,7 @@ def test_the_real_llm_client_asks_the_responses_api_for_a_structured_korean_repo
     client.post("/api/papers/2610.00001/report")
 
     assert wait_status(client, "2610.00001", "완료")["report"]["hook"] == REPORT.hook
-    (request,) = sent
+    (request,) = [r for r in sent if r["model"] == "test-model"]  # the collection also sent its KO summary request
     assert request["model"] == "test-model"
     assert request["text"]["format"]["type"] == "json_schema"
     assert set(request["text"]["format"]["schema"]["properties"]) == set(Report.model_fields)

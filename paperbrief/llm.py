@@ -35,6 +35,44 @@ class QA(BaseModel):
     answer: str
 
 
+# --- KO 한 줄 요약 (#6) -------------------------------------------------------------------------------------------
+class KoSummary(BaseModel):
+    arxiv_id: str
+    summary: str
+
+
+class KoSummaries(BaseModel):
+    items: list[KoSummary]
+
+
+KO_INSTRUCTIONS = """You write one-line Korean summaries of research papers for a browsing list.
+
+Rules:
+- For every paper in <papers>, return one item with the same arxiv_id and a summary of one sentence in Korean.
+- Keep the sentence short (about 60 characters), plain and specific: say what the paper does, not that it is a paper.
+- Keep technical terms, model names, dataset names and method names in their English original.
+- Use only the title and abstract. Do not add numbers or claims that they do not contain.
+"""
+
+
+def ko_input(papers: list[tuple[str, str, str]]) -> str:
+    items = [
+        f'<paper arxiv_id="{arxiv_id}">\n<title>{title}</title>\n<abstract>{abstract}</abstract>\n</paper>'
+        for arxiv_id, title, abstract in papers
+    ]
+    return "<papers>\n" + "\n".join(items) + "\n</papers>"
+
+
+def summarize_ko_with(client: OpenAI, model: str, papers: list[tuple[str, str, str]]) -> dict[str, str]:
+    """One structured call for a whole 발표일. Ids the model invented or left out are simply absent from the result."""
+    response = client.responses.parse(model=model, instructions=KO_INSTRUCTIONS, input=ko_input(papers), text_format=KoSummaries)
+    if response.output_parsed is None:  # a refusal or an unparsable answer
+        raise RuntimeError("OpenAI returned no summaries")
+    asked = {arxiv_id for arxiv_id, _, _ in papers}
+    return {item.arxiv_id: item.summary for item in response.output_parsed.items if item.arxiv_id in asked}
+
+
+# --- end KO 한 줄 요약 ---------------------------------------------------------------------------------------------
 class LLMClient(Protocol):
     def summarize_ko(self, papers: list[tuple[str, str, str]]) -> dict[str, str]:
         """[(arxiv_id, title, abstract)] -> {arxiv_id: KO 한 줄 요약}, one call per 발표일."""
@@ -57,11 +95,17 @@ class _Unimplemented:
 
 
 class OpenAILLM(_Unimplemented):
-    """The real client. `summarize_ko` (#6) and `answer` (#11) are still the NotImplementedError of the base class."""
+    """The real client. `answer` (#11) is still the NotImplementedError of the base class."""
 
     def __init__(self, settings: Settings, http_client: httpx.Client | None = None) -> None:
         self._settings = settings
         self._http_client = http_client  # tests stand in for api.openai.com here
+
+    def summarize_ko(self, papers: list[tuple[str, str, str]]) -> dict[str, str]:
+        if not self._settings.openai_api_key or not papers:  # no key: the list works, just without KO lines
+            return {}
+        client = OpenAI(api_key=self._settings.openai_api_key, http_client=self._http_client)
+        return summarize_ko_with(client, self._settings.openai_summary_model, papers)
 
     def write_report(self, body: str, figures: list[FigureCandidate]) -> Report:
         if not self._settings.openai_api_key:  # #8 turns this into the user-facing "OPENAI_API_KEY 없음" failure
@@ -80,6 +124,9 @@ class OpenAILLM(_Unimplemented):
 
 class OfflineLLM(_Unimplemented):
     """Canned report from tests/fixtures; `PAPERBRIEF_OFFLINE_DELAY` seconds of fake work make the progress watchable."""
+
+    def summarize_ko(self, papers: list[tuple[str, str, str]]) -> dict[str, str]:
+        return {arxiv_id: f"(오프라인) {title}" for arxiv_id, title, _ in papers}
 
     def write_report(self, body: str, figures: list[FigureCandidate]) -> Report:
         time.sleep(delay())
