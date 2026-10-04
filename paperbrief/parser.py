@@ -68,13 +68,11 @@ class TieredParser:
         raise RuntimeError(f"파싱 실패: {' + '.join(self._tiers)} tier 모두 실패\n\n" + "\n".join(logs))
 
 
-class _Unimplemented:
-    def parse(self, pdf: Path, out_dir: Path) -> ParseResult:
-        raise NotImplementedError("parser not implemented yet")
-
-
 def live(settings: Settings) -> Parser:
-    return _Unimplemented()
+    from paperbrief.mineru import run_mineru  # imported here: mineru.py imports ParseResult from this module
+
+    # PAPERBRIEF_MINERU_TIER=basic skips the GPU tier altogether
+    return TieredParser(run_mineru, ("basic",) if settings.mineru_tier == "basic" else ("standard", "basic"))
 
 
 class OfflineParser:

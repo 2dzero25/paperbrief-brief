@@ -1,0 +1,961 @@
+{
+ "pages": [
+  {
+   "page_idx": 0,
+   "blocks": [
+    {
+     "type": "aside_text",
+     "bbox": [
+      0.032,
+      0.283,
+      0.069,
+      0.713
+     ],
+     "content": "arXiv:2610.01092v1 [cs.CV] 1 Oct 2026"
+    },
+    {
+     "type": "header",
+     "bbox": [
+      0.173,
+      0.034,
+      0.232,
+      0.049
+     ],
+     "content": "Preprint"
+    },
+    {
+     "type": "doc_title",
+     "bbox": [
+      0.172,
+      0.099,
+      0.825,
+      0.148
+     ],
+     "level": 1,
+     "content": "EGO2ACT: EVALUATING GOAL-DIRECTED MANIPU..."
+    },
+    {
+     "type": "text",
+     "bbox": [
+      0.181,
+      0.17,
+      0.775,
+      0.231
+     ],
+     "content": "**Patrick Amadeus Irawan**<sup>1∗</sup>*..."
+    },
+    {
+     "type": "text",
+     "bbox": [
+      0.182,
+      0.234,
+      0.739,
+      0.265
+     ],
+     "content": "<sup>1</sup>Mohamed bin Zayed University..."
+    },
+    {
+     "type": "text",
+     "bbox": [
+      0.186,
+      0.274,
+      0.532,
+      0.292
+     ],
+     "content": "[§ **Code**](https://github.com/ego2act/..."
+    },
+    {
+     "type": "paragraph_title",
+     "bbox": [
+      0.452,
+      0.327,
+      0.548,
+      0.343
+     ],
+     "level": 2,
+     "content": "ABSTRACT"
+    },
+    {
+     "type": "text",
+     "bbox": [
+      0.23,
+      0.357,
+      0.769,
+      0.664
+     ],
+     "content": "Video generation models are increasingly..."
+    },
+    {
+     "type": "paragraph_title",
+     "bbox": [
+      0.175,
+      0.686,
+      0.339,
+      0.701
+     ],
+     "level": 2,
+     "content": "1 INTRODUCTION"
+    },
+    {
+     "type": "text",
+     "bbox": [
+      0.171,
+      0.716,
+      0.827,
+      0.87
+     ],
+     "content": "Recent advances in video generation have..."
+    },
+    {
+     "type": "text",
+     "bbox": [
+      0.171,
+      0.876,
+      0.827,
+      0.905
+     ],
+     "content": "To succeed in such goal-directed manipul..."
+    },
+    {
+     "type": "page_footnote",
+     "bbox": [
+      0.191,
+      0.911,
+      0.818,
+      0.925
+     ],
+     "content": "∗Lead & corresponding authors: {patrick...."
+    },
+    {
+     "type": "page_number",
+     "bbox": [
+      0.495,
+      0.949,
+      0.505,
+      0.96
+     ],
+     "content": "1"
+    }
+   ]
+  },
+  {
+   "page_idx": 1,
+   "blocks": [
+    {
+     "type": "header",
+     "bbox": [
+      0.174,
+      0.034,
+      0.232,
+      0.048
+     ],
+     "content": "Preprint"
+    },
+    {
+     "type": "text",
+     "bbox": [
+      0.178,
+      0.179,
+      0.309,
+      0.242
+     ],
+     "content": "Goal Closed toothpaste and folded toothb..."
+    },
+    {
+     "type": "text",
+     "bbox": [
+      0.341,
+      0.165,
+      0.412,
+      0.175
+     ],
+     "content": "Handle grasped"
+    },
+    {
+     "type": "text",
+     "bbox": [
+      0.179,
+      0.254,
+      0.272,
+      0.298
+     ],
+     "content": "Local valid state Task Error × Physics E..."
+    },
+    {
+     "type": "text",
+     "bbox": [
+      0.448,
+      0.164,
+      0.502,
+      0.175
+     ],
+     "content": "Neck bends"
+    },
+    {
+     "type": "text",
+     "bbox": [
+      0.345,
+      0.246,
+      0.409,
+      0.256
+     ],
+     "content": "Tube grasped"
+    },
+    {
+     "type": "text",
+     "bbox": [
+      0.544,
+      0.165,
+      0.604,
+      0.175
+     ],
+     "content": "Move to case"
+    },
+    {
+     "type": "text",
+     "bbox": [
+      0.626,
+      0.165,
+      0.719,
+      0.175
+     ],
+     "content": "Extra object appears"
+    },
+    {
+     "type": "image",
+     "bbox": [
+      0.174,
+      0.103,
+      0.827,
+      0.359
+     ],
+     "content": "",
+     "captions": [],
+     "footnotes": [
+      {
+       "bbox": [
+        0.736,
+        0.164,
+        0.808,
+        0.184
+       ],
+       "content": "Brush unfolded; case still open"
+      },
+      {
+       "bbox": [
+        0.345,
+        0.338,
+        0.408,
+        0.348
+       ],
+       "content": "Tube grasped"
+      },
+      {
+       "bbox": [
+        0.638,
+        0.245,
+        0.706,
+        0.257
+       ],
+       "content": "New inventory"
+      },
+      {
+       "bbox": [
+        0.731,
+        0.245,
+        0.815,
+        0.265
+       ],
+       "content": "Changed scene Case remains open"
+      },
+      {
+       "bbox": [
+        0.644,
+        0.337,
+        0.702,
+        0.348
+       ],
+       "content": "Hand arrives"
+      },
+      {
+       "bbox": [
+        0.725,
+        0.337,
+        0.818,
+        0.347
+       ],
+       "content": "Brush handle outside"
+      }
+     ],
+     "image_source": "images/page_1_image_8.jpg"
+    },
+    {
+     "type": "text",
+     "bbox": [
+      0.172,
+      0.371,
+      0.826,
+      0.415
+     ],
+     "content": "Figure 1: EGO2ACT assesses whether diffe..."
+    },
+    {
+     "type": "text",
+     "bbox": [
+      0.171,
+      0.446,
+      0.827,
+      0.545
+     ],
+     "content": "outcome (Du et al., 2023; 2024; Bagchi e..."
+    },
+    {
+     "type": "text",
+     "bbox": [
+      0.171,
+      0.551,
+      0.827,
+      0.679
+     ],
+     "content": "However, existing benchmarks fall short ..."
+    },
+    {
+     "type": "text",
+     "bbox": [
+      0.189,
+      0.7,
+      0.809,
+      0.744
+     ],
+     "content": "**RQ1: Goal-directed egocentric manipula..."
+    },
+    {
+     "type": "text",
+     "bbox": [
+      0.189,
+      0.747,
+      0.809,
+      0.791
+     ],
+     "content": "**RQ2: Reference-free scalable evaluatio..."
+    },
+    {
+     "type": "text",
+     "bbox": [
+      0.171,
+      0.813,
+      0.828,
+      0.927
+     ],
+     "content": "To address **RQ1**, we introduce EGO2ACT..."
+    },
+    {
+     "type": "page_number",
+     "bbox": [
+      0.494,
+      0.949,
+      0.506,
+      0.96
+     ],
+     "content": "2"
+    }
+   ]
+  },
+  {
+   "page_idx": 2,
+   "blocks": [
+    {
+     "type": "header",
+     "bbox": [
+      0.174,
+      0.034,
+      0.232,
+      0.049
+     ],
+     "content": "Preprint"
+    },
+    {
+     "type": "table",
+     "bbox": [
+      0.175,
+      0.184,
+      0.824,
+      0.329
+     ],
+     "content": "| Benchmarks | Real-World Egocentric | M...",
+     "captions": [
+      {
+       "bbox": [
+        0.171,
+        0.102,
+        0.826,
+        0.174
+       ],
+       "content": "Table 1: Benchmark comparison between EG..."
+      }
+     ],
+     "footnotes": [],
+     "image_source": "images/page_2_table_2.jpg"
+    },
+    {
+     "type": "text",
+     "bbox": [
+      0.171,
+      0.359,
+      0.826,
+      0.389
+     ],
+     "continues_prev": true,
+     "content": "skip dependent steps or commit physical ..."
+    },
+    {
+     "type": "text",
+     "bbox": [
+      0.171,
+      0.394,
+      0.828,
+      0.521
+     ],
+     "content": "While identifying these failures provide..."
+    },
+    {
+     "type": "text",
+     "bbox": [
+      0.211,
+      0.535,
+      0.826,
+      0.578
+     ],
+     "content": "1. We introduce **EGO2ACT**, to our know..."
+    },
+    {
+     "type": "text",
+     "bbox": [
+      0.21,
+      0.583,
+      0.826,
+      0.627
+     ],
+     "content": "2. We propose **EGO2ACTJUDGE**, a refere..."
+    },
+    {
+     "type": "text",
+     "bbox": [
+      0.209,
+      0.632,
+      0.826,
+      0.663
+     ],
+     "content": "3. We present a comprehensive analysis o..."
+    },
+    {
+     "type": "paragraph_title",
+     "bbox": [
+      0.172,
+      0.683,
+      0.348,
+      0.7
+     ],
+     "level": 2,
+     "content": "2 RELATED WORK"
+    },
+    {
+     "type": "paragraph_title",
+     "bbox": [
+      0.172,
+      0.717,
+      0.525,
+      0.732
+     ],
+     "level": 2,
+     "content": "2.1 VIDEO GENERATION FOR EMBODIED TASKS"
+    },
+    {
+     "type": "text",
+     "bbox": [
+      0.17,
+      0.744,
+      0.828,
+      0.927
+     ],
+     "content": "Generative video models are increasingly..."
+    },
+    {
+     "type": "page_number",
+     "bbox": [
+      0.494,
+      0.948,
+      0.506,
+      0.961
+     ],
+     "content": "3"
+    }
+   ]
+  },
+  {
+   "page_idx": 3,
+   "blocks": [
+    {
+     "type": "text",
+     "bbox": [
+      0.351,
+      0.109,
+      0.536,
+      0.122
+     ],
+     "content": "(b) Action co-occurrence + dist."
+    },
+    {
+     "type": "chart",
+     "bbox": [
+      0.349,
+      0.125,
+      0.646,
+      0.245
+     ],
+     "content": "",
+     "captions": [],
+     "footnotes": [],
+     "image_source": "images/page_3_chart_1.jpg"
+    },
+    {
+     "type": "header",
+     "bbox": [
+      0.174,
+      0.034,
+      0.232,
+      0.048
+     ],
+     "content": "Preprint"
+    },
+    {
+     "type": "chart",
+     "bbox": [
+      0.184,
+      0.11,
+      0.341,
+      0.249
+     ],
+     "content": "",
+     "captions": [],
+     "footnotes": [],
+     "image_source": "images/page_3_chart_3.jpg"
+    },
+    {
+     "type": "chart",
+     "bbox": [
+      0.657,
+      0.126,
+      0.817,
+      0.25
+     ],
+     "content": "",
+     "captions": [
+      {
+       "bbox": [
+        0.659,
+        0.109,
+        0.792,
+        0.123
+       ],
+       "content": "(c) Recording duration"
+      }
+     ],
+     "footnotes": [],
+     "image_source": "images/page_3_chart_5.jpg"
+    },
+    {
+     "type": "chart",
+     "bbox": [
+      0.187,
+      0.269,
+      0.338,
+      0.358
+     ],
+     "content": "",
+     "captions": [
+      {
+       "bbox": [
+        0.187,
+        0.255,
+        0.304,
+        0.269
+       ],
+       "content": "(d) Involved objects"
+      }
+     ],
+     "footnotes": [],
+     "image_source": "images/page_3_chart_7.jpg"
+    },
+    {
+     "type": "chart",
+     "bbox": [
+      0.35,
+      0.255,
+      0.651,
+      0.358
+     ],
+     "content": "",
+     "captions": [],
+     "footnotes": [],
+     "image_source": "images/page_3_chart_8.jpg"
+    },
+    {
+     "type": "chart",
+     "bbox": [
+      0.658,
+      0.27,
+      0.814,
+      0.358
+     ],
+     "content": "",
+     "captions": [
+      {
+       "bbox": [
+        0.66,
+        0.255,
+        0.771,
+        0.269
+       ],
+       "content": "(f) Action diversity"
+      },
+      {
+       "bbox": [
+        0.171,
+        0.378,
+        0.826,
+        0.45
+       ],
+       "content": "Figure 2: Composition and descriptive st..."
+      }
+     ],
+     "footnotes": [],
+     "image_source": "images/page_3_chart_10.jpg"
+    },
+    {
+     "type": "paragraph_title",
+     "bbox": [
+      0.172,
+      0.49,
+      0.539,
+      0.505
+     ],
+     "level": 2,
+     "content": "2.2 EVALUATING ACTIONS FROM VIDEO MODELS"
+    },
+    {
+     "type": "text",
+     "bbox": [
+      0.171,
+      0.522,
+      0.827,
+      0.691
+     ],
+     "content": "General video evaluation frameworks like..."
+    },
+    {
+     "type": "paragraph_title",
+     "bbox": [
+      0.173,
+      0.726,
+      0.294,
+      0.742
+     ],
+     "level": 2,
+     "content": "3 EGO2ACT"
+    },
+    {
+     "type": "paragraph_title",
+     "bbox": [
+      0.174,
+      0.767,
+      0.344,
+      0.782
+     ],
+     "level": 2,
+     "content": "3.1 TASK DEFINITION"
+    },
+    {
+     "type": "text",
+     "bbox": [
+      0.171,
+      0.8,
+      0.828,
+      0.926
+     ],
+     "content": "Given an initial scene image $f _ { 1 }$..."
+    },
+    {
+     "type": "page_number",
+     "bbox": [
+      0.494,
+      0.949,
+      0.506,
+      0.96
+     ],
+     "content": "4"
+    }
+   ]
+  },
+  {
+   "page_idx": 4,
+   "blocks": [
+    {
+     "type": "header",
+     "bbox": [
+      0.174,
+      0.034,
+      0.232,
+      0.049
+     ],
+     "content": "Preprint"
+    },
+    {
+     "type": "image",
+     "bbox": [
+      0.176,
+      0.122,
+      0.821,
+      0.38
+     ],
+     "content": "",
+     "captions": [
+      {
+       "bbox": [
+        0.178,
+        0.106,
+        0.335,
+        0.12
+       ],
+       "content": "(a) Ego2Act construction"
+      },
+      {
+       "bbox": [
+        0.507,
+        0.106,
+        0.688,
+        0.12
+       ],
+       "content": "(b) Ego2ActJudge evaluation"
+      },
+      {
+       "bbox": [
+        0.171,
+        0.39,
+        0.826,
+        0.463
+       ],
+       "content": "Figure 3: Overview of EGO2ACT and EGO2AC..."
+      }
+     ],
+     "footnotes": [],
+     "image_source": "images/page_4_image_3.jpg"
+    },
+    {
+     "type": "paragraph_title",
+     "bbox": [
+      0.173,
+      0.488,
+      0.422,
+      0.504
+     ],
+     "level": 2,
+     "content": "3.2 DATA COLLECTION PIPELINE"
+    },
+    {
+     "type": "text",
+     "bbox": [
+      0.171,
+      0.515,
+      0.827,
+      0.601
+     ],
+     "content": "To construct EGO2ACT, we manually collec..."
+    },
+    {
+     "type": "text",
+     "bbox": [
+      0.17,
+      0.616,
+      0.828,
+      0.799
+     ],
+     "content": "**Task features and data statistics.** T..."
+    },
+    {
+     "type": "text",
+     "bbox": [
+      0.17,
+      0.813,
+      0.828,
+      0.926
+     ],
+     "content": "**Human recordings and verification.** H..."
+    },
+    {
+     "type": "page_number",
+     "bbox": [
+      0.494,
+      0.949,
+      0.506,
+      0.961
+     ],
+     "content": "5"
+    }
+   ]
+  },
+  {
+   "page_idx": 5,
+   "blocks": [
+    {
+     "type": "header",
+     "bbox": [
+      0.174,
+      0.034,
+      0.232,
+      0.049
+     ],
+     "content": "Preprint"
+    },
+    {
+     "type": "text",
+     "bbox": [
+      0.171,
+      0.105,
+      0.827,
+      0.149
+     ],
+     "continues_prev": true,
+     "content": "their longest side is 512 pixels while p..."
+    },
+    {
+     "type": "text",
+     "bbox": [
+      0.171,
+      0.165,
+      0.827,
+      0.236
+     ],
+     "content": "**Metadata annotation.** For each human ..."
+    },
+    {
+     "type": "paragraph_title",
+     "bbox": [
+      0.173,
+      0.258,
+      0.349,
+      0.274
+     ],
+     "level": 2,
+     "content": "4 EGO2ACTJUDGE"
+    },
+    {
+     "type": "text",
+     "bbox": [
+      0.171,
+      0.29,
+      0.826,
+      0.363
+     ],
+     "content": "We build EGO2ACTJUDGE based on human-cra..."
+    },
+    {
+     "type": "text",
+     "bbox": [
+      0.171,
+      0.367,
+      0.826,
+      0.454
+     ],
+     "content": "**(1) Subgoals.** Given goal $G$ and sce..."
+    },
+    {
+     "type": "text",
+     "bbox": [
+      0.171,
+      0.458,
+      0.826,
+      0.547
+     ],
+     "content": "**(2) Task completion.** For each subgoa..."
+    },
+    {
+     "type": "text",
+     "bbox": [
+      0.171,
+      0.551,
+      0.827,
+      0.666
+     ],
+     "content": "(3) Physics Plausibility. For each subgo..."
+    },
+    {
+     "type": "text",
+     "bbox": [
+      0.171,
+      0.672,
+      0.827,
+      0.76
+     ],
+     "content": "**(4) Final Score Aggregation.** Since T..."
+    },
+    {
+     "type": "paragraph_title",
+     "bbox": [
+      0.173,
+      0.781,
+      0.431,
+      0.797
+     ],
+     "level": 2,
+     "content": "5 EXPERIMENTS & RESULTS"
+    },
+    {
+     "type": "paragraph_title",
+     "bbox": [
+      0.173,
+      0.814,
+      0.264,
+      0.828
+     ],
+     "level": 2,
+     "content": "5.1 SETUP"
+    },
+    {
+     "type": "text",
+     "bbox": [
+      0.171,
+      0.84,
+      0.827,
+      0.926
+     ],
+     "content": "**Model Setup.** We evaluate 6 video gen..."
+    },
+    {
+     "type": "page_number",
+     "bbox": [
+      0.494,
+      0.949,
+      0.506,
+      0.961
+     ],
+     "content": "6"
+    }
+   ]
+  }
+ ],
+ "metadata": {
+  "file_suffix": "pdf",
+  "producer": {
+   "name": "mineru",
+   "version": "4.0.10"
+  }
+ },
+ "extensions": {
+  "mineru": {
+   "tier": "standard",
+   "parse_mode": "txt"
+  }
+ },
+ "is_full_document": true
+}
