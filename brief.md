@@ -10,18 +10,18 @@
 
 **목록**
 - 앱을 켜거나 [수집]을 누르면 최근 논문이 들어온다.
-- 카드 한 장에 upvotes, 제목, 한 줄 요약, 분야, 코드 유무, 보고서 상태가 보인다. upvotes는 HF `paper.upvotes`, 코드 유무는 `paper.githubRepo`(★는 `githubStars`), 프로젝트 페이지는 `projectPage`, 기관은 `organization`(있을 때만)에서 가져온다.
+- 카드 한 장에 upvotes, 제목, 한 줄 요약, 분야, 코드 유무, 보고서 상태가 보인다.
 - 분야와 "코드 있음"으로 거른다.
-- 한 줄 요약은 KO/EN 탭으로 바꿔 본다. EN은 HF가 주는 `ai_summary`를 쓰고, 없으면 초록 첫 문장을 쓴다. `ai_summary`는 거의 없어서(2026-10-02 84건 중 1건) 대부분 초록 첫 문장이 된다. KO는 LLM으로 만든다.
-- 날짜 기준은 HF Daily 날짜(발표일) 하나다. 목록 그룹, ◀▶ 이동, 보고서 머리의 날짜가 모두 이 날짜다.
-- `date`를 빼고 부르면 HF가 최신 발표일 50건을 준다. 최신 발표일보다 뒤의 `date=`는 HF가 400으로 거절하므로, 주말·휴일에는 최신 발표일을 보여 준다.
-- 수집할 때 저장된 최근 3개 발표일의 upvotes와 ★만 새 값으로 갱신한다.
+- 한 줄 요약은 KO/EN 탭으로 바꿔 본다. EN은 HF가 주는 `ai_summary`를 쓰고, 없으면 초록 첫 문장을 쓴다. KO는 LLM으로 만든다.
+- 주말·휴일처럼 그날 논문이 없으면 가장 최근 발표일을 보여 준다.
+- upvotes는 수집할 때 저장된 최근 3개 발표일치만 새 값으로 갱신한다(달력 3일이 아니다).
 
 **보고서**
 - 카드를 누르면 PDF를 받아 파싱하고 보고서를 만든다. 한 번 만들면 저장해 두고 다시 만들지 않는다.
-- MinerU가 PDF를 markdown과 그림 파일로 바꾸고, 그림 선택과 문장은 `gpt-6.1-sol`이 맡는다. LLM에는 이미지를 보내지 않고 캡션만 보낸다.
 - 순서: 한 문장 훅(핵심 수치 1개) → 원문 그림 1~2장과 캡션 → 방법 / 결과 / 차이 / 의미 → 재현 체크(코드, 가중치, 데이터, GPU, 라이선스) → 한계.
 - 논문에 없는 내용은 "명시 없음"으로 쓴다. 본문에 없는 수치는 쓰지 않는다.
+- 재현 체크의 판정은 그 논문 자체가 쓰거나 공개한 것만 기준으로 한다. 논문이 인용하거나 검토한 다른 연구(서베이 등)의 코드·GPU는 세지 않는다.
+- 그림은 다중 패널을 한 장으로 본다: 캡션이 마지막 패널에만 붙으므로 캡션 없는 바로 앞 이미지 블록을 같은 그림의 패널로 묶어 보여 준다.
 - 진행 중, 완료, 실패 상태가 보이고, 실패하면 실패한 단계부터 다시 시도한다.
 
 **질문**
@@ -37,16 +37,16 @@
 | 실행 방법 | `run.bat`(Windows) / `run.sh`(Linux) 더블클릭 → 서버 시작 → 기본 브라우저 자동 열림. 데스크톱 앱 패키징(Electron 등)은 하지 않는다 |
 | 스택 | Python 3.12 + uv, FastAPI, 정적 HTML 1장 + vanilla JS, `sqlite3`, `httpx`, `openai` SDK |
 | 테스트 | `uv run pytest`, 타입체크 `uv run pyright`. 네트워크가 필요한 테스트는 저장해 둔 응답(fixture)으로 돈다 |
-| 논문 목록 | Hugging Face Daily Papers API `GET https://huggingface.co/api/daily_papers?date=YYYY-MM-DD&limit=100`. `limit`을 빼면 50건만 온다. 100건을 넘으면 `p=`로 다음 쪽을 받는다. 주말에는 0건이다 |
-| 분야 | arXiv API를 그날 받은 ID로 한 번 조회해(`id_list=`) 카테고리만 붙인다. `max_results`를 주지 않으면 10건만 오므로 ID 수만큼 지정한다. 앱이 직접 분류하지 않는다. RSS는 쓰지 않는다. arXiv 요청은 3초에 1회 이하 |
+| 논문 목록 | Hugging Face Daily Papers API `GET https://huggingface.co/api/daily_papers?limit=100`. `limit`을 빼면 50건만 온다. `date`를 생략하면 가장 최근 발표일부터 최신순으로 여러 날이 섞여 오고 `Link rel=next`가 항상 붙으므로, 첫 항목과 다른 날짜가 나오는 페이지에서 멈춘다. 주말에도 `date` 생략 호출은 직전 발표일을 돌려준다. 특정 날짜를 받는 `date=YYYY-MM-DD`는 갱신에만 쓰고, 최신 발표일보다 뒤의 날짜는 400이다(주말 날짜는 0건) |
+| 분야 | arXiv API를 그날 받은 ID로 한 번 조회해(`id_list=`) 카테고리만 붙인다. 앱이 직접 분류하지 않는다. RSS는 쓰지 않는다. arXiv 요청은 3초에 1회 이하 |
 | PDF | `https://arxiv.org/pdf/<id>`에서 받아 로컬에만 저장한다. 재배포하지 않는다 |
-| 문서 파싱 | MinerU `mineru[full]>=4.0.10,<4.1`. 레이아웃 검출 + 1.2B VLM. 파싱 모델은 7B 이하(HF 파라미터 수 기준)여야 하고, 16GB GPU 한 장에서 돌아야 한다 |
-| MinerU 호출 | `mineru-kit parse <pdf> -o <dir> -f zip --tier standard`. 실패하면 `--tier basic`(CPU)으로 다시 시도한다. `-f zip`이면 `-o` 폴더에 `<pdf명>.zip` 하나만 생기고, 앱이 이 zip을 푼다. `mineru parse`는 서버가 필요하고 그림 파일을 내지 않아서 쓰지 않는다(10쪽 제한은 `--pages all`로 풀린다) |
-| MinerU 출력 | `markdown.md`, `structured_content.json`(블록 type, bbox, 캡션), `images/` 폴더. 그림 파일명을 조합하지 말고 `structured_content.json`과 `markdown.md`에 적힌 참조 경로를 그대로 따른다(확장자도 jpg로 고정되지 않는다). 그림 캡션은 `Figure`로 시작하는 것을 고른다 |
-| MinerU 모델 | HF 토큰이 필요 없다. 첫 파싱 때 `~/.mineru/models`로 자동으로 받는다(standard 약 3.2GB). VLM 엔진은 OS마다 다르다: Windows는 LMDeploy, Linux는 vLLM(`mineru[full]`이 OS별로 골라 설치한다). 16GB GPU에서 standard가 도는지는 아직 실측하지 않았다. 첫 구현 작업이 스모크 테스트다 |
+| 문서 파싱 | MinerU `mineru[full]>=4.0.10,<4.1`. 레이아웃 검출 + 1.2B VLM. 파싱 모델은 7B 이하(HF 파라미터 수 기준)여야 하고, 16GB GPU 한 장에서 돌아야 한다. 실측(RTX 5070 Ti, 32~78쪽 논문)은 최대 VRAM 11~13.2GB라 여유가 약 3GB뿐이므로 다른 GPU 프로그램과 동시에 실행하지 않는다 |
+| MinerU 호출 | `mineru-kit parse <pdf> -o <dir> -f zip --tier standard`. 실패하면 `--tier basic`(CPU)으로 다시 시도한다. `-f zip`이어야 그림이 `images/`에 파일로 나온다. `mineru parse`는 서버가 필요하고 앞 10쪽만 파싱하므로 쓰지 않는다 |
+| MinerU 출력 | `markdown.md`, `structured_content.json`(블록 type, bbox, 캡션), `images/page_{쪽}_{image\|chart\|table\|equation}_{n}.jpg`. `Figure`라는 블록 타입은 없다. 그림 후보는 type이 `image` 또는 `chart`이고 캡션이 `Figure`로 시작하며 이미지 파일이 실제로 있는 블록이다(`chart`에는 가짜 캡션이 앞에 붙기도 하고 표에도 `image_source`가 있다). 다중 패널 그림은 캡션이 마지막 패널에만 붙는다 |
+| MinerU 모델 | HF 토큰이 필요 없다. 첫 파싱 때 `~/.mineru/models`로 자동으로 받는다(standard 약 3GB). VLM 엔진은 OS마다 다르다: Windows는 LMDeploy, Linux는 vLLM(`mineru[full]`이 OS별로 골라 설치한다) |
 | torch와 lock | Windows의 PyPI torch는 CPU 전용이라 `pyproject.toml`에서 torch·torchvision을 직접 의존성으로 두고 Windows만 PyTorch cu128 인덱스로 받는다. `lmdeploy`의 Linux 휠 메타데이터가 `nvidia-nccl-cu12`를 요구해 Windows lock이 깨지므로 `override-dependencies`로 Linux 전용으로 묶는다. 이 두 설정이 있으면 Windows·Linux x86_64·Linux aarch64 lock이 함께 풀린다 |
-| LLM | OpenAI Responses API `client.responses.parse(..., text_format=<Pydantic 모델>)`. 보고서·질문은 `gpt-6.1-sol`, 한 줄 요약은 `gpt-6-luna` |
-| 설정 | `.env.example`을 `.env`로 복사해서 쓴다. `.env`는 커밋하지 않는다. `OPENAI_API_KEY`가 없으면 서버가 시작하지 않는다 |
+| LLM | OpenAI Responses API `client.responses.parse(..., text_format=<Pydantic 모델>)`. 보고서·질문은 `gpt-6.1-sol`, 한 줄 요약은 `gpt-6-luna`. 보고서 한 편은 입력 3.4만~7만 토큰(실측 약 $0.07~0.14) |
+| 설정 | `.env.example`을 `.env`로 복사해서 쓴다. `.env`는 커밋하지 않는다 |
 | 데이터 위치 | repo 밖. Windows `%LOCALAPPDATA%\PaperBrief`, Linux `~/.local/share/PaperBrief` |
 | 외부 전송 | 보고서·질문을 만들 때 논문 본문이 OpenAI API로 나간다. 화면 맨 아래에 작게 표시한다 |
 | 쓰지 않는 것 | HF 응답의 `thumbnail`(PDF 첫 쪽 렌더라 저자 이메일이 보인다) |
